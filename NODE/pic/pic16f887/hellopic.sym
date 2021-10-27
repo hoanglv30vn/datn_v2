@@ -1,0 +1,344 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+00C.0   TMR1IF
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020     @INTERRUPT_AREA
+021     @INTERRUPT_AREA
+022     @INTERRUPT_AREA
+023     @INTERRUPT_AREA
+024     @INTERRUPT_AREA
+025     @INTERRUPT_AREA
+026     @INTERRUPT_AREA
+027     @INTERRUPT_AREA
+028     @INTERRUPT_AREA
+029     @INTERRUPT_AREA
+02A     @INTERRUPT_AREA
+02B-02C strtok.save
+02D-030 _Randseed
+031     @TRIS_C
+032-033 KQADC
+034-035 AN0
+036-037 AN1
+038     CONFIG_FUN
+039     ID_NODE
+03A     STT_DEVICE
+03B     STT_SENSOR
+03C     VT
+03D     KYTU
+03E     ID_NODE_NHAN
+03F     ID_DEVICE_NHAN
+040     TT_DEVICE_NHAN
+041-054 KYTUCHAR
+055.0   TTNHAN
+055.1   TT_CONFIG
+055.2   TT_CONTROL
+055.3   TT_CONFIG_DONE
+055.4   TT_FUN
+055.5   TT_STT
+056     TT_DEVICE
+057     TT_SENSOR
+058-059 TT_DEVICE_CHAR
+05A-062 @TT_DEVICE_CHAR
+063-070 PACKAGE_NHIETDO
+071-072 ID_
+073-075 @ID_
+076     LEN_PACKAGES
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+07B-07E ID_GATEWAY
+07F     @INTERRUPT_AREA
+0A0-0C7 @PACKAGE_NHIETDO
+0C8-0D7 PACKAGE_CONFIG
+0D8-0D9 TEMP_CHAR
+0DA-0DC @TEMP_CHAR
+0DD-0DE TEMP_CHAR2
+0DF-0E7 @TEMP_CHAR2
+0E8-0E9 TEMP_CHAR3
+0EA-0EE @TEMP_CHAR3
+0FF     @INTERRUPT_AREA
+107.6   C1OUT
+108.6   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+110-142 @PACKAGE_CONFIG
+143-145 NHIETDO1
+146-148 NHIETDO2
+149     MAIN.i
+14A-14B MAIN.TOKEN
+14C     NHAPID_GW.num
+14C-14D strtok.s1
+14C     CONFIG_DONE.j
+14C     CHUONG_TRINH_CON.i
+14C-14D atoi.s
+14C     lcd_init.i
+14C     CHON_ID.@SCRATCH1
+14C     CONFIG_DEVICE.@SCRATCH1
+14C     CONFIG_SENSOR.@SCRATCH1
+14C     BUTT_FUN.@SCRATCH1
+14C     MAIN.@SCRATCH1
+14D-150 lcd_init.LCD_INIT_STRING
+14D     XULYDEVICE_CF.i
+14D     XULYSENSOR_CF.j
+14D     @WRITEBITA.P1
+14D     @PSTRINGC7_921.@SCRATCH1
+14D     @PSTRINGR_921.@SCRATCH1
+14D     NHAPID_GW.@SCRATCH1
+14D     CONFIG_DONE.@SCRATCH1
+14D     MAIN.@SCRATCH2
+14E     @READBITA.P1
+14E-14F strcat.s1
+14E     @WRITEBITA.P1
+14E-14F strtok.s2
+14E-151 itoa.num
+14E     atoi.result
+14E     @PSTRINGC7_921.@SCRATCH2
+14E     @PSTRINGR_921.@SCRATCH2
+14E     NHAPID_GW.@SCRATCH2
+14E     XULYDEVICE_CF.@SCRATCH1
+14E     XULYSENSOR_CF.@SCRATCH1
+14E     CONFIG_DONE.@SCRATCH2
+14F     atoi.sign
+14F-150 @WRITEBITA.P1
+14F-150 strlen.s
+14F-150 @READBITA.P1
+14F     @PSTRINGC7_921.@SCRATCH3
+14F     NHAPID_GW.@SCRATCH3
+14F     XULYDEVICE_CF.@SCRATCH2
+14F     XULYSENSOR_CF.@SCRATCH2
+14F     CONFIG_DONE.@SCRATCH3
+14F     @PSTRINGR_9600_62_63.@SCRATCH1
+150-151 strcat.s2
+150-151 strtok.beg
+150     @DIV88.P1
+150     atoi.base
+150     lcd_putc.c
+150     @PSTRINGC7_921.@SCRATCH4
+150     CONFIG_DONE.@SCRATCH4
+150     @PSTRINGR_9600_62_63.@SCRATCH2
+151-152 strlen.sc
+151     @delay_ms1.P1
+151     lcd_gotoxy.x
+151     atoi.index
+151     @DIV88.P1
+151     lcd_init.@SCRATCH1
+151     CONFIG_DONE.@SCRATCH5
+152     atoi.c
+152     itoa.base
+152     lcd_gotoxy.y
+152-153 strcat.s
+152-153 strtok.end
+152     @DIV88.@SCRATCH1
+152     CONFIG_DONE.@SCRATCH6
+153     lcd_gotoxy.address
+153     @MUL88.P1
+153-154 itoa.s
+153     strlen.@SCRATCH1
+153     atoi.@SCRATCH1
+154-155 strpbrk.s1
+154     @MUL88.P1
+154-155 strspn.s1
+154     strcat.@SCRATCH1
+154     strtok.@SCRATCH1
+154     atoi.@SCRATCH2
+154     lcd_gotoxy.@SCRATCH1
+155     lcd_send_byte.address
+155-158 itoa.temp
+155     strcat.@SCRATCH2
+155     strtok.@SCRATCH2
+156-157 strpbrk.s2
+156-157 strspn.s2
+156     lcd_send_byte.n
+156     strcat.@SCRATCH3
+157     lcd_read_byte.low
+157     lcd_send_byte.@SCRATCH1
+158     lcd_read_byte.high
+158-159 strspn.sc1
+158     lcd_send_nibble.n
+158-159 strpbrk.sc1
+159     itoa.i
+159     lcd_read_nibble.n
+159     lcd_read_byte.@SCRATCH1
+15A     itoa.sign
+15A-15B strspn.sc2
+15A-15B strpbrk.sc2
+15A     lcd_read_nibble.@SCRATCH1
+15B     itoa.cnt
+15C     itoa.c
+15C     strpbrk.@SCRATCH1
+15C     strspn.@SCRATCH1
+15D-160 @MUL3232.P1
+15D     itoa.@SCRATCH1
+15E     itoa.@SCRATCH2
+15F     itoa.@SCRATCH3
+160     itoa.@SCRATCH4
+161-164 @MUL3232.P1
+161     itoa.@SCRATCH5
+162     itoa.@SCRATCH6
+163     itoa.@SCRATCH7
+164     itoa.@SCRATCH8
+165-168 @DIVS3232.P1
+165     itoa.@SCRATCH9
+165     @MUL3232.@SCRATCH1
+166     itoa.@SCRATCH10
+166     @MUL3232.@SCRATCH2
+167     itoa.@SCRATCH11
+167     @MUL3232.@SCRATCH3
+168     itoa.@SCRATCH12
+168     @MUL3232.@SCRATCH4
+169-16C @DIVS3232.P1
+169     @MUL3232.@SCRATCH5
+17F     @INTERRUPT_AREA
+190     @DIVS3232.@SCRATCH1
+191     @DIVS3232.@SCRATCH2
+192     @DIVS3232.@SCRATCH3
+193     @DIVS3232.@SCRATCH4
+194     @DIVS3232.@SCRATCH5
+195     @DIVS3232.@SCRATCH6
+196     QUET_PHIM.BDT
+196     NGAT.@SCRATCH1
+197     NGAT.@SCRATCH2
+1FF     @INTERRUPT_AREA
+27F     @INTERRUPT_AREA
+2FF     @INTERRUPT_AREA
+37F     @INTERRUPT_AREA
+3FF     @INTERRUPT_AREA
+47F     @INTERRUPT_AREA
+4FF     @INTERRUPT_AREA
+57F     @INTERRUPT_AREA
+5FF     @INTERRUPT_AREA
+67F     @INTERRUPT_AREA
+6FF     @INTERRUPT_AREA
+77F     @INTERRUPT_AREA
+7FF     @INTERRUPT_AREA
+87F     @INTERRUPT_AREA
+8FF     @INTERRUPT_AREA
+97F     @INTERRUPT_AREA
+9FF     @INTERRUPT_AREA
+A7F     @INTERRUPT_AREA
+AFF     @INTERRUPT_AREA
+B7F     @INTERRUPT_AREA
+BFF     @INTERRUPT_AREA
+C7F     @INTERRUPT_AREA
+CFF     @INTERRUPT_AREA
+D7F     @INTERRUPT_AREA
+DFF     @INTERRUPT_AREA
+E7F     @INTERRUPT_AREA
+EFF     @INTERRUPT_AREA
+F7F     @INTERRUPT_AREA
+FFF     @INTERRUPT_AREA
+
+ROM Allocation:
+000058  @const992.call
+00005E  @const1017.call
+000063  @const1039.call
+000069  @const974.call
+000072  @const978.call
+00007C  @const988.call
+000085  @const993.call
+00008C  @const994.call
+000093  @const995.call
+000098  @const1003.call
+0000A0  @const1004.call
+0000A8  @const1005.call
+0000B0  @const1006.call
+0000B8  @const1007.call
+0000C0  @const1008.call
+0000C8  @const1021.call
+0000D2  @const1022.call
+0000DC  QUET_PHIM
+0000DC  NGAT_NGOAI
+00010C  BUTT_OKE
+000115  NGAT
+000132  @delay_ms1
+000146  lcd_send_byte
+00014E  lcd_read_byte
+0001AC  lcd_read_nibble
+0002C8  lcd_init
+000353  lcd_send_nibble
+0003B6  lcd_gotoxy
+0003CA  lcd_putc
+000404  @PSTRINGC7_921
+000454  itoa
+00046D  @MUL3232
+00057D  @DIVS3232
+0006A4  @READBITA
+0006BD  @WRITEBITA
+0006DF  BUTT_FUN
+000780  @goto12068
+000788  @PSTRINGR_9600_62_63
+0007A6  CHUONG_TRINH_CON
+0007BE  XUATLCD
+0007CC  @PSTRINGR_921
+000800  SELLECT_FUN
+000807  CHON_ID
+000889  CONFIG_DEVICE
+0009E2  CONFIG_SENSOR
+000B3B  NHAPID_GW
+000BC7  @DIV88
+000C3C  @goto12033
+000C44  CONFIG_DONE
+000CE5  XULYDEVICE_CF
+000D60  XULYSENSOR_CF
+000D9B  strcat
+000E06  strlen
+000E93  strtok
+000EAC  strspn
+000F1F  strpbrk
+001000  atoi
+00106F  @MUL88
+001102  MAIN
+001102  @cinit1
+001130  @cinit2
+0013C0  @goto12286
+0136  StrtoulGO
+0136  StrtolGO
+
+Project Directory:
+    E:\DATN\NODE\pic\pic16f887\
+
+Project Files:
+    hellopic.c                                              [26-Oct-21 14:13  CRC=D3766DF6]
+    thuvien.c                                               [25-Oct-21 15:09  CRC=A98CB246]
+    C:\Program Files (x86)\PICC\Devices\16F887.H            [12-Nov-13 14:35  CRC=6CB1A611]
+    C:\Program Files (x86)\PICC\Drivers\STRING.H            [14-Jul-11 10:13  CRC=23EDEC8F]
+    C:\Program Files (x86)\PICC\Drivers\stddef.h            [16-Jul-10 09:27  CRC=897CEC6C]
+    C:\Program Files (x86)\PICC\Drivers\ctype.h             [03-Jan-08 13:55  CRC=2D1F019F]
+    C:\Program Files (x86)\PICC\Drivers\STDLIB.H            [08-Jun-11 14:39  CRC=0B6669CF]
+    C:\Program Files (x86)\PICC\Drivers\string.h            [14-Jul-11 10:13  CRC=23EDEC8F]
+    C:\Program Files (x86)\PICC\Drivers\STDIO.H             [31-Jul-07 13:24  CRC=4E4534F4]
+    C:\Program Files (x86)\PICC\Drivers\LCD.C               [19-Sep-13 15:38  CRC=D1A6378A]
+    khaibaobien.c                                           [26-Oct-21 13:51  CRC=E0F4627C]
+    config_1.C                                              [26-Oct-21 01:45  CRC=BBCD23FA]
+
+Source signature=6C0D0E33
+
+Units:
+    hellopic (main)
+
+Compiler Settings:
+    Processor:      PIC16F887
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   hellopic.xsym
+    Errors:      hellopic.err
+    Ext Symbols: hellopic.esym
+    INHX8:       hellopic.hex
+    Symbols:     hellopic.sym
+    List:        hellopic.lst
+    Debug/COFF:  hellopic.cof
+    Project:     hellopic.ccspjt
+    Call Tree:   hellopic.tre
+    Statistics:  hellopic.STA

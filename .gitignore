@@ -1,0 +1,5 @@
+NODE/proteus/
+NODE/pic/pic16f887/__history/
+GATEWAY/GW_python/*.db
+GATEWAY/GW_python/**.db
+GATEWAY/GW_python/data_config.db

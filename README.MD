@@ -1,5 +1,6 @@
 *******DATN_V1
 27/9 --> 11/10: 
+https://github.com/hoanglv30vn/datn
 +> PIC 
 - nút nhấn B0 -> chọn id node (1-10) 
 - tạm thời chỉ 2 node 1 và 2 - đo nhiệt độ gửi UART ( T>27 gửi) 

@@ -81,22 +81,118 @@ firebaseConfig = {
 }
 firebase = pyrebase.initialize_app(firebaseConfig)
 # db = firebase.database().child("ADMIN")
-# firebase = pyrebase.initialize_app(firebaseConfig)
-# db=firebase.database()
-# data={"name":"Hoàng", 'age':22, 'addr': 'Ha Tinh'}
-# db.push(data)
-# db.child('infor').set(data)
-# db.child('infor').set({'addr':'binh duong'})
-
-# arr_sql = ["hoang" , "duc"]
-# arr_sql += 'chao'
-# print(arr_sql)
-
-
-
-
+id_gw = 'gateway'
+name_gw = 'gateway'
+global serial__ 
+serial__=serial.Serial()
 class Ui_MainWindow(object):
+                             
+    def serial_ports(self):
+        """ Lists serial port names
 
+            :raises EnvironmentError:
+                On unsupported or unknown platforms
+            :returns:
+                A list of the serial ports available on the system
+        """
+        # check đang dùng hệ điều hành nào
+        if sys.platform.startswith('win'):
+            ports = ['COM%s' % (i + 1) for i in range(256)]
+        elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
+            # this excludes your current terminal "/dev/tty"
+            ports = glob.glob('/dev/tty[A-Za-z]*')
+        elif sys.platform.startswith('darwin'):
+            ports = glob.glob('/dev/tty.*')
+        else:
+            raise EnvironmentError('Unsupported platform')
+
+        result = []
+        for port in ports:
+            # kiểm tra các cổng com đang sẵn sàng
+            try:
+                s = serial.Serial(port)
+                s.close()
+                result.append(port)
+            except (OSError, serial.SerialException):
+                pass
+        # danh sách các cổng com
+        return result
+    def add_com(self):
+        # add danh sách cổng com vào box
+        self.box_comport.clear()                
+        self.box_comport.addItems(self.serial_ports())
+
+    def set_serial_change(self):   
+        global serial__             
+        serial_com = self.box_comport.currentText()    
+        curr.execute("UPDATE CONFIG_GW SET THONGTIN = ? WHERE ATTRIBUTES = ?",[serial_com, "COM_PORT"])
+        conn.commit() 
+        self.set_serial()
+
+    def set_serial(self):
+        global serial__
+        # chọn cổng com, tốc độ baud                             
+        serial_baud = int(self.box_baudrate.currentText())
+        # Đọc từ SQL Để xem đã có cổng com chưa
+        curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = 'COM_PORT' ")
+        if (len(curr.fetchall())>0): 
+            thongtin_cfig=curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = 'COM_PORT' ")
+            serial_com = thongtin_cfig.fetchone()[1]
+        else:
+            serial_com = self.box_comport.currentText()    
+            curr.execute("INSERT INTO CONFIG_GW VALUES (?,?)",["COM_PORT",serial_com])
+            conn.commit()    
+        serial__.close()
+
+        try:
+            serial__=serial.Serial(serial_com, baudrate=serial_baud ,timeout=0.1)
+        except:
+            serial_com = self.box_com.currentText()    
+            curr.execute("UPDATE CONFIG_GW SET THONGTIN = ? WHERE ATTRIBUTES = ?",[serial_com, "COM_PORT"])
+            conn.commit()              
+            serial__=serial.Serial(serial_com, baudrate=serial_baud ,timeout=0.1)
+        print(serial__)
+    def readData(self):
+        # thread: lắng nghe uart
+        if serial__.in_waiting >0:
+            data_recv = serial__.readline()
+            data_recv = data_recv.decode('utf-8')            
+            print(data_recv)   
+            lenght_data = str(len(data_recv[data_recv.find('*'):data_recv.find('#')]))
+            print(lenght_data)   
+    def read_interval(self):
+        # thread
+        self.timer = QtCore.QTimer()
+        self.timer.setInterval(100)
+        try:
+            self.timer.timeout.connect(self.readData)
+        except:
+            print("readData error")
+        self.timer.start()
+    # def senddata(self, tt):   
+    #     if (tt==1):
+    #         hello= 'on11237891' + '.'
+    #     else:
+    #         hello='1234_CH_ConfigOK' + '.'
+    #     serial__.write(hello.encode())       
+    #     print(hello.encode())
+      
+    def uploadDataSensor(self, data):
+        print("up load sensor")
+        print(data)
+               
+    def thongtincauhinhnode(self,data):
+        # tách thông tin cấu hình node
+        # xử lý, gửi thông tin
+        print("xu ly node moi")
+        print(f'data nhận được là :{data}')
+        idnode_moi = "hello"
+        hello=f'{id_gw}_{idnode_moi}_Config OK' + '.'
+        serial__.write(hello.encode())       
+        print(hello.encode())           
+        # DATA_NODE(ID_NODE char[20], NAME_ID_NODE char[20], PHANLOAI CHAR[20], ID_THIETBI CHAR[20], NAME_THIETBI CHAR[20]                  
+
+# ###############################3
     def apply_span_to_sales_table(self, row, nrow):
         if nrow <= 1:
             return
@@ -287,6 +383,8 @@ class Ui_MainWindow(object):
         self.box_baudrate = QtWidgets.QComboBox(self.tab_config)
         self.box_baudrate.setGeometry(QtCore.QRect(450, 340, 191, 51))
         self.box_baudrate.setObjectName("box_baudrate")
+        self.box_baudrate.addItems(["9600", "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200", "128000"])
+
         self.tabWidget.addTab(self.tab_config, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -300,6 +398,13 @@ class Ui_MainWindow(object):
 # ####################################################################
         # self.check_data_from_sql()
         self.ALL_DATA()
+        self.add_com()
+        self.set_serial()
+        self.box_comport.currentIndexChanged.connect(self.set_serial_change)
+        self.box_baudrate.currentIndexChanged.connect(self.set_serial_change)
+        t1 = Thread(target = self.read_interval())
+        t1.start()
+        # db.child("ADMIN").child(name_gw).stream(self.stream_handler)         
         # nhập id gw, nhấn nút thì đọc từ firebase.
         self.butt_oke.clicked.connect(self.read_idGW_firebase)
         self.retranslateUi(MainWindow)

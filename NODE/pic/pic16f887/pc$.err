@@ -1,4 +1,4 @@
 >>> Warning 202 "E:\DATN\NODE\pic\pic16f887\khaibaobien.c" Line 1(26,29): Variable never used:   AN1
-      Memory usage:   ROM=41%      RAM=39% - 53%
+      Memory usage:   ROM=41%      RAM=42% - 54%
       0 Errors,  1 Warnings.
 Build Successful.

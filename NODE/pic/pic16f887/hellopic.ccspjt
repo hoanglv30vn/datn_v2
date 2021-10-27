@@ -20,7 +20,7 @@ Type=4
 6=C:\Program Files (x86)\PICC\Drivers\LCD.C
 7=C:\Program Files (x86)\PICC\Drivers\STRING.H
 8=C:\Program Files (x86)\PICC\Drivers\STDLIB.H
-9=CONFIG_NODE.C
+9=
 10=
 [Units]
 Count=1

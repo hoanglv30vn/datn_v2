@@ -1,8 +1,7 @@
-D G "lcd_rw_tris" 9 129 "()  output_drive(LCD_RW_PIN)"
-D G "__PCM__" 9 136 ""5.015""
-D G "__DEVICE__" 9 136 "887"
-D G "__DATE__" 9 136 ""26-Oct-21""
-D G "__TIME__" 9 136 ""14:13:30"" "Standard Header file for the PIC16F887 device ////////////////"
+D G "__PCM__" 0 200 ""5.015""
+D G "__DEVICE__" 0 200 "887"
+D G "__DATE__" 0 200 ""27-Oct-21""
+D G "__TIME__" 0 200 ""21:08:43"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 v L "value" 2 39 "int8" `54 
 f B "set_tris_a" 2 39 "void(int8 value)" `53 
@@ -1320,93 +1319,83 @@ V G "KQADC" 10 1 "int16" `934
 V G "AN0" 10 1 "int16" `935 
 V G "AN1" 10 1 "int16" `936 
 V G "CONFIG_FUN" 10 2 "int8" `937 
-V G "ID_NODE" 10 2 "int8" `938 
-V G "STT_DEVICE" 10 2 "int8" `939 
-V G "STT_SENSOR" 10 2 "int8" `940 
-V G "VT" 10 3 "int8" `941 
-V G "KYTU" 10 3 "int8" `942 
-V G "ID_NODE_NHAN" 10 4 "int8" `943 
-V G "ID_DEVICE_NHAN" 10 4 "int8" `944 
-V G "TT_DEVICE_NHAN" 10 4 "int8" `945  "UNSIGNED INT8 ID_SENSOR_NHAN, TT_SENSOR_NHAN;"
-V G "KYTUCHAR" 10 6 "int8[20]" `946 
-V G "TTNHAN" 10 8 "int1" `947 
-V G "TT_CONFIG" 10 8 "int1" `948 
-V G "TT_CONTROL" 10 8 "int1" `949 
-V G "TT_CONFIG_DONE" 10 8 "int1" `950 
-V G "TT_FUN" 10 8 "int1" `951 
-V G "TT_STT" 10 8 "int1" `952 
-V G "TT_DEVICE" 10 9 "int1[8]" `953 
-V G "TT_SENSOR" 10 10 "int1[8]" `954 
-V G "TT_DEVICE_CHAR" 10 11 "*int8[1]" `955 
-V G "PACKAGE_NHIETDO" 10 12 "*int8[1]" `957 
-V G "PACKAGE_CONFIG" 10 14 "*int8[1]" `959 
-V G "ID_" 10 16 "*int8[1]" `961 
-V G "ID_GATEWAY" 10 18 "int8[4]" `963 
-V G "TEMP_CHAR" 10 19 "*int8[1]" `964 
-V G "TEMP_CHAR2" 10 20 "*int8[1]" `966 
-V G "TEMP_CHAR3" 10 21 "*int8[1]" `968 
-V G "LEN_PACKAGES" 10 22 "int8" `970 
-V G "NHIETDO1" 10 23 "int8[1]" `971 
-V G "NHIETDO2" 10 24 "int8[1]" `972 
+V G "VT" 10 3 "int8" `938 
+V G "KYTU" 10 3 "int8" `939 
+V G "ID_NODE_NHAN" 10 4 "int8" `940 
+V G "ID_DEVICE_NHAN" 10 4 "int8" `941 
+V G "TT_DEVICE_NHAN" 10 4 "int8" `942 
+V G "ID_GATEWAY" 10 5 "int8[6]" `943 
+V G "ID_NODE" 10 6 "int8[4]" `944 
+V G "LEN_PACKAGES" 10 7 "int8" `945 
+V G "TTNHAN" 10 8 "int1" `946 
+V G "TT_CONFIG" 10 8 "int1" `947 
+V G "TT_CONTROL" 10 8 "int1" `948 
+V G "TT_CONFIG_DONE" 10 8 "int1" `949 
+V G "TT_FUN" 10 8 "int1" `950 
+V G "TT_STT" 10 8 "int1" `951 
+V G "ID_NODE_CHAR" 10 10 "*int8[1]" `952 
+V G "ID_GATEWAY_CHAR" 10 11 "*int8[1]" `954 
+V G "KYTUCHAR" 10 12 "int8[20]" `956 
+V G "PACKAGE_CONFIG" 10 14 "*int8[1]" `957 
+V G "TEMP_CHAR" 10 15 "*int8[1]" `959 
+V G "TEMP_CHAR3" 10 17 "*int8[1]" `961 
 C L "CHON_ID" 1 24 1 "FUNCTION"
 C L "CHON_ID" 11 2 1 "FUNCTION"
-F G "CHON_ID" 11 4 "void()" `973  "TT_CONFIG_DONE;"
+F G "CHON_ID" 11 4 "void()" `963  "TT_CONFIG_DONE;"
+V L "num" 11 8 "int8" `964 
+C L "CHON_ID" 11 2 2 "FUNCTION"
 C L "CHON_ID" 11 2 1 "FUNCTION"
-F G "CONFIG_DEVICE" 11 30 "void()" `977 
-C L "CONFIG_DEVICE" 11 2 1 "FUNCTION"
-F G "CONFIG_SENSOR" 11 69 "void()" `987 
-C L "CONFIG_SENSOR" 11 2 1 "FUNCTION"
-F G "NHAPID_GW" 11 108 "void()" `990 
-V L "num" 11 109 "int8" `991 
+C L "CHON_ID" 11 2 1 "FUNCTION"
+F G "NHAPID_GW" 11 44 "void()" `975 
+V L "num" 11 45 "int8" `976 
+C L "NHAPID_GW" 11 2 2 "FUNCTION"
 C L "NHAPID_GW" 11 2 1 "FUNCTION"
 C L "NHAPID_GW" 11 2 1 "FUNCTION"
-F G "BUTT_OKE" 11 146 "void()" `999 
-F G "SELLECT_FUN" 11 153 "void()" `1000 
-C L "SELLECT_FUN" 11 2 1 "FUNCTION"
-F G "BUTT_FUN" 11 178 "void()" `1002 
+F G "BUTT_OKE" 11 83 "void()" `982 
+C L "BUTT_OKE" 11 2 1 "FUNCTION"
+C L "BUTT_OKE" 11 2 1 "FUNCTION"
+F G "SELLECT_FUN" 11 90 "void()" `983 
+F G "BUTT_FUN" 11 106 "void()" `984 
 C L "BUTT_FUN" 11 2 1 "FUNCTION"
 C L "BUTT_FUN" 11 2 1 "FUNCTION"
 C L "BUTT_FUN" 11 2 1 "FUNCTION"
-C L "BUTT_FUN" 11 2 1 "FUNCTION"
-F G "XULYDEVICE_CF" 11 232 "void()" `1010 
-V L "i" 11 235 "int8" `1011 
-C L "XULYDEVICE_CF" 11 2 1 "FUNCTION"
-F G "XULYSENSOR_CF" 11 249 "void()" `1012 
-V L "j" 11 252 "int8" `1013 
-C L "XULYSENSOR_CF" 11 2 1 "FUNCTION"
-F G "CONFIG_DONE" 11 266 "void()" `1014 
-V L "j" 11 270 "int8" `1016 
+F G "XULY_IDNODE_NHAP" 11 149 "void()" `989 
+V L "j" 11 152 "int8" `992 
+C L "XULY_IDNODE_NHAP" 11 2 1 "FUNCTION"
+C L "XULY_IDNODE_NHAP" 11 2 1 "FUNCTION"
+F G "XULY_IDGW_NHAP" 11 162 "void()" `993 
+V L "j" 11 165 "int8" `995 
+C L "XULY_IDGW_NHAP" 11 2 1 "FUNCTION"
+F G "CONFIG_DONE" 11 176 "void()" `996 
 C L "CONFIG_DONE" 11 2 1 "FUNCTION"
+V L "j" 11 186 "int8" `998 
 C L "CONFIG_DONE" 11 2 1 "FUNCTION"
-C L "CONFIG_DONE" 11 2 1 "FUNCTION"
-C L "CONFIG_DONE" 11 2 4 "FUNCTION"
 C L "QUET_PHIM" 11 2 1 "FUNCTION"
-F G "QUET_PHIM" 0 5 "void()" `1023 
-V L "BDT" 0 6 "int8" `1024 
+F G "QUET_PHIM" 0 5 "void()" `1003 
+V L "BDT" 0 6 "int8" `1004 
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
-F G "NGAT_NGOAI" 0 36 "void()" `1025 
-F G "NGAT" 0 42 "void()" `1026 
-F G "XUATLCD" 0 57 "void()" `1027 
-V L "KENH" 0 64 "int8" `1029 
-F G "ADC_READ" 0 65 "int8(int8 KENH)" `1028 
-V L "i" 0 68 "int8" `1030 
-F G "CHUONG_TRINH_CON" 0 79 "void()" `1033 
-V L "i" 0 80 "int8" `1034 
-F G "MAIN" 0 88 "void()" `1035 
+F G "NGAT_NGOAI" 0 36 "void()" `1005 
+F G "NGAT" 0 42 "void()" `1006 
+F G "XUATLCD" 0 57 "void()" `1007 
+V L "KENH" 0 64 "int8" `1009 
+F G "ADC_READ" 0 65 "int8(int8 KENH)" `1008 
+V L "i" 0 68 "int8" `1010 
+F G "CHUONG_TRINH_CON" 0 79 "void()" `1013 
+V L "i" 0 80 "int8" `1014 
+F G "MAIN" 0 88 "void()" `1015 
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 2 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
-V L "i" 0 144 "int8" `1038 
 C L "MAIN" 0 8 4 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
-V L "TOKEN" 0 167 "*int8" `1040 
+V L "TOKEN" 0 157 "*int8" `1019 
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 F B "reset_cpu" 0 0

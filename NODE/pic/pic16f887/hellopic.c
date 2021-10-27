@@ -103,7 +103,7 @@ VOID QUET_PHIM()
     SET_TIMER1 (3036);
     TMR1IF = 0;
     LCD_INIT (); // KHOI TAO LCD
-    ID_NODE = 0;
+
     TT_CONFIG = 0;
     TT_CONFIG_DONE = 0;
     TT_CONTROL = 1;
@@ -136,16 +136,6 @@ VOID QUET_PHIM()
 
              IF (AN0 > 26)
              {
-                ITOA (AN0, 10, NHIETDO1);
-                PACKAGE_NHIETDO[4] = NHIETDO1;
-                ITOA (AN1, 10, NHIETDO2);
-                PACKAGE_NHIETDO[5] = NHIETDO2;
-                
-                FOR (INT I = 0; I < 8; I++)
-                {
-                   PRINTF (PACKAGE_NHIETDO[I]);
-                   DELAY_MS (1);
-                }
 
                 
                 DELAY_MS (1000);

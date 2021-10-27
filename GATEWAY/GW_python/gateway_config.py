@@ -152,22 +152,25 @@ class Ui_MainWindow(object):
             conn.commit()              
             serial__=serial.Serial(serial_com, baudrate=serial_baud ,timeout=0.1)
         print(serial__)
-    def readData(self):
+    def readDataUART(self):
         # thread: lắng nghe uart
         if serial__.in_waiting >0:
             data_recv = serial__.readline()
             data_recv = data_recv.decode('utf-8')            
             print(data_recv)   
             lenght_data = str(len(data_recv[data_recv.find('*'):data_recv.find('#')]))
-            print(lenght_data)   
+            print(lenght_data) 
+            data = data_recv.split("@")
+            print(data)  
+
     def read_interval(self):
         # thread
         self.timer = QtCore.QTimer()
         self.timer.setInterval(100)
         try:
-            self.timer.timeout.connect(self.readData)
+            self.timer.timeout.connect(self.readDataUART)
         except:
-            print("readData error")
+            print("readDataUART error")
         self.timer.start()
     # def senddata(self, tt):   
     #     if (tt==1):
@@ -202,6 +205,21 @@ class Ui_MainWindow(object):
                 t = self.table_danhsach.takeItem(r, c)
                 del t
     def ALL_DATA(self): 
+        # in tên + id nhà
+        # result = conn.execute("SELECT * FROM CONFIG_GW")       
+        name_home = "     HOME:"
+        id_home = "   -   ID:"
+        curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = ? ", ["id_nha"] ) 
+        if (len(curr.fetchall())>0): 
+            thongtin_cfig=curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = 'id_nha' ")
+            id_home += thongtin_cfig.fetchone()[1]
+        curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = ? ", ["name_nha"] ) 
+        if (len(curr.fetchall())>0): 
+            thongtin_cfig=curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = 'name_nha' ")
+            name_home += thongtin_cfig.fetchone()[1]
+        self.lab_name_gw.setText(name_home + id_home)
+        # ___________ #
+        # in ra table
         result = conn.execute("SELECT * FROM DATA_NODE")        
         self.table_danhsach.setRowCount(0)        
         last_id = -1
@@ -255,12 +273,13 @@ class Ui_MainWindow(object):
             print("error")
         print("oke")    
     def pretty( self, data_object):
+        tenphongsql = "tentam"
+
         for phong, nha in data_object.items():
             # print("phòng:" + str(phong))
             if isinstance(nha, dict):
                 for thietbi, tenphong in nha.items():
                     # print("tên thiết bị "+ thietbi)
-                    tenphongsql = "tentam"
                     if isinstance(tenphong, dict):
                         for doituong, dulieu in tenphong.items():                            
                             if doituong == "namethietbi":
@@ -280,8 +299,7 @@ class Ui_MainWindow(object):
                 print("nhà" + str(nha))    
                 tennhasql=str(nha)
                 curr.execute("INSERT INTO CONFIG_GW VALUES (?,?)",["name_nha",tennhasql])                            
-        conn.commit()
-        self.lab_name_gw.setText(tennhasql)
+        conn.commit()        
         self.ALL_DATA()
 
     # def pretty( self, data_object):
@@ -425,7 +443,7 @@ class Ui_MainWindow(object):
         item = self.table_danhsach.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "PHÂN LOẠI"))
 
-        self.lab_name_gw.setText(_translate("MainWindow", "    NAME GATEWAY"))
+        # self.lab_name_gw.setText(_translate("MainWindow", "    NAME GATEWAY"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_hienthi), _translate("MainWindow", "LIST"))
         self.butt_oke.setText(_translate("MainWindow", "OK"))
         self.label.setText(_translate("MainWindow", "   ID GATEWAY "))

@@ -62,7 +62,7 @@ VOID NHAPID_GW()
          NUM++;
          NUM = NUM % 6;
          LCD_GOTOXY (3 + NUM, 1);
-         PRINTF (LCD_PUTC, "    _    ");//4SPACE
+         PRINTF (LCD_PUTC, "    _        ");//4SPACE
          DELAY_MS (300); 
       }
 
@@ -147,16 +147,16 @@ VOID BUTT_FUN()
    }
 }
 VOID XULY_IDNODE_NHAP(){
-   *TEMP_CHAR3 = "\0";
+   //*TEMP_CHAR3 = "\0";
    *ID_NODE_CHAR = "\0";
    FOR (int j = 0; j < 4; j++)
    {
       ITOA (ID_NODE[j], 10, TEMP_CHAR);
       DELAY_MS (1);
-      STRCAT (TEMP_CHAR3, TEMP_CHAR);
+      STRCAT (ID_NODE_CHAR, TEMP_CHAR);
    }  
    //ID_NODE_CHAR = TEMP_CHAR3;   
-   STRCPY(ID_NODE_CHAR,TEMP_CHAR3);
+   //STRCPY(ID_NODE_CHAR,TEMP_CHAR3);
    //strcpy
 }
 VOID XULY_IDGW_NHAP(){
@@ -168,14 +168,14 @@ VOID XULY_IDGW_NHAP(){
       DELAY_MS (1);
       STRCAT (ID_GATEWAY_CHAR, TEMP_CHAR);
    }  
-    //STRCPY(ID_GATEWAY_CHAR,TEMP_CHAR2);
 }
 
 
 VOID CONFIG_DONE()
 {
    TT_FUN = 0;
-   TT_STT = 0;   
+   TT_STT = 0;
+   CHAR *PACKAGE_CONFIG[]={"*", "LENGHT","C_F", "ID_GW1234" ,"ID_NODE","#"};
    XULY_IDGW_NHAP();
    PACKAGE_CONFIG[3] = ID_GATEWAY_CHAR;
    
@@ -200,11 +200,10 @@ VOID CONFIG_DONE()
 
    LCD_GOTOXY (1, 1) ;
    DELAY_MS (10);
-   PRINTF (LCD_PUTC, "CONFIG DONE        ") ;
-   LCD_GOTOXY (1, 2) ;
+   PRINTF (LCD_PUTC, "WAITING ....        ") ;
+   LCD_GOTOXY (1, 1) ;
    DELAY_MS (10);
-   PRINTF (LCD_PUTC, "CONFIG DONE        ") ;
-
+   PRINTF (LCD_PUTC, "WAITING ....        ") ;   
    TT_CONFIG_DONE = 0;
 }
 

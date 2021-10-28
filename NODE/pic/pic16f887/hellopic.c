@@ -53,12 +53,68 @@ VOID QUET_PHIM()
     VT++;
  }
 
- VOID XUATLCD  ()
+ VOID XUATLCD ( CHAR CHUOI_PRINT[])
  {
     LCD_GOTOXY (1, 1) ;
     DELAY_MS (10);
-    PRINTF (LCD_PUTC, KYTUCHAR);
+    PRINTF (LCD_PUTC, CHUOI_PRINT);
     DELAY_MS (1);
+ }
+
+ VOID XU_LY_UART()
+ {
+     //ID_NODE_NHAN = KYTU[1] - 48;
+    //ID_DEVICE_NHAN = KYTU[2] - 48 + 64;
+    //TT_DEVICE_NHAN = KYTU[3] - 48; // - 48 ASCII -- > S?. + 64 -- > PORT_D (D0 = 64)               
+    
+    /*TINH DO DAI*/
+    CHAR CH = '*';
+    CHAR *RET;
+    UNSIGNED INT8 LEN_RET;
+    RET = STRCHR(KYTUCHAR,CH);
+    LEN_RET = STRLEN(RET);
+    /* TINH ID_NODE, ID_GW LUU TRONG PIC*/
+    ID_NODE_NUMBER = ATOI(ID_NODE_CHAR);  
+    ID_GW_NUMBER =  ATOI(ID_GATEWAY_CHAR);  
+    /* LAY TOKEN DAU TIEN */    
+    KYTU = 0;
+    TEMP_CHAR = "#";
+    CHAR * TOKEN;
+    TOKEN = STRTOK (KYTUCHAR, TEMP_CHAR);                
+    /* DUYET QUA CAC TOKEN CON LAI */                
+    WHILE (TOKEN != NULL)
+    {                
+       SWITCH(KYTU)
+       {
+         CASE 0:
+         BREAK;
+         CASE 1:
+         ID_GW_NHAN = ATOI(TOKEN);  
+         BREAK;                     
+         CASE 2:
+         ID_NODE_NHAN = ATOI(TOKEN);  
+         BREAK;      
+         CASE 3:
+         LENHDIEUKHIEN =  ATOI(TOKEN);                 
+         BREAK;    
+         CASE 4:
+         DODAI_DATA_NHAN =  ATOI(TOKEN);                 
+         BREAK;          
+       }  
+      DELAY_MS (1);                      
+      TOKEN = STRTOK(NULL, TEMP_CHAR);
+      KYTU++;         
+    }
+    IF (LEN_RET == DODAI_DATA_NHAN){
+      OUTPUT_D (0XFF);
+      DELAY_MS (2500) ;
+    }
+    IF (ID_NODE_NHAN == ID_NODE_NUMBER && ID_GW_NHAN == ID_GW_NUMBER)
+    {
+      OUTPUT_D (0XF0);
+      DELAY_MS (2500); 
+      OUTPUT_D (0X0F);
+    }
  }
 
  INT ADC_READ (INT KENH)
@@ -114,82 +170,17 @@ VOID QUET_PHIM()
     
     WHILE (TRUE)
     {
-       //AN1 = ADC_READ (1) ;
-       //AN0 = ADC_READ (0) ;
-
-       IF (TT_CONFIG)
-       {
-          BUTT_FUN (); // GOI HAM CHON LENH (SWITCH CASE)
-       }
-
-       ELSE IF (TT_CONFIG_DONE)
-       {
-          CONFIG_DONE ();
-       }
-
-       
+       IF (TT_CONFIG)             {BUTT_FUN (); } // GOI HAM CHON LENH (SWITCH CASE)
+       ELSE IF (TT_CONFIG_DONE)   { CONFIG_DONE ();}       
        ELSE
        {
           WHILE (!TT_CONFIG)
           {
-             CHUONG_TRINH_CON ();
-
-             IF (AN0 > 26)
-             {
-
-                
-                DELAY_MS (1000);
-             }
-
-             
+             CHUONG_TRINH_CON ();             
              IF (TTNHAN == 1)
              {
                 TTNHAN = 0;
-                KYTU = 0;
-                //TEMP_CHAR = 'K';
-                //ID_NODE_NHAN = KYTU[1] - 48;
-                //ID_DEVICE_NHAN = KYTU[2] - 48 + 64;
-                //TT_DEVICE_NHAN = KYTU[3] - 48; // - 48 ASCII -- > S?. + 64 -- > PORT_D (D0 = 64)
-                XUATLCD ();
-                
-                /* LAY TOKEN DAU TIEN */
-                TEMP_CHAR = "_";
-                CHAR * TOKEN;
-                TOKEN = STRTOK (KYTUCHAR, TEMP_CHAR);
-                
-                /* DUYET QUA CAC TOKEN CON LAI */
-                
-                LCD_GOTOXY (1, 2) ;
-                WHILE (TOKEN != NULL)
-                {                
-                   SWITCH(KYTU)
-                   {
-                     CASE 0:
-                     BREAK;
-                     CASE 1:
-                     ID_NODE_NHAN = ATOI(TOKEN);  
-                     BREAK;
-               
-                     CASE 2:
-                     ID_DEVICE_NHAN =  ATOI(TOKEN) + 64 ;
-                     BREAK;
-               
-                     CASE 3:
-                     TT_DEVICE_NHAN =  ATOI(TOKEN);                 
-                     BREAK;
-               
-                   
-                   }
-                  //PRINTF (LCD_PUTC, TOKEN);   
-                  DELAY_MS (1);                      
-                  TOKEN = STRTOK(NULL, TEMP_CHAR);
-                  KYTU++;     
-                
-                }
-                IF (ID_NODE_NHAN == ID_NODE)
-                {
-                   OUTPUT_BIT (ID_DEVICE_NHAN, TT_DEVICE_NHAN);
-                }
+                XU_LY_UART();
              }
           }
        }

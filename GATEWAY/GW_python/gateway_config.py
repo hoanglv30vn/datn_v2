@@ -241,10 +241,10 @@ class Ui_MainWindow(object):
             curr.execute("UPDATE DATA_NODE SET TRANGTHAI_ACTIVE = 'active' WHERE ID_NODE = ? ", [id_node_nhan] ) 
             conn.commit()
             # gửi lại xác nhận cho node.
-            hello=f'*#{id_gw}#{id_node_nhan}#1#{name_node_nhan}'
+            hello=f'*#{id_gw}#{id_node_nhan}#1#CONFIG OK'
             len_data_send_uart = len(hello) + 3
             hello=f'*#{id_gw}#{id_node_nhan}#1#'
-            data_send_uart = hello + str(len_data_send_uart) +'#'+name_node_nhan +'.'
+            data_send_uart = hello + str(len_data_send_uart) +'#CONFIG OK' +'.'
             serial__.write(data_send_uart.encode())       
             print(data_send_uart.encode()) 
             print(data_send_uart) 

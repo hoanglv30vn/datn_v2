@@ -10,7 +10,7 @@ VOID CHON_ID()
    LCD_GOTOXY (1, 2) ;
    DELAY_MS (10);
    PRINTF (LCD_PUTC, "NODE: ");
-   PRINTF (LCD_PUTC, "0000");
+   PRINTF (LCD_PUTC, "0000          ");
    LCD_GOTOXY (1, 1) ;
    PRINTF (LCD_PUTC, "      _              ");//6 SPACE PHIA TRUOC "_"
    //ID_GW = "1234";    
@@ -49,7 +49,7 @@ VOID NHAPID_GW()
    LCD_GOTOXY (1, 2) ;
    DELAY_MS (10);
    PRINTF (LCD_PUTC, "ID_GW:");
-   PRINTF (LCD_PUTC, "000000");
+   PRINTF (LCD_PUTC, "000000        ");
    LCD_GOTOXY (1, 1) ;
    PRINTF (LCD_PUTC, "      _                ");//6 SPACE PHIA TRUOC "_"
    //ID_GW = "1234";    
@@ -182,7 +182,7 @@ VOID CONFIG_DONE()
    XULY_IDNODE_NHAP();
    PACKAGE_CONFIG[4] = ID_NODE_CHAR;         
    LEN_PACKAGES = 0;
-   PACKAGE_CONFIG[1] = "__"; //DO DAI CUA LENGHT CO DO DAI = 2
+   PACKAGE_CONFIG[1] = "12"; //DO DAI CUA LENGHT CO DO DAI = 2
    FOR (int J = 0; J < 6; J++)
    {
       LEN_PACKAGES += strlen(PACKAGE_CONFIG[J]);

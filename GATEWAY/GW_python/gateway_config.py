@@ -59,6 +59,7 @@ import serial
 from threading import Thread
 from PyQt5.QtCore import QDate, Qt
 import pyrebase
+import array as arr
 
 ############################# DATABASE SQL #########################################
 conn = sqlite3.connect('data_config.db')   #kết nối tới database
@@ -81,10 +82,13 @@ firebaseConfig = {
 }
 firebase = pyrebase.initialize_app(firebaseConfig)
 # db = firebase.database().child("ADMIN")
-id_gw = 'gateway'
+
 name_gw = 'gateway'
 global serial__ 
 serial__=serial.Serial()
+global id_gw
+id_gw = 'gateway'
+
 class Ui_MainWindow(object):
                              
     def serial_ports(self):
@@ -154,6 +158,7 @@ class Ui_MainWindow(object):
         print(serial__)
     def readDataUART(self):
         # thread: lắng nghe uart
+        global id_gw
         if serial__.in_waiting >0:
             data_recv = serial__.readline()
             data_recv = data_recv.decode('utf-8')            
@@ -161,7 +166,26 @@ class Ui_MainWindow(object):
             lenght_data = str(len(data_recv[data_recv.find('*'):data_recv.find('#')]))
             print(lenght_data) 
             data = data_recv.split("@")
-            print(data)  
+            print(data)
+            print(id_gw)
+            do_dai_chuoi_nhan = data[1]
+            thongtinlenh_nhan = data[2]
+            id_gw_nhan = data[3]
+            id_node_nhan = data[4]            
+            if do_dai_chuoi_nhan == lenght_data and id_gw_nhan == id_gw :
+                print("đúng độ dài - đúng id")
+                # phân tích lệnh, xử lý.
+                if thongtinlenh_nhan == 'C_F':
+                    self.thongtincauhinhnode(data)
+                # S_S == dữ liệu cảm biến.
+                elif thongtinlenh_nhan == 'S_S':
+                    self.uploadDataSensor(data)     
+            else:
+                print("config error")            
+
+
+            # do_dai_chuoi_nhan = data[3]
+            # lenh_xu_ly = data [4]              
 
     def read_interval(self):
         # thread
@@ -189,10 +213,20 @@ class Ui_MainWindow(object):
         # xử lý, gửi thông tin
         print("xu ly node moi")
         print(f'data nhận được là :{data}')
+        id_node_nhan = data[4]        
+        curr.execute("SELECT * FROM DATA_NODE WHERE ID_NODE = ? ", [id_node_nhan] ) 
+        if (len(curr.fetchall())>0): 
+            # thongtin_cfig=curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = 'id_nha' ")   
+            print("id node nhận đc:"+ id_node_nhan )
+        else:
+            print("sai idnode")
+
         idnode_moi = "hello"
         hello=f'{id_gw}_{idnode_moi}_Config OK' + '.'
-        serial__.write(hello.encode())       
-        print(hello.encode())           
+        # serial__.write(hello.encode())       
+        print(hello.encode()) 
+        # in lại table
+        # self.ALL_DATA()          
         # DATA_NODE(ID_NODE char[20], NAME_ID_NODE char[20], PHANLOAI CHAR[20], ID_THIETBI CHAR[20], NAME_THIETBI CHAR[20]                  
 
 # ###############################3
@@ -206,30 +240,36 @@ class Ui_MainWindow(object):
                 del t
     def ALL_DATA(self): 
         # in tên + id nhà
-        # result = conn.execute("SELECT * FROM CONFIG_GW")       
+        # result = conn.execute("SELECT * FROM CONFIG_GW")   
+        global id_gw    
         name_home = "     HOME:"
-        id_home = "   -   ID:"
+        id_home_hienthi = "   -   ID:"
         curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = ? ", ["id_nha"] ) 
         if (len(curr.fetchall())>0): 
             thongtin_cfig=curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = 'id_nha' ")
-            id_home += thongtin_cfig.fetchone()[1]
+            id_gw = thongtin_cfig.fetchone()[1]
+            id_home_hienthi += id_gw
         curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = ? ", ["name_nha"] ) 
         if (len(curr.fetchall())>0): 
             thongtin_cfig=curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = 'name_nha' ")
             name_home += thongtin_cfig.fetchone()[1]
-        self.lab_name_gw.setText(name_home + id_home)
+        self.lab_name_gw.setText(name_home + id_home_hienthi)
         # ___________ #
         # in ra table
         result = conn.execute("SELECT * FROM DATA_NODE")        
-        self.table_danhsach.setRowCount(0)        
+        self.table_danhsach.setRowCount(0)    
         last_id = -1
         start_row = 0        
+        color=arr.array( 'i' ,[226,243,187,181,238,243])
         for row_number, row_data in enumerate(result): 
             self.table_danhsach.insertRow(row_number)  
             current_id, *other_values = row_data
+            row_color_number = row_number%2
+            color_row = (QtGui.QColor(color[3*row_color_number],color[3*row_color_number+1],color[3*row_color_number+2]))
             for colum_number, data in enumerate (row_data):
                 # đoạn này là in ra bảng
                 self.table_danhsach.setItem(row_number, colum_number,QtWidgets.QTableWidgetItem(str(data))) 
+                self.table_danhsach.item(row_number, colum_number).setBackground(color_row)
 
             # đoạn này xuống dưới + hàm apply_span_to_sales_table là:
             # so sánh gộp các hàng của cột 0, cột 1 nếu tên phòng và tên id giống nhau
@@ -254,6 +294,8 @@ class Ui_MainWindow(object):
         curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = ? ", [id_nha] )
         if (len(curr.fetchall())>0): 
             curr.execute("DELETE FROM CONFIG_GW WHERE ATTRIBUTES = ?",[id_nha])  
+            curr.execute("INSERT INTO CONFIG_GW VALUES (?,?)",[id_nha,id_gw_from_line])  
+        else:
             curr.execute("INSERT INTO CONFIG_GW VALUES (?,?)",[id_nha,id_gw_from_line])  
 
         curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = ? ", [name_nha] )
@@ -313,37 +355,38 @@ class Ui_MainWindow(object):
 
 
 # ####################################################################
-# 
+
     def setupUi(self, MainWindow):
+#         
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(819, 540)
         MainWindow.setStyleSheet("#centralwidget{\n"
-    "    background-color:qlineargradient(spread:pad, x1:1, y1:0.25, x2:0.988636, y2:1, stop:0.0909091 rgba(29, 113, 133, 248), stop:1 rgba(255, 255, 255, 255));\n"
-    "font-size:16px;\n"
-    "}\n"
-    "\n"
-    "#line_idgw,#box_comport,#box_baudrate{\n"
-    "font-size:24px;\n"
-    "}\n"
-    "\n"
-    "QLabel{\n"
-    "border-radius: 10%;\n"
-    "font-size:20px;\n"
-    "background-color:rgb(217, 232, 217);\n"
-    "}\n"
-    "#tab_config,#tab_hienthi{\n"
-    "background-color:rgba(0, 124, 91, 206)\n"
-    "}\n"
-    "\n"
-    "#butt_oke{\n"
-    "border-radius: 30%;\n"
-    "font-size:20px;\n"
-    "background-color:rgb(223, 223, 167)\n"
-    "}\n"
-    "#table_danhsach{\n"
-    "font-size:20px;\n"
-    "}\n"
-    "")
+            "    background-color:qlineargradient(spread:pad, x1:1, y1:0.25, x2:0.988636, y2:1, stop:0.0909091 rgba(29, 113, 133, 248), stop:1 rgba(255, 255, 255, 255));\n"
+            "font-size:16px;\n"
+            "}\n"
+            "\n"
+            "#line_idgw,#box_comport,#box_baudrate{\n"
+            "font-size:24px;\n"
+            "}\n"
+            "\n"
+            "QLabel{\n"
+            "border-radius: 10%;\n"
+            "font-size:20px;\n"
+            "background-color:rgb(217, 232, 217);\n"
+            "}\n"
+            "#tab_config,#tab_hienthi{\n"
+            "background-color:rgba(0, 124, 91, 206)\n"
+            "}\n"
+            "\n"
+            "#butt_oke{\n"
+            "border-radius: 30%;\n"
+            "font-size:20px;\n"
+            "background-color:rgb(223, 223, 167)\n"
+            "}\n"
+            "#table_danhsach{\n"
+            "font-size:20px;\n"
+            "}\n"
+            "")
 # 
 #
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -358,7 +401,7 @@ class Ui_MainWindow(object):
         self.tab_hienthi = QtWidgets.QWidget()
         self.tab_hienthi.setObjectName("tab_hienthi")
         self.table_danhsach = QtWidgets.QTableWidget(self.tab_hienthi)
-        self.table_danhsach.setGeometry(QtCore.QRect(10, 110, 761, 281))
+        self.table_danhsach.setGeometry(QtCore.QRect(10, 110, 761, 331))
         self.table_danhsach.setObjectName("table_danhsach")
         self.table_danhsach.setColumnCount(5)
         self.table_danhsach.setRowCount(0)

@@ -234,58 +234,58 @@ ROM Allocation:
 00005E  @const1018.call
 000064  @const966.call
 000068  @const968.call
-00006B  @const969.call
-000076  @const970.call
-00007B  @const978.call
-00007F  @const979.call
-000083  @const980.call
-00008F  @const981.call
-000094  @const985.call
-00009C  @const986.call
-0000A4  @const987.call
-0000AD  @const988.call
-0000B5  @const1001.call
-0000BF  @const1002.call
-0000C9  QUET_PHIM
-0000C9  NGAT_NGOAI
-0000F2  BUTT_OKE
-0000FA  NGAT
-000117  @delay_ms1
-00012B  lcd_send_nibble
-00016D  lcd_read_nibble
-0001B0  lcd_send_byte
-0001B8  lcd_read_byte
-000224  lcd_init
-000288  lcd_gotoxy
-00029C  lcd_putc
-0002D6  @PSTRINGC7_921
-00034A  @DIVS3232
-0003C6  itoa
-0003ED  @MUL3232
-000528  @PSTRINGR_921
-000545  @DIV88
-00055C  BUTT_FUN
-0005CD  SELLECT_FUN
-0005D5  CHON_ID
-000692  NHAPID_GW
-000759  strcat
-000797  CHUONG_TRINH_CON
-0007AD  XUATLCD
-0007C4  @WRITEBITA
+000070  @const969.call
+00007B  @const970.call
+000080  @const978.call
+000084  @const979.call
+00008C  @const980.call
+000098  @const981.call
+00009D  @const985.call
+0000A5  @const986.call
+0000AD  @const987.call
+0000B6  @const988.call
+0000BE  @const1001.call
+0000C8  @const1002.call
+0000D2  QUET_PHIM
+0000D2  NGAT_NGOAI
+0000FB  BUTT_OKE
+000103  NGAT
+000120  @delay_ms1
+000134  lcd_send_nibble
+000176  lcd_read_nibble
+0001B9  lcd_send_byte
+0001C1  lcd_read_byte
+00022D  lcd_init
+000291  lcd_gotoxy
+0002A5  lcd_putc
+0002DF  @PSTRINGC7_921
+000353  @DIVS3232
+0003CF  itoa
+0003F6  @MUL3232
+000531  @PSTRINGR_921
+00054E  @DIV88
+000565  BUTT_FUN
+0005D6  SELLECT_FUN
+0005DE  CHON_ID
+00069B  NHAPID_GW
+000762  strcat
+0007A0  CHUONG_TRINH_CON
+0007B6  XUATLCD
+0007CD  @WRITEBITA
 000800  CONFIG_DONE
 000802  XULY_IDGW_NHAP
 00083F  XULY_IDNODE_NHAP
-0008BA  strlen
-00090A  @PSTRINGR_9600_62_63
-000961  strtok
-00097A  strspn
-0009ED  strpbrk
-000A52  atoi
-000AC1  @MUL88
-000B54  @cinit1
-000B54  MAIN
-000B7F  @cinit2
-000D0F  @goto12193
+0008BB  strlen
+00090B  @PSTRINGR_9600_62_63
+000962  strtok
+00097B  strspn
+0009EE  strpbrk
+000A53  atoi
+000AC2  @MUL88
+000B55  @cinit1
+000B55  MAIN
+000B80  @cinit2
+000D10  @goto12193
 0136  StrtoulGO
 0136  StrtolGO
 
@@ -293,7 +293,7 @@ Project Directory:
     E:\DATN\NODE\pic\pic16f887\
 
 Project Files:
-    hellopic.c                                              [27-Oct-21 20:07  CRC=1D84EFBB]
+    hellopic.c                                              [27-Oct-21 21:11  CRC=1D84EFBB]
     thuvien.c                                               [25-Oct-21 15:09  CRC=A98CB246]
     C:\Program Files (x86)\PICC\Devices\16F887.H            [12-Nov-13 14:35  CRC=6CB1A611]
     C:\Program Files (x86)\PICC\Drivers\STRING.H            [14-Jul-11 10:13  CRC=23EDEC8F]
@@ -303,10 +303,10 @@ Project Files:
     C:\Program Files (x86)\PICC\Drivers\string.h            [14-Jul-11 10:13  CRC=23EDEC8F]
     C:\Program Files (x86)\PICC\Drivers\STDIO.H             [31-Jul-07 13:24  CRC=4E4534F4]
     C:\Program Files (x86)\PICC\Drivers\LCD.C               [19-Sep-13 15:38  CRC=D1A6378A]
-    khaibaobien.c                                           [27-Oct-21 21:08  CRC=3229CCE0]
-    config_1.C                                              [27-Oct-21 21:08  CRC=818C7814]
+    khaibaobien.c                                           [27-Oct-21 21:11  CRC=3229CCE0]
+    config_1.C                                              [28-Oct-21 15:34  CRC=DC9F1EBD]
 
-Source signature=92CFA290
+Source signature=48F4EFE2
 
 Units:
     hellopic (main)

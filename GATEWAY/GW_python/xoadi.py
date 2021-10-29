@@ -18,6 +18,11 @@ global serial__
 serial__=serial.Serial()        
 serial__=serial.Serial('COM11', baudrate=9600 ,timeout=0.1)                
 
+
+a= "hoang"
+print(a[-1])
+
+
 # while True:
 #     id_device_control= input("a:")
 #     state_control= input("a:")

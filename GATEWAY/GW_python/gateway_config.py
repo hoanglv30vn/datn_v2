@@ -116,11 +116,19 @@ class Ui_MainWindow(object):
         link_fb = path_fb.split("/")
         if len(link_fb) == 4:
             id_node_control = link_fb[1]
-            id_device_control = link_fb[2][2]
+            id_device_control = link_fb[2]
             state_control = mess_fb
             self.send_data_control(id_node_control,id_device_control,state_control) 
 
     def send_data_control(self,id_node_control,id_device_control,state_control):
+        conn = sqlite3.connect('data_config.db')   #kết nối tới database
+        curr = conn.cursor()    #con trỏ        
+        curr.execute("SELECT PHANLOAI FROM DATA_NODE WHERE ID_THIETBI = ? ",[id_device_control])
+        if (len(curr.fetchall())>0): 
+            id_dk = curr.execute("SELECT PHANLOAI FROM DATA_NODE WHERE ID_THIETBI = ? ",[id_device_control])
+            id_device_control = id_dk.fetchone()[0][-1]
+        else:
+            print("cập nhật lại danh sách")            
         hello=f'*#{id_gw}#{id_node_control}#2#{id_device_control}#{state_control}'
         len_data_send_uart = len(hello) + 3
         hello=f'*#{id_gw}#{id_node_control}#2#'
@@ -390,10 +398,14 @@ class Ui_MainWindow(object):
     def pretty( self, data_object):
         tenphongsql = "tentam"
         trangthai_active = "inactive"
+        sothutu_thietbi = 0
+        sothutu_cambien = 0
 
         for phong, nha in data_object.items():
             # print("phòng:" + str(phong))
             if isinstance(nha, dict):
+                sothutu_thietbi = 0
+                sothutu_cambien = 0
                 for thietbi, tenphong in nha.items():
                     # print("tên thiết bị "+ thietbi)
                     if isinstance(tenphong, dict):
@@ -405,7 +417,13 @@ class Ui_MainWindow(object):
                                 phanloai = dulieu
                                 # print(phanloai)
                         # print (str(phong) + ":"+ str(thietbi)+ ":" + str(namethietbi)+ ":" + str(phanloai) )
-                        curr.execute("INSERT INTO DATA_NODE VALUES (?,?,?,?,?,?)",[phong,tenphongsql,thietbi,namethietbi,phanloai,trangthai_active])                
+                        if phanloai == 'Thiết bị':
+                            phanloai = phanloai + '_TB' +str(sothutu_thietbi)
+                            sothutu_thietbi +=1
+                        elif phanloai == 'Cảm biến':
+                            phanloai = phanloai + '_CB' +str(sothutu_cambien)
+                            sothutu_cambien +=1                            
+                        curr.execute("INSERT INTO DATA_NODE VALUES (?,?,?,?,?,?)",[phong,tenphongsql,thietbi,namethietbi,phanloai,trangthai_active])                                        
                     else:
                         # print("tên phòng:" + tenphong)
                         tenphongsql = tenphong

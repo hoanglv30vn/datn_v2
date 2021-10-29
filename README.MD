@@ -13,3 +13,7 @@ https://github.com/hoanglv30vn/datn
 
 *******DATN_V2
 27/10 -->
+- SỬA CẤU TRÚC FIREBASE ==> SỬA LẠI CODE
+- PYTHON NHẬP ID GW, GET DATA TỪ FIREBASE.
+- PIC NHẬP ID GW, ID NODE, ĐỂ XÁC NHẬN.
+- ĐIỀU KHIỂN THIẾT BỊ

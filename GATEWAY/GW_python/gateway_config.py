@@ -198,10 +198,10 @@ class Ui_MainWindow(object):
             else:
                 print("config error")        
                 # gửi lại xác nhận cho node.            
-                hello=f'*#{id_gw}#{id_node_nhan}#1#ERRO_CF'
+                hello=f'*#{id_gw_nhan}#{id_node_nhan}#1#ERROR GW'
                 len_data_send_uart = len(hello) + 3
-                hello=f'*#{id_gw}#{id_node_nhan}#1#'
-                data_send_uart = hello + str(len_data_send_uart) +'#ERRO_CF' +'.'
+                hello=f'*#{id_gw_nhan}#{id_node_nhan}#1#'
+                data_send_uart = hello + str(len_data_send_uart) +'#ERROR GW' +'.'
                 serial__.write(data_send_uart.encode())       
                 print(data_send_uart.encode())                    
 
@@ -255,10 +255,10 @@ class Ui_MainWindow(object):
         else:
             print("sai idnode")
             # gửi lại xác nhận cho node.            
-            hello=f'*#{id_gw}#{id_node_nhan}#1#error_ID'
+            hello=f'*#{id_gw}#{id_node_nhan}#1#ERROR NODE'
             len_data_send_uart = len(hello) + 3
             hello=f'*#{id_gw}#{id_node_nhan}#1#'
-            data_send_uart = hello + str(len_data_send_uart) +'#error_ID' +'.'
+            data_send_uart = hello + str(len_data_send_uart) +'#ERROR NODE' +'.'
             serial__.write(data_send_uart.encode())       
             print(data_send_uart.encode())           
 

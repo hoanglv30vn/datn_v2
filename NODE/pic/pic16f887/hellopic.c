@@ -60,22 +60,46 @@ VOID QUET_PHIM()
     PRINTF (LCD_PUTC, CHUOI_PRINT);
     DELAY_MS (1);
  }
+ VOID XACNHANCONFIG()
+ {
+   OUTPUT_D (0XFF);    
+   DELAY_MS(500);
+   LCD_GOTOXY (1, 1) ;
+   DELAY_MS (10);
+   PRINTF (LCD_PUTC,KYTUCHAR2);
+   PRINTF (LCD_PUTC,"            ");
+   DELAY_MS (1); 
+   OUTPUT_D (0XFF);  
+   LCD_GOTOXY (1, 2) ;
+   DELAY_MS (10);
+   PRINTF (LCD_PUTC,"                ");   
+   OUTPUT_D (0X00);
+   DELAY_MS(500);
+   OUTPUT_D (0XFF);    
+   DELAY_MS(500);
+   OUTPUT_D (0X00);
+   
+ } 
+ VOID DIEUKHIENTHIETBI()
+ {
+ 
+ }
 
  VOID XU_LY_UART()
  {
      //ID_NODE_NHAN = KYTU[1] - 48;
     //ID_DEVICE_NHAN = KYTU[2] - 48 + 64;
     //TT_DEVICE_NHAN = KYTU[3] - 48; // - 48 ASCII -- > S?. + 64 -- > PORT_D (D0 = 64)               
-    
+
     /*TINH DO DAI*/
     CHAR CH = '*';
     CHAR *RET;
-    UNSIGNED INT8 LEN_RET;
+    *ID_NODE_NHAN = '\0';
+    *ID_GW_NHAN = '\0';
+    KYTUCHAR2 = "";
+    UNSIGNED INT8 LEN_RET;    
     RET = STRCHR(KYTUCHAR,CH);
-    LEN_RET = STRLEN(RET);
-    /* TINH ID_NODE, ID_GW LUU TRONG PIC*/
-    ID_NODE_NUMBER = ATOI(ID_NODE_CHAR);  
-    ID_GW_NUMBER =  ATOI(ID_GATEWAY_CHAR);  
+    LEN_RET = STRLEN(RET); 
     /* LAY TOKEN DAU TIEN */    
     KYTU = 0;
     TEMP_CHAR = "#";
@@ -88,33 +112,47 @@ VOID QUET_PHIM()
        {
          CASE 0:
          BREAK;
-         CASE 1:
-         ID_GW_NHAN = ATOI(TOKEN);  
+         CASE 1: 
+         STRCAT (ID_GW_NHAN, TOKEN);
          BREAK;                     
          CASE 2:
-         ID_NODE_NHAN = ATOI(TOKEN);  
+         STRCAT (ID_NODE_NHAN, TOKEN);
          BREAK;      
          CASE 3:
          LENHDIEUKHIEN =  ATOI(TOKEN);                 
          BREAK;    
          CASE 4:
          DODAI_DATA_NHAN =  ATOI(TOKEN);                 
-         BREAK;          
-       }  
-      DELAY_MS (1);                      
+         BREAK;  
+         CASE 5:  
+         STRCAT (KYTUCHAR2, TOKEN);
+         BREAK;         
+       }         
       TOKEN = STRTOK(NULL, TEMP_CHAR);
-      KYTU++;         
+      KYTU++;        
+    }              
+      /* SO SANH ID returns -1 if s1<s2, 0 if s1=s2, 1 if s1>s2 */
+      SOSANH_IDGW = STRCMP(ID_GW_NHAN,ID_GATEWAY_CHAR);      
+      SOSANH_IDNODE = STRCMP(ID_NODE_NHAN,ID_NODE_CHAR);    
+    IF ( SOSANH_IDGW == 0 && SOSANH_IDNODE == 0 && LEN_RET == DODAI_DATA_NHAN)
+    {                      
+      SWITCH(LENHDIEUKHIEN)
+       {
+         CASE 0:
+         BREAK;
+         CASE 1:
+         XACNHANCONFIG();
+         BREAK;                     
+         CASE 2:
+         //DIEUKHIENTHIETBI();
+         BREAK;              
+       } 
     }
-    IF (LEN_RET == DODAI_DATA_NHAN){
-      OUTPUT_D (0XFF);
-      DELAY_MS (2500) ;
+    ELSE{
+      DELAY_MS (10);
+      /*DATA RCV SAI ID NODE, ID GW HOAC LA SAI DO DAI*/
     }
-    IF (ID_NODE_NHAN == ID_NODE_NUMBER && ID_GW_NHAN == ID_GW_NUMBER)
-    {
-      OUTPUT_D (0XF0);
-      DELAY_MS (2500); 
-      OUTPUT_D (0X0F);
-    }
+    
  }
 
  INT ADC_READ (INT KENH)
@@ -166,8 +204,7 @@ VOID QUET_PHIM()
     OUTPUT_D (0X00);
     TTNHAN = 0;
     
-    
-    
+   
     WHILE (TRUE)
     {
        IF (TT_CONFIG)             {BUTT_FUN (); } // GOI HAM CHON LENH (SWITCH CASE)

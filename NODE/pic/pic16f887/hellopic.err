@@ -2,6 +2,8 @@
 >>> Warning 202 "E:\DATN\NODE\pic\pic16f887\khaibaobien.c" Line 1(26,29): Variable never used:   AN1
 >>> Warning 202 "E:\DATN\NODE\pic\pic16f887\khaibaobien.c" Line 4(15,29): Variable never used:   ID_DEVICE_NHAN
 >>> Warning 202 "E:\DATN\NODE\pic\pic16f887\khaibaobien.c" Line 4(30,44): Variable never used:   TT_DEVICE_NHAN
-      Memory usage:   ROM=41%      RAM=30% - 55%
-      0 Errors,  4 Warnings.
+>>> Warning 202 "E:\DATN\NODE\pic\pic16f887\khaibaobien.c" Line 9(45,62): Variable never used:   SOSANH_DODAICHUOI
+>>> Warning 202 "E:\DATN\NODE\pic\pic16f887\khaibaobien.c" Line 21(7,17): Variable never used:   TEMP_CHAR2
+      Memory usage:   ROM=44%      RAM=38% - 67%
+      0 Errors,  6 Warnings.
 Build Successful.

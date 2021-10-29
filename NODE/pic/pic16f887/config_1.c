@@ -201,10 +201,31 @@ VOID CONFIG_DONE()
    LCD_GOTOXY (1, 1) ;
    DELAY_MS (10);
    PRINTF (LCD_PUTC, "WAITING ....        ") ;
-   LCD_GOTOXY (1, 1) ;
+   LCD_GOTOXY (1, 2) ;
    DELAY_MS (10);
    PRINTF (LCD_PUTC, "WAITING ....        ") ;   
    TT_CONFIG_DONE = 0;
 }
 
+
+ VOID XACNHANCONFIG()
+ {
+   OUTPUT_D (0XFF);    
+   DELAY_MS(500);
+   LCD_GOTOXY (1, 1) ;
+   DELAY_MS (10);
+   PRINTF (LCD_PUTC,KYTUCHAR2);
+   PRINTF (LCD_PUTC,"            ");
+   DELAY_MS (1); 
+   OUTPUT_D (0XFF);  
+   LCD_GOTOXY (1, 2) ;
+   DELAY_MS (10);
+   PRINTF (LCD_PUTC,"                ");   
+   OUTPUT_D (0X00);
+   DELAY_MS(500);
+   OUTPUT_D (0XFF);    
+   DELAY_MS(500);
+   OUTPUT_D (0X00);
+   
+ } 
 //--------------------------------------------------------------------//

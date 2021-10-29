@@ -52,6 +52,7 @@
 # 
 #####################################################################################
 
+
 from logging import error
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3
@@ -87,25 +88,51 @@ firebaseConfig = {
   'measurementId': "G-YK901S5FXQ"
 }
 firebase = pyrebase.initialize_app(firebaseConfig)
-# db = firebase.database().child("ADMIN")
+db = firebase.database().child("ADMIN")
 
 name_gw = 'gateway'
 global serial__ 
 serial__=serial.Serial()
 global id_gw
 id_gw = 'gateway'
+curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = ? ", ["id_nha"] ) 
+if (len(curr.fetchall())>0): 
+    thongtin_cfig=curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = 'id_nha' ")
+    id_gw = thongtin_cfig.fetchone()[1]
+    
+class Ui_MainWindow(object):    
 
-class Ui_MainWindow(object):       
-    def testuart_xongxoa(self):
-        hello=f'*#123456#1234#1#chaohoang'
+    def stream_handler(self, message):
+        # hàm lắng nghe sự kiện từ firebase
+        print('data thay doi tu firebase:')     
+        event_fb = message["event"] # put
+        print("event:" + event_fb)
+        path_fb = message["path"] # /-K7yGTTEp7O549EzTYtI
+        print("path:" )      
+        print(path_fb)
+        mess_fb = message["data"] # {'title': 'Pyrebase', "body": "etc..."}   
+        print("mess")
+        print(mess_fb)
+        link_fb = path_fb.split("/")
+        if len(link_fb) == 4:
+            id_node_control = link_fb[1]
+            id_device_control = link_fb[2][2]
+            state_control = mess_fb
+            self.send_data_control(id_node_control,id_device_control,state_control) 
+
+    def send_data_control(self,id_node_control,id_device_control,state_control):
+        hello=f'*#{id_gw}#{id_node_control}#2#{id_device_control}#{state_control}'
         len_data_send_uart = len(hello) + 3
-        hello=f'*#123456#1234#1#'
-        data_send_uart = hello + str(len_data_send_uart) +'#chaohoang' +'.'
+        hello=f'*#{id_gw}#{id_node_control}#2#'
+        data_send_uart = hello + str(len_data_send_uart)+ '#' + str(id_device_control) +'_'+ str(state_control) +'.'
         serial__.write(data_send_uart.encode())       
-        print(data_send_uart.encode()) 
-        print(data_send_uart) 
-        print(len(data_send_uart)) 
+        print(data_send_uart.encode())    
 
+    def check_data_sql():
+        # ban đầu khởi chạy sẽ check xem trong sql có data chưa.
+        # kiểm tra đối chiếu giữa data sql và data firebase
+        # cái này căng à, chưa làm, để sau tính :v
+        pass
     def serial_ports(self):
         """ Lists serial port names
 
@@ -277,7 +304,7 @@ class Ui_MainWindow(object):
                 del t
     def ALL_DATA(self): 
         # in tên + id nhà
-        # result = conn.execute("SELECT * FROM CONFIG_GW")   
+        # result = conn.execute("SELECT * FROM CONFIG_GW")           
         global id_gw    
         name_home = "     HOME:"
         id_home_hienthi = "   -   ID:"
@@ -326,9 +353,9 @@ class Ui_MainWindow(object):
             if start_row != row_number:
                 # pass
                 self.apply_span_to_sales_table(start_row, self.table_danhsach.rowCount())        
-        # conn.close()    
-
-
+        # conn.close()  
+        db = firebase.database().child("ADMIN")
+        db.child(id_gw).stream(self.stream_handler)   
     def check_data_from_sql(self,id_nha,id_gw_from_line,name_nha):
         # check xem có data chưa, nếu có rồi thì xóa.
 
@@ -511,10 +538,10 @@ class Ui_MainWindow(object):
         self.box_comport.currentIndexChanged.connect(self.set_serial_change)
         self.box_baudrate.currentIndexChanged.connect(self.set_serial_change)
         t1 = Thread(target = self.read_interval())
-        t1.start()
-        # db.child("ADMIN").child(name_gw).stream(self.stream_handler)         
+        t1.start()         
         # nhập id gw, nhấn nút thì đọc từ firebase.
         self.butt_oke.clicked.connect(self.read_idGW_firebase)
+        # db.child(id_gw).stream(self.stream_handler) 
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)

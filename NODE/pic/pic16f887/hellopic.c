@@ -60,29 +60,43 @@ VOID QUET_PHIM()
     PRINTF (LCD_PUTC, CHUOI_PRINT);
     DELAY_MS (1);
  }
- VOID XACNHANCONFIG()
- {
-   OUTPUT_D (0XFF);    
-   DELAY_MS(500);
-   LCD_GOTOXY (1, 1) ;
-   DELAY_MS (10);
-   PRINTF (LCD_PUTC,KYTUCHAR2);
-   PRINTF (LCD_PUTC,"            ");
-   DELAY_MS (1); 
-   OUTPUT_D (0XFF);  
-   LCD_GOTOXY (1, 2) ;
-   DELAY_MS (10);
-   PRINTF (LCD_PUTC,"                ");   
-   OUTPUT_D (0X00);
-   DELAY_MS(500);
-   OUTPUT_D (0XFF);    
-   DELAY_MS(500);
-   OUTPUT_D (0X00);
-   
- } 
+
  VOID DIEUKHIENTHIETBI()
  {
- 
+    /* LAY TOKEN DAU TIEN */    
+    KYTU = 0;
+    TEMP_CHAR = "_";
+    LCD_GOTOXY (1, 1) ;
+    DELAY_MS (10);       
+    PRINTF (LCD_PUTC, KYTUCHAR2);   
+    PRINTF (LCD_PUTC, "                 ");
+        LCD_GOTOXY (1, 2) ;
+    DELAY_MS (10);          
+    PRINTF (LCD_PUTC, "                 ");    
+    CHAR * TOKEN;
+    TOKEN = STRTOK (KYTUCHAR2, TEMP_CHAR);   
+    
+    /* DUYET QUA CAC TOKEN CON LAI */                
+    WHILE (TOKEN != NULL)
+    {                
+       SWITCH(KYTU)
+       {
+         CASE 0:
+         ID_DEVICE_NHAN =  ATOI(TOKEN) +64 ;       
+         CASE 1: 
+         TT_DEVICE_NHAN =  ATOI(TOKEN);       
+         BREAK;                     
+         CASE 2:
+         STRCAT (ID_NODE_NHAN, TOKEN);
+         BREAK;              
+       } 
+       LCD_GOTOXY (7, 2) ;
+       DELAY_MS (10);       
+       PRINTF (LCD_PUTC, TOKEN);
+      TOKEN = STRTOK(NULL, TEMP_CHAR);
+      KYTU++;        
+    } 
+    OUTPUT_BIT (ID_DEVICE_NHAN, TT_DEVICE_NHAN);
  }
 
  VOID XU_LY_UART()
@@ -144,7 +158,7 @@ VOID QUET_PHIM()
          XACNHANCONFIG();
          BREAK;                     
          CASE 2:
-         //DIEUKHIENTHIETBI();
+         DIEUKHIENTHIETBI();
          BREAK;              
        } 
     }

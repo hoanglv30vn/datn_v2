@@ -1,19 +1,19 @@
 
-ROM used:   3903/8192 (48%)
-            3905/8192 (48%) including unused fragments
+ROM used:   4058/8192 (50%)
+            4062/8192 (50%) including unused fragments
 
             1.0 Average locations per line
-            4.5 Average locations per statement
+            4.6 Average locations per statement
 
-RAM used:   133/368 (36%) at main() level
-            242/368 (66%) worst case
+RAM used:   135/368 (37%) at main() level
+            244/368 (66%) worst case
 
 Stack used: 7 worst case (6 in main + 1 for interrupts)
 Stack size: 8
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  241   139  16  hellopic.c
+  240   139  16  hellopic.c
    28     0   0  thuvien.c
   768     0   0  C:\Program Files (x86)\PICC\Devices\16F887.H
   423   125  14  C:\Program Files (x86)\PICC\Drivers\STRING.H
@@ -22,11 +22,11 @@ Lines Stmts  %   Files
  1351   359  41  C:\Program Files (x86)\PICC\Drivers\STDLIB.H
   423     0   0  C:\Program Files (x86)\PICC\Drivers\string.h
    37     0   0  C:\Program Files (x86)\PICC\Drivers\STDIO.H
-  456   100  12  C:\Program Files (x86)\PICC\Drivers\LCD.C
-   23     0   0  khaibaobien.c
-  232   144  17  config_1.C
+  456   100  11  C:\Program Files (x86)\PICC\Drivers\LCD.C
+   24     0   0  khaibaobien.c
+  257   163  18  config_1.C
 ----- -----
- 4042   867 Total
+ 4067   886 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
@@ -38,82 +38,83 @@ Page ROM  %  RAM   Vol Diff  Functions:
 1    241   6   10   475  7.2  strtok
 0     32   1    5   129  4.6  strlen
  Inline         2             @MUL88
-1    258   7    9  1815 10.5  atoi
+1    258   6    9  1815 10.5  atoi
 0    288   7   27  1075 11.2  itoa
  Inline        13             @MUL3232
 0    124   3   14             @DIVS3232
-0     20   1    1             @delay_ms1
+0     20   0    1             @delay_ms1
  Inline         3   760  4.5  lcd_read_byte
 0     67   2    2   262  3.7  lcd_read_nibble
 0     72   2    1   399  2.4  lcd_send_nibble
 0    123   3    3   415  3.7  lcd_send_byte
 0    112   3    6   852  6.2  lcd_init
-0     20   1    4   208  6.3  lcd_gotoxy
+0     20   0    4   208  6.3  lcd_gotoxy
 0     58   1    1   354  4.7  lcd_putc
  Inline         3   940  6.2  CHON_ID
-0      6   0    0             @const969
-0      4   0    0             @const970
+0      6   0    0             @const971
+0      4   0    0             @const972
 0     80   2    4             @PSTRINGC7_921
-0      8   0    0             @const972
-0     11   0    0             @const973
-0      5   0    0             @const974
+0      8   0    0             @const974
+0     11   0    0             @const975
+0      5   0    0             @const976
 0     23   1    3             @DIV88
 0     31   1    2             @PSTRINGR_921
  Inline         4   940  6.2  NHAPID_GW
-0      4   0    0             @const982
-0      8   0    0             @const983
-0     12   0    0             @const984
-0      7   0    0             @const985
+0      4   0    0             @const984
+0      8   0    0             @const985
+0     12   0    0             @const986
+0      7   0    0             @const987
  Inline         0    50  1.5  BUTT_OKE
  Inline         0   106  3.1  SELLECT_FUN
-0    541  14    1   739  7.1  BUTT_FUN
-0      8   0    0             @const989
-0      8   0    0             @const990
-0      9   0    0             @const991
+0    541  13    1   739  7.1  BUTT_FUN
+0      8   0    0             @const991
 0      8   0    0             @const992
+0      9   0    0             @const993
+0      8   0    0             @const994
  Inline         6   203  4.3  XULY_IDNODE_NHAP
  Inline         6   203  4.3  XULY_IDGW_NHAP
 1    397  10    4  1014  5.8  CONFIG_DONE
  Inline         2             @PSTRINGR_9600_62_63
-0     11   0    0             @const1006
-0     11   0    0             @const1007
- Inline         1   415  1.9  XACNHANCONFIG
-0      7   0    0             @const1009
-0      9   0    0             @const1010
+0     11   0    0             @const1008
+0     11   0    0             @const1009
+ Inline         2  1193  6.3  XACNHANCONFIG
+0      6   0    0             @const1011
+0      7   0    0             @const1013
+0      3   0    0   750  4.8  @const1014
+0      4   0    0   323  5.1  @const1015
  Inline         1   323  5.1  QUET_PHIM
 0     49   1    0    12  0.8  NGAT_NGOAI
 0     29   1    2   163  3.9  NGAT
  Inline         2   855  6.7  DIEUKHIENTHIETBI
-0      6   0    0             @const1019
-0      9   0    0             @const1020
-0      9   0    0             @const1021
-0     34   1    6             @WRITEBITA
-1    655  17    5  1362  8.4  XU_LY_UART
-0      5   0    0             @const1030
-0      6   0    0             @const1032
-1     10   0    0             @goto12175
+0      9   0    0             @const1025
+0      9   0    0   750  4.8  @const1026
+0     34   1    6  1362  8.4  @WRITEBITA
+1    810  20    5  1362  8.4  XU_LY_UART
+0      5   0    0             @const1035
+0      6   0    0   750  4.8  @const1037
+1     10   0    0   251  5.0  @goto12191
 0     22   1    0   102  2.9  CHUONG_TRINH_CON
-1    226   6    1   750  4.8  MAIN
+1    228   6    1   750  4.8  MAIN
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               32
-    Statements              867
+    Functions               38
+    Statements              886
     Comments                784
-    Volume (V)              29048
-    Difficulty (D)          166.0
-    Effort to implement (E) 4820930
-    Time to implement (T)   74 hours, 24 minutes
-    Est Delivered Bugs (B)  10
-    Cyclomatic Complexity   70
-    Maintainability (MI)    131
+    Volume (V)              38680
+    Difficulty (D)          204.5
+    Effort to implement (E) 7908970
+    Time to implement (T)   122 hours, 3 minutes
+    Est Delivered Bugs (B)  13
+    Cyclomatic Complexity   95
+    Maintainability (MI)    118
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00003     4  0  
 00004-00057    84  0  
-00058-007FF  1958  2  
-00800-00FFF  1857  191  
+00058-007FF  1956  4  
+00800-00FFF  2014  34  
 01000-017FF     0  2048  
 01800-01FFF     0  2048  
 

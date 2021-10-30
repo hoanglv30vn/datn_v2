@@ -1,5 +1,5 @@
->>> Warning 202 "E:\DATN\NODE\pic\pic16f887\khaibaobien.c" Line 1(21,24): Variable never used:   AN0
->>> Warning 202 "E:\DATN\NODE\pic\pic16f887\khaibaobien.c" Line 1(26,29): Variable never used:   AN1
-      Memory usage:   ROM=48%      RAM=36% - 66%
+>>> Warning 202 "E:\DATN_V2\NODE\pic\pic16f887\khaibaobien.c" Line 1(21,24): Variable never used:   AN0
+>>> Warning 202 "E:\DATN_V2\NODE\pic\pic16f887\khaibaobien.c" Line 1(26,29): Variable never used:   AN1
+      Memory usage:   ROM=50%      RAM=37% - 66%
       0 Errors,  2 Warnings.
 Build Successful.

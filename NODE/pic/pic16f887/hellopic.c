@@ -48,7 +48,6 @@ VOID QUET_PHIM()
        VT = 0;
        TTNHAN = 1;
     }
-
     ELSE
     VT++;
  }
@@ -70,7 +69,7 @@ VOID QUET_PHIM()
     DELAY_MS (10);       
     PRINTF (LCD_PUTC, KYTUCHAR2);   
     PRINTF (LCD_PUTC, "                 ");
-        LCD_GOTOXY (1, 2) ;
+    LCD_GOTOXY (1, 2) ;
     DELAY_MS (10);          
     PRINTF (LCD_PUTC, "                 ");    
     CHAR * TOKEN;

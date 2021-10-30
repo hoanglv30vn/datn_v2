@@ -209,18 +209,43 @@ VOID CONFIG_DONE()
 
 
  VOID XACNHANCONFIG()
- {
-   OUTPUT_D (0XFF);    
-   DELAY_MS(500);
+ {   
+   KYTU=0;
+   OUTPUT_D (0XFF);       
    LCD_GOTOXY (1, 1) ;
    DELAY_MS (10);
-   PRINTF (LCD_PUTC,KYTUCHAR2);
-   PRINTF (LCD_PUTC,"            ");
+   TEMP_CHAR = "_";
+   CHAR * TOKEN;
+   TOKEN = STRTOK (KYTUCHAR2, TEMP_CHAR);   
+    WHILE (TOKEN != NULL)
+    {                
+       SWITCH(KYTU)
+       {
+         CASE 0:
+         DELAY_MS (1);
+         PRINTF (LCD_PUTC,TOKEN);
+         PRINTF (LCD_PUTC,"            ");
+         CASE 1: 
+         SOLUONGTHIETBI_CONFIG = ATOI(TOKEN);
+         BREAK;                     
+         CASE 2:
+         SOLUONGCAMBIEN_CONFIG = ATOI(TOKEN);
+         BREAK;              
+       } 
+      TOKEN = STRTOK(NULL, TEMP_CHAR);
+      KYTU++;        
+    }          
+   DELAY_MS(500);
    DELAY_MS (1); 
-   OUTPUT_D (0XFF);  
+   OUTPUT_D (0XFF);     
    LCD_GOTOXY (1, 2) ;
    DELAY_MS (10);
-   PRINTF (LCD_PUTC,"                ");   
+   PRINTF (LCD_PUTC,"TB: ");   
+   ITOA (SOLUONGTHIETBI_CONFIG, 10, TEMP_CHAR);   
+   PRINTF (LCD_PUTC,TEMP_CHAR);   
+   PRINTF (LCD_PUTC,"    CB:");   
+   ITOA (SOLUONGCAMBIEN_CONFIG, 10, TEMP_CHAR);   
+   PRINTF (LCD_PUTC,TEMP_CHAR);      
    OUTPUT_D (0X00);
    DELAY_MS(500);
    OUTPUT_D (0XFF);    

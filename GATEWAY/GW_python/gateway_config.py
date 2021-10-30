@@ -266,20 +266,27 @@ class Ui_MainWindow(object):
         # xử lý, gửi thông tin
         print("xu ly node moi")
         print(f'data nhận được là :{data}')
-        id_node_nhan = data[4]        
+        id_node_nhan = data[4]    
+        soluongcambien = 0
+        soluongthietbi = 0    
         curr.execute("SELECT * FROM DATA_NODE WHERE ID_NODE = ? ", [id_node_nhan] ) 
         if (len(curr.fetchall())>0): 
-            get_name_node = curr.execute("SELECT * FROM DATA_NODE WHERE ID_NODE = ? ", [id_node_nhan] )             
-            name_node_nhan = get_name_node.fetchone()[1]
-            # thongtin_cfig=curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = 'id_nha' ")   
+            get_phanloai_node = curr.execute("SELECT PHANLOAI FROM DATA_NODE WHERE ID_NODE = ? ", [id_node_nhan] )             
+            danhsachphanloai = get_phanloai_node.fetchall()
+            for phanloaithietbi in danhsachphanloai:
+                phanloai = phanloaithietbi[0].split("_")
+                if phanloai[0] == "Thiết bị":
+                    soluongthietbi +=1
+                elif phanloai[0] == "Cảm biến":
+                    soluongcambien +=1
             print("id node nhận đc:"+ id_node_nhan )
             curr.execute("UPDATE DATA_NODE SET TRANGTHAI_ACTIVE = 'active' WHERE ID_NODE = ? ", [id_node_nhan] ) 
             conn.commit()
             # gửi lại xác nhận cho node.
-            hello=f'*#{id_gw}#{id_node_nhan}#1#CONFIG OK'
+            hello=f'*#{id_gw}#{id_node_nhan}#1#OK'+'_'+str(soluongthietbi)+'_'+str(soluongcambien)
             len_data_send_uart = len(hello) + 3
             hello=f'*#{id_gw}#{id_node_nhan}#1#'
-            data_send_uart = hello + str(len_data_send_uart) +'#CONFIG OK' +'.'
+            data_send_uart = hello + str(len_data_send_uart) +'#OK' + '_'+str(soluongthietbi)+'_'+str(soluongcambien)+'.'
             serial__.write(data_send_uart.encode())       
             print(data_send_uart.encode()) 
             print(data_send_uart) 
@@ -344,10 +351,7 @@ class Ui_MainWindow(object):
             for colum_number, data in enumerate (row_data):
                 # đoạn này là in ra bảng
                 self.table_danhsach.setItem(row_number, colum_number,QtWidgets.QTableWidgetItem(str(data)))                 
-                self.table_danhsach.item(row_number, colum_number).setBackground(color_row)
-                print("col new")
-                print(colum_number)
-                print(data)                
+                self.table_danhsach.item(row_number, colum_number).setBackground(color_row)              
                 if colum_number == 0:
                     id_node_update = data
                 elif colum_number == 2:

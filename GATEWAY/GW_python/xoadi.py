@@ -23,17 +23,18 @@ a= "hoang"
 print(a[-1])
 
 
-# while True:
-#     id_device_control= input("a:")
-#     state_control= input("a:")
-#     hello=f'*#127102#0589#2#{id_device_control}#{state_control}'
-#     len_data_send_uart = len(hello) + 3
-#     hello=f'*#127102#0589#2#'
-#     data_send_uart = hello + str(len_data_send_uart)+ '#' + str(id_device_control) +'_'+ str(state_control) +'.'
-#     serial__.write(data_send_uart.encode())       
-#     print(data_send_uart.encode())    
-#     print(data_send_uart) 
-#     print(len(data_send_uart))     
+while True:
+    id_device_control= input("a:")
+    state_control= input("a:")
+    hello=f'*#127102#0589#2#{id_device_control}#{state_control}'
+    len_data_send_uart = len(hello) + 3
+    hello=f'*#127102#0589#2#'
+    data_send_uart = hello + str(len_data_send_uart)+ '#' + str(id_device_control) +'_'+ str(state_control) +'.'
+    data_send_uart = "*@21@C_F@063233@7458@#@"
+    serial__.write(data_send_uart.encode())       
+    print(data_send_uart.encode())    
+    print(data_send_uart) 
+    print(len(data_send_uart))     
 
 
     # a = input("hihi")

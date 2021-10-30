@@ -112,7 +112,7 @@ class Ui_MainWindow(object):
         print(path_fb)
         mess_fb = message["data"] # {'title': 'Pyrebase', "body": "etc..."}   
         print("mess")
-        print(mess_fb)
+        # print(mess_fb)
         link_fb = path_fb.split("/")
         if len(link_fb) == 4:
             id_node_control = link_fb[1]
@@ -312,7 +312,8 @@ class Ui_MainWindow(object):
                 del t
     def ALL_DATA(self): 
         # in tên + id nhà
-        # result = conn.execute("SELECT * FROM CONFIG_GW")           
+        # result = conn.execute("SELECT * FROM CONFIG_GW")  
+        db = firebase.database().child("ADMIN")          
         global id_gw    
         name_home = "     HOME:"
         id_home_hienthi = "   -   ID:"
@@ -326,6 +327,7 @@ class Ui_MainWindow(object):
             thongtin_cfig=curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = 'name_nha' ")
             name_home += thongtin_cfig.fetchone()[1]
         self.lab_name_gw.setText(name_home + id_home_hienthi)
+        
         # ___________ #
         # in ra table
         result = conn.execute("SELECT ID_NODE, NAME_ID_NODE, ID_THIETBI, NAME_THIETBI, PHANLOAI FROM DATA_NODE")        
@@ -343,6 +345,17 @@ class Ui_MainWindow(object):
                 # đoạn này là in ra bảng
                 self.table_danhsach.setItem(row_number, colum_number,QtWidgets.QTableWidgetItem(str(data)))                 
                 self.table_danhsach.item(row_number, colum_number).setBackground(color_row)
+                print("col new")
+                print(colum_number)
+                print(data)                
+                if colum_number == 0:
+                    id_node_update = data
+                elif colum_number == 2:
+                    id_device_update = data
+                elif colum_number == 4:
+                    phanloai_device_update = data
+                    db = firebase.database().child("ADMIN")          
+                    db.child(id_gw).child(id_node_update).child(id_device_update).update({'phanloai':phanloai_device_update})  
                 # đổi màu
                 curr.execute("SELECT TRANGTHAI_ACTIVE FROM DATA_NODE WHERE NAME_ID_NODE = ? AND TRANGTHAI_ACTIVE = 'active'", [data])
                 if (len(curr.fetchall())>0): 
@@ -361,9 +374,9 @@ class Ui_MainWindow(object):
             if start_row != row_number:
                 # pass
                 self.apply_span_to_sales_table(start_row, self.table_danhsach.rowCount())        
-        # conn.close()  
-        db = firebase.database().child("ADMIN")
-        db.child(id_gw).stream(self.stream_handler)   
+        # conn.close()             
+        db.child(id_gw).stream(self.stream_handler) 
+        # db.child(id_gw).update(result)  
     def check_data_from_sql(self,id_nha,id_gw_from_line,name_nha):
         # check xem có data chưa, nếu có rồi thì xóa.
 

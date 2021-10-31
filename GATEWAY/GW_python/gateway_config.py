@@ -114,6 +114,7 @@ class Ui_MainWindow(object):
         print("mess")
         # print(mess_fb)
         link_fb = path_fb.split("/")
+        print(link_fb)
         if len(link_fb) == 4:
             id_node_control = link_fb[1]
             id_device_control = link_fb[2]
@@ -358,17 +359,22 @@ class Ui_MainWindow(object):
                     id_device_update = data
                 elif colum_number == 4:
                     phanloai_device_update = data
+                    if phanloai_device_update.find("_CB")>0:
+                        giatri_update = "analog"
+                    elif phanloai_device_update.find("_TB")>0:
+                        giatri_update = 0
+                    else:
+                        giatri_update = "undefind"
                     db = firebase.database().child("ADMIN")          
                     db.child(id_gw).child(id_node_update).child(id_device_update).update({'phanloai':phanloai_device_update})  
+                    db = firebase.database().child("ADMIN") 
+                    db.child(id_gw).child(id_node_update).child(id_device_update).update({'trangthai':giatri_update})  
+
                 # đổi màu
                 curr.execute("SELECT TRANGTHAI_ACTIVE FROM DATA_NODE WHERE NAME_ID_NODE = ? AND TRANGTHAI_ACTIVE = 'active'", [data])
                 if (len(curr.fetchall())>0): 
                     # self.table_danhsach.item(row_number, colum_number).setBackground(color_active)
-                    self.table_danhsach.setItem(row_number, colum_number,QtWidgets.QTableWidgetItem(str(data)+" -active")) 
-
-  
-              
-                 
+                    self.table_danhsach.setItem(row_number, colum_number,QtWidgets.QTableWidgetItem(str(data)+" -active"))                                
             # đoạn này xuống dưới + hàm apply_span_to_sales_table là:
             # so sánh gộp các hàng của cột 0, cột 1 nếu tên phòng và tên id giống nhau
             if last_id != current_id and last_id != -1:
@@ -378,7 +384,9 @@ class Ui_MainWindow(object):
             if start_row != row_number:
                 # pass
                 self.apply_span_to_sales_table(start_row, self.table_danhsach.rowCount())        
-        # conn.close()             
+        # conn.close()   
+        print(id_gw)
+        db = firebase.database().child("ADMIN")  
         db.child(id_gw).stream(self.stream_handler) 
         # db.child(id_gw).update(result)  
     def check_data_from_sql(self,id_nha,id_gw_from_line,name_nha):

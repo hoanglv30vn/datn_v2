@@ -229,7 +229,7 @@ class Ui_MainWindow(object):
                 if thongtinlenh_nhan == 'C_F':
                     self.thongtincauhinhnode(data)
                 # S_S == dữ liệu cảm biến.
-                elif thongtinlenh_nhan == 'S_S':
+                elif thongtinlenh_nhan == 'SS':
                     self.uploadDataSensor(data)     
             else:
                 print("config error")        

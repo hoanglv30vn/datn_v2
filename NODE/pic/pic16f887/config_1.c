@@ -179,8 +179,10 @@ VOID CONFIG_DONE()
    XULY_IDGW_NHAP();
    PACKAGE_CONFIG[3] = ID_GATEWAY_CHAR;
    
+   
    XULY_IDNODE_NHAP();
-   PACKAGE_CONFIG[4] = ID_NODE_CHAR;         
+   PACKAGE_CONFIG[4] = ID_NODE_CHAR;    
+       
    LEN_PACKAGES = 0;
    PACKAGE_CONFIG[1] = "12"; //DO DAI CUA LENGHT CO DO DAI = 2
    FOR (int J = 0; J < 6; J++)
@@ -251,6 +253,7 @@ VOID CONFIG_DONE()
    OUTPUT_D (0XFF);    
    DELAY_MS(500);
    OUTPUT_D (0X00);
+   TT_CONFIG_OKE_UART = 1;
    
  } 
 //--------------------------------------------------------------------//

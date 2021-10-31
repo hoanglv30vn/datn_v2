@@ -51,15 +51,68 @@ VOID QUET_PHIM()
     ELSE
     VT++;
  }
-
- VOID XUATLCD ( CHAR CHUOI_PRINT[])
+  INT ADC_READ (INT KENH)
  {
-    LCD_GOTOXY (1, 1) ;
-    DELAY_MS (10);
-    PRINTF (LCD_PUTC, CHUOI_PRINT);
-    DELAY_MS (1);
+    UNSIGNED INT8 ANALOG_PORT[] = {1,2,4,8,16,32,64}; 
+    SETUP_ADC_PORTS (ANALOG_PORT[KENH]);
+    DELAY_MS(3);
+    SET_ADC_CHANNEL (KENH);
+    DELAY_MS(3);
+    KQADC = 0;
+    FOR (INT I = 0; I < 100; I++)
+    {
+       KQADC = KQADC + READ_ADC () ;
+       DELAY_MS (1);
+    }
+
+    KQADC = KQADC / (100 * 2.046);
+    RETURN KQADC;
  }
 
+
+ VOID READ_ANALOG ( )
+ {
+   FOR(INT K = 0; K<SOLUONGCAMBIEN_CONFIG; K++){
+      KET_QUA_ANALOG[K] = ADC_READ (K);  
+   }
+ }
+
+ VOID SEND_ANALOG_UART()
+ {
+   OUTPUT_TOGGLE(PIN_D6);
+   CHAR *PACKAGE_SS[]={"*", "26","SS", "ID_GW1234" ,"ID_NODE","ZZ","AA","VV","CC","SS"};
+   PACKAGE_SS[3] = ID_GATEWAY_CHAR;
+   PACKAGE_SS[4] = ID_NODE_CHAR;
+   UNSIGNED INT8 DO_DAI =20;
+   FOR(INT I = 0; I<SOLUONGCAMBIEN_CONFIG; I++)
+   {
+      ITOA(KET_QUA_ANALOG[I],10,TEMP_CHAR);
+      PACKAGE_SS[5+I] = TEMP_CHAR;      
+      DO_DAI = DO_DAI + 3;
+   }
+   
+   ITOA(DO_DAI,10,TEMP_CHAR2);
+   PACKAGE_SS[1] = TEMP_CHAR2;
+   
+   FOR ( I = 0; I < 5 + SOLUONGCAMBIEN_CONFIG; I++)
+   {
+      LCD_GOTOXY (5, 1) ;    
+      PRINTF (LCD_PUTC,"h") ;
+      PRINTF (LCD_PUTC,PACKAGE_SS[I] ) ;
+      PRINTF (LCD_PUTC,"h                     ") ;
+      DELAY_MS (900);
+   }
+   
+   
+   FOR ( I = 0; I < 5 + SOLUONGCAMBIEN_CONFIG; I++)
+   {
+      PRINTF (PACKAGE_SS[I]);
+      PRINTF ("@");
+   }
+   PRINTF ("#");
+   OUTPUT_TOGGLE(PIN_D6);
+   
+ }
  VOID DIEUKHIENTHIETBI()
  {
     /* LAY TOKEN DAU TIEN */    
@@ -168,19 +221,6 @@ VOID QUET_PHIM()
     
  }
 
- INT ADC_READ (INT KENH)
- {
-    SET_ADC_CHANNEL (KENH);
-    KQADC = 0;
-    FOR (INT I = 0; I < 100; I++)
-    {
-       KQADC = KQADC + READ_ADC () ;
-       DELAY_MS (1);
-    }
-
-    KQADC = KQADC / (100 * 2.046);
-    RETURN KQADC;
- }
 
  VOID CHUONG_TRINH_CON ()
  {
@@ -189,6 +229,7 @@ VOID QUET_PHIM()
        OUTPUT_TOGGLE (PIN_D1);
        DELAY_MS (100);
     }
+    OUTPUT_TOGGLE(PIN_D0);
  }
 
  VOID MAIN  ()
@@ -197,8 +238,7 @@ VOID QUET_PHIM()
     SET_TRIS_B (0XFF);
     SET_TRIS_E (0);
     SET_TRIS_C (0X80);
-    SETUP_ADC (ADC_CLOCK_DIV_8);
-    SETUP_ADC_PORTS (SAN0);
+    SETUP_ADC (ADC_CLOCK_DIV_8);       
     ENABLE_INTERRUPTS (INT_TIMER0);
     ENABLE_INTERRUPTS (INT_EXT); //CHO PHEP NGAT NGOAI
     ENABLE_INTERRUPTS (INT_EXT_H2L); //NGAT XAY RA KHI CO XUNG TU CAO XUONG THAP
@@ -226,12 +266,21 @@ VOID QUET_PHIM()
        {
           WHILE (!TT_CONFIG)
           {
-             CHUONG_TRINH_CON ();             
+             CHUONG_TRINH_CON ();                      
              IF (TTNHAN == 1)
              {
                 TTNHAN = 0;
                 XU_LY_UART();
+             } 
+             
+             IF (TT_CONFIG_OKE_UART == 1){
+               READ_ANALOG();
+               IF (KET_QUA_ANALOG[0]>28)
+               {
+               SEND_ANALOG_UART();
+               }
              }
+
           }
        }
     }

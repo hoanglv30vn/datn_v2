@@ -1,19 +1,19 @@
 
-ROM used:   4837/8192 (59%)
-            5082/8192 (62%) including unused fragments
+ROM used:   4930/8192 (60%)
+            5192/8192 (63%) including unused fragments
 
             0.8 Average locations per line
-            4.1 Average locations per statement
+            4.2 Average locations per statement
 
-RAM used:   144/368 (39%) at main() level
-            278/368 (76%) worst case
+RAM used:   148/368 (40%) at main() level
+            263/368 (71%) worst case
 
 Stack used: 7 worst case (6 in main + 1 for interrupts)
 Stack size: 8
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  289   172  15  hellopic.c
+  281   167  14  hellopic.c
    29     0   0  thuvien.c
   768     0   0  C:\Program Files (x86)\PICC\Devices\16F887.H
   423   125  11  C:\Program Files (x86)\PICC\Drivers\STRING.H
@@ -23,11 +23,11 @@ Lines Stmts  %   Files
   423     0   0  C:\Program Files (x86)\PICC\Drivers\string.h
    37     0   0  C:\Program Files (x86)\PICC\Drivers\STDIO.H
  2229   257  22  C:\Program Files (x86)\PICC\Drivers\MATH.H
-  456   100   8  C:\Program Files (x86)\PICC\Drivers\LCD.C
+  456   100   9  C:\Program Files (x86)\PICC\Drivers\LCD.C
    26     0   0  khaibaobien.c
   260   164  14  config_1.C
 ----- -----
- 6351  1177 Total
+ 6343  1172 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
@@ -45,27 +45,27 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0    288   6   27  1075 11.2  itoa
  Inline        13             @MUL3232
 0    124   3   14             @DIVS3232
- Inline         4  1021  5.8  @SFTOI
+ Inline         4             @SFTOI
 0     20   0    1             @delay_ms1
  Inline         3   760  4.5  lcd_read_byte
 0     67   1    2   262  3.7  lcd_read_nibble
 0     72   1    1   399  2.4  lcd_send_nibble
-0    123   3    3   415  3.7  lcd_send_byte
+0    123   2    3   415  3.7  lcd_send_byte
 0    112   2    6   852  6.2  lcd_init
 0     20   0    4   208  6.3  lcd_gotoxy
 0     58   1    1   354  4.7  lcd_putc
  Inline         3   940  6.2  CHON_ID
 0      6   0    0             @const1106
-0      4   0    0  1021  5.8  @const1107
-0     80   2    4  1021  5.8  @PSTRINGC7_1052
-0      8   0    0  1021  5.8  @const1109
-0     11   0    0  1021  5.8  @const1110
+0      4   0    0             @const1107
+0     80   2    4             @PSTRINGC7_1052
+0      8   0    0             @const1109
+0     11   0    0             @const1110
 0      5   0    0             @const1111
-0     23   0    3  1021  5.8  @DIV88
-0     29   1    2  1021  5.8  @PSTRINGR_1052
+0     23   0    3             @DIV88
+0     31   1    2             @PSTRINGR_1052
  Inline         4   940  6.2  NHAPID_GW
-0      4   0    0  1021  5.8  @const1119
-0      8   0    0  1362  8.4  @const1120
+0      4   0    0             @const1119
+0      8   0    0             @const1120
 0     12   0    0             @const1121
 0      7   0    0             @const1122
  Inline         0    50  1.5  BUTT_OKE
@@ -73,11 +73,11 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0    541  11    1   739  7.1  BUTT_FUN
 0      8   0    0             @const1126
 0      8   0    0             @const1127
-0      9   0    0  1021  5.8  @const1128
-0      8   0    0  1021  5.8  @const1129
+0      9   0    0             @const1128
+0      8   0    0             @const1129
  Inline         6   203  4.3  XULY_IDNODE_NHAP
  Inline         6   203  4.3  XULY_IDGW_NHAP
-1    368   8    4  1014  5.8  CONFIG_DONE
+1    368   7    4  1014  5.8  CONFIG_DONE
 0     30   1    2             @PSTRINGR_9600_62_63
 0     11   0    0             @const1143
 0     11   0    0             @const1144
@@ -87,43 +87,44 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0      3   0    0             @const1149
 0      4   0    0             @const1150
  Inline         1   323  5.1  QUET_PHIM
-0     57   1    0    12  0.8  NGAT_NGOAI
+0     49   1    0    12  0.8  NGAT_NGOAI
 0     29   1    2   163  3.9  NGAT
  Inline        13   475  6.3  ADC_READ
-2    427   9    2   104  3.3  READ_ANALOG
-2    315   7    2  1191  5.4  SEND_ANALOG_UART
-0     12   0    0             @const1167
-0      6   0    0   855  6.7  @const1169
+2    517  10    2   104  3.3  READ_ANALOG
+2    315   6    3   816  5.3  SEND_ANALOG_UART
+0      3   0    0             @const1167
+ Inline         4             @PSTRINGC7_9600_62_63
+0      6   0    0   855  6.7  @const1170
  Inline         2   855  6.7  DIEUKHIENTHIETBI
-0      9   0    0             @const1172
 0      9   0    0   867  5.8  @const1173
+0      9   0    0   867  5.8  @const1174
 1     34   1    6  1362  8.4  @WRITEBITA
-1    807  17    5  1362  8.4  XU_LY_UART
-0      5   0    0             @const1182
-1     10   0    0   123  3.0  @goto12646
-1     27   1    0   123  3.0  CHUONG_TRINH_CON
-2    244   5    1   867  5.8  MAIN
- Inline         0             @cinit1
+1    807  16    5  1362  8.4  XU_LY_UART
+0      5   0    0   867  5.8  @const1183
+1     10   0    0   867  5.8  @goto12644
+0     25   1    0   123  3.0  CHUONG_TRINH_CON
+2    264   5    1   898  5.8  MAIN
+ Inline         0   867  5.8  @cinit1
 
 Program metrics:
-    Functions               50
-    Statements              1177
-    Comments                1041
-    Volume (V)              63190
-    Difficulty (D)          279.4
-    Effort to implement (E) 17655555
-    Time to implement (T)   272 hours, 28 minutes
-    Est Delivered Bugs (B)  23
-    Cyclomatic Complexity   159
-    Maintainability (MI)    117
+    Functions               42
+    Statements              1172
+    Comments                1042
+    Volume (V)              46413
+    Difficulty (D)          231.3
+    Effort to implement (E) 10734199
+    Time to implement (T)   165 hours, 39 minutes
+    Est Delivered Bugs (B)  16
+    Cyclomatic Complexity   117
+    Maintainability (MI)    130
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00003     4  0  
 00004-00057    84  0  
-00058-007FF  1948  12  
-00800-00FFF  1815  233  
-01000-017FF   986  1062  
+00058-007FF  1958  2  
+00800-00FFF  1788  260  
+01000-017FF  1096  952  
 01800-01FFF     0  2048  
 
 

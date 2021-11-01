@@ -80,31 +80,22 @@ VOID QUET_PHIM()
  VOID SEND_ANALOG_UART()
  {
    OUTPUT_TOGGLE(PIN_D6);
-   CHAR *PACKAGE_SS[]={"*", "26","SS", "ID_GW1234" ,"ID_NODE","ZZ","AA","VV","CC","SS"};
-   PACKAGE_SS[3] = ID_GATEWAY_CHAR;
-   PACKAGE_SS[4] = ID_NODE_CHAR;
+   //CHAR *PACKAGE_SS[]={"*", "26","SS", "IDGW12" ,"NODE","ZZ","AA","VV","CC","SS"};
+   CHAR *PACKAGE_SS[]={"IDGW12" ,"NODE","ZZ","AA","VV","CC","SS"};   
+   PACKAGE_SS[0] = ID_GATEWAY_CHAR;
+   PACKAGE_SS[1] = ID_NODE_CHAR;
    UNSIGNED INT8 DO_DAI =20;
+   
    FOR(INT I = 0; I<SOLUONGCAMBIEN_CONFIG; I++)
    {
-      ITOA(KET_QUA_ANALOG[I],10,TEMP_CHAR);
-      PACKAGE_SS[5+I] = TEMP_CHAR;      
+      ITOA(KET_QUA_ANALOG[I],10,PACKAGE_SS[2+I]);
       DO_DAI = DO_DAI + 3;
-   }
-   
+   }      
    ITOA(DO_DAI,10,TEMP_CHAR2);
-   PACKAGE_SS[1] = TEMP_CHAR2;
-   
-   FOR ( I = 0; I < 5 + SOLUONGCAMBIEN_CONFIG; I++)
-   {
-      LCD_GOTOXY (5, 1) ;    
-      PRINTF (LCD_PUTC,"h") ;
-      PRINTF (LCD_PUTC,PACKAGE_SS[I] ) ;
-      PRINTF (LCD_PUTC,"h                     ") ;
-      DELAY_MS (900);
-   }
-   
-   
-   FOR ( I = 0; I < 5 + SOLUONGCAMBIEN_CONFIG; I++)
+   PRINTF ("*@");   
+   PRINTF (TEMP_CHAR2);
+   PRINTF ("@SS@");   
+   FOR ( I = 0; I < 2 + SOLUONGCAMBIEN_CONFIG; I++)
    {
       PRINTF (PACKAGE_SS[I]);
       PRINTF ("@");
@@ -277,6 +268,7 @@ VOID QUET_PHIM()
                READ_ANALOG();
                IF (KET_QUA_ANALOG[0]>28)
                {
+               DELAY_MS(500);
                SEND_ANALOG_UART();
                }
              }

@@ -1,7 +1,8 @@
-D G "__PCM__" 0 289 ""5.015""
-D G "__DEVICE__" 0 289 "887"
-D G "__DATE__" 0 289 ""01-Nov-21""
-D G "__TIME__" 0 289 ""02:03:19"" "Standard Header file for the PIC16F887 device ////////////////"
+D G "LCD_LINE_LENGTH" 10 187 "20"
+D G "__PCM__" 0 282 ""5.015""
+D G "__DEVICE__" 0 282 "887"
+D G "__DATE__" 0 282 ""02-Nov-21""
+D G "__TIME__" 0 282 ""01:20:28"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 v L "value" 2 39 "int8" `54 
 f B "set_tris_a" 2 39 "void(int8 value)" `53 
@@ -1547,7 +1548,7 @@ C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
-F G "NGAT_NGOAI" 0 36 "void(int8 KENH)" `1153 
+F G "NGAT_NGOAI" 0 36 "void()" `1153 
 F G "NGAT" 0 42 "void()" `1154 
 V L "KENH" 0 54 "int8" `1156 
 F G "ADC_READ" 0 55 "int8(int8 KENH)" `1155 
@@ -1556,25 +1557,26 @@ V L "i" 0 62 "int8" `1158
 F G "READ_ANALOG" 0 74 "void()" `1159 
 V L "K" 0 75 "int8" `1160 
 F G "SEND_ANALOG_UART" 0 81 "void()" `1161 
-V L "PACKAGE_SS" 0 83 "*int8[1]" `1162 
-V L "DO_DAI" 0 86 "int8" `1164 
-V L "i" 0 87 "int8" `1165 
-F G "DIEUKHIENTHIETBI" 0 117 "void()" `1170  "LAY TOKEN DAU TIEN *"
-V L "TOKEN" 0 128 "*int8" `1174 
+C L "SEND_ANALOG_UART" 0 8 1 "FUNCTION"
+V L "PACKAGE_SS" 0 84 "*int8[1]" `1162 
+V L "DO_DAI" 0 87 "int8" `1164 
+V L "i" 0 89 "int8" `1165 
+F G "DIEUKHIENTHIETBI" 0 108 "void()" `1171  "LAY TOKEN DAU TIEN *"
+V L "TOKEN" 0 119 "*int8" `1175 
 C L "DIEUKHIENTHIETBI" 0 8 1 "FUNCTION"
-F G "XU_LY_UART" 0 155 "void()" `1179  "ID_NODE_NHAN = KYTU[1] - 48;"
+F G "XU_LY_UART" 0 146 "void()" `1180  "ID_NODE_NHAN = KYTU[1] - 48;"
 C L "XU_LY_UART" 0 8 3 "FUNCTION"
-V L "CH" 0 161 "int8" `1180 
-V L "RET" 0 162 "*int8" `1181 
-V L "LEN_RET" 0 166 "int8" `1183 
+V L "CH" 0 152 "int8" `1181 
+V L "RET" 0 153 "*int8" `1182 
+V L "LEN_RET" 0 157 "int8" `1184 
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
-V L "TOKEN" 0 172 "*int8" `1185 
+V L "TOKEN" 0 163 "*int8" `1186 
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
-F G "CHUONG_TRINH_CON" 0 226 "void()" `1187 
-V L "i" 0 227 "int8" `1188 
-F G "MAIN" 0 236 "void()" `1189 
+F G "CHUONG_TRINH_CON" 0 217 "void()" `1188 
+V L "i" 0 218 "int8" `1189 
+F G "MAIN" 0 227 "void()" `1190 
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"

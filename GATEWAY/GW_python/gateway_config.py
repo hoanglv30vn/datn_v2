@@ -261,6 +261,12 @@ class Ui_MainWindow(object):
     def uploadDataSensor(self, data):
         print("up load sensor")
         print(data)
+        # * ss idgw id node cb cb cb cb
+        # dodai = len(data)
+        # for 
+        #     pass
+
+
                
     def thongtincauhinhnode(self,data):
         # tách thông tin cấu hình node

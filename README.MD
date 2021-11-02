@@ -1,3 +1,20 @@
+*********** Cài đặt - chạy code*********
+gói pyrebase pyton: pip install Pyrebase
+tạo các cặp cổng com kết nối với nhau. (2 cặp)
+chạy file code gateway: GATEWAY\GW_python\gateway_config.py
+    Lưu ý: có lúc file sẽ bị lỗi do lỗi cổng com --> xóa file .db, và chạy lại
+	   có lúc file sẽ bị lỗi do gửi uart nhưng không có nhận được xác nhận --> kiểm tra các cổng com và chạy lại
+
+chạy file mô phỏng TCP-gateway: GATEWAY\UDP\tcpserve.py
+	nhập cổng com nối với cổng com gateway.
+chạy file mô phỏng TCP-node: GATEWAY\UDP\tcpclient.py
+	nhập cổng com nối với cổng com pic.
+
+mở proteus file: NODE\proteus\helloprt
+nếu 2 node thì mở thêm file: NODE\proteus\helloprt2
+giữ nút trên cùng 3s để vào config. giữ 3s để hoàn thành config
+
+
 *******DATN_V1
 27/9 --> 11/10: 
 https://github.com/hoanglv30vn/datn

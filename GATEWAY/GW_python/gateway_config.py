@@ -99,10 +99,13 @@ curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = ? ", ["id_nha"] )
 if (len(curr.fetchall())>0): 
     thongtin_cfig=curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = 'id_nha' ")
     id_gw = thongtin_cfig.fetchone()[1]
-    
+
+global chuoinhiphan
+chuoinhiphan =[0,0,0,0,0,0,0,0]
 class Ui_MainWindow(object):    
 
     def stream_handler(self, message):
+        global chuoinhiphan        
         # hàm lắng nghe sự kiện từ firebase
         print('data thay doi tu firebase:')     
         event_fb = message["event"] # put
@@ -115,27 +118,59 @@ class Ui_MainWindow(object):
         # print(mess_fb)
         link_fb = path_fb.split("/")
         print(link_fb)
+        print(len(link_fb))
         if len(link_fb) == 4:
             id_node_control = link_fb[1]
-            id_device_control = link_fb[2]
-            state_control = mess_fb
-            self.send_data_control(id_node_control,id_device_control,state_control) 
+            # id_device_control = link_fb[2]
+            # state_control = mess_fb
+            # self.send_data_control(id_node_control,id_device_control,state_control) 
+            chuoinhiphan =[0,0,0,0,0,0,0,0]
 
-    def send_data_control(self,id_node_control,id_device_control,state_control):
-        conn = sqlite3.connect('data_config.db')   #kết nối tới database
-        curr = conn.cursor()    #con trỏ        
-        curr.execute("SELECT PHANLOAI FROM DATA_NODE WHERE ID_THIETBI = ? ",[id_device_control])
-        if (len(curr.fetchall())>0): 
-            id_dk = curr.execute("SELECT PHANLOAI FROM DATA_NODE WHERE ID_THIETBI = ? ",[id_device_control])
-            id_device_control = id_dk.fetchone()[0][-1]
-        else:
-            print("cập nhật lại danh sách")            
-        hello=f'*#{id_gw}#{id_node_control}#2#{id_device_control}#{state_control}'
-        len_data_send_uart = len(hello) + 3
+            data_control = firebase.database().child("ADMIN")
+            data_gw = data_control.child(id_gw).child(id_node_control).get()
+            data_object = data_gw.val()
+
+            self.get_data_control(data_object)
+            binTOdec = self.binaryToDecimal(chuoinhiphan)
+            print(chuoinhiphan)
+            print(binTOdec)
+            self.send_data_control(id_node_control,binTOdec) 
+    def get_data_control( self, data_object):
+        stt_thietbi_control=''
+        state_thietbi_control=''  
+        # chuoi_nhi_phan = ""
+        # global chuoinhiphan
+
+        for key, value in data_object.items():
+            if isinstance(value, dict):
+                self.get_data_control(value)
+            else:
+                if(str(key)) == "phanloai":
+                    if str(value).find("TB")>0:
+                        stt_thietbi_control = str(value)[-1]
+                    else:
+                        stt_thietbi_control = ""
+                if(str(key)) == "trangthai": 
+                    if len(stt_thietbi_control)>0:
+                        state_thietbi_control = str(value)
+                        chuoinhiphan [int(stt_thietbi_control)]= int(state_thietbi_control)
+                        stt_thietbi_control = ""   
+    def binaryToDecimal(self,n):        
+        dec_value = 0        
+        # Initializing base
+        # value to 1, i.e 2 ^ 0
+        base = 1                
+        for i in n:                       
+            dec_value += i * base
+            base = base * 2        
+        return dec_value
+    def send_data_control(self,id_node_control,binTOdec):
+        hello=f'*#{id_gw}#{id_node_control}#2#{binTOdec}'
+        len_data_send_uart = len(hello) + 2
         hello=f'*#{id_gw}#{id_node_control}#2#'
-        data_send_uart = hello + str(len_data_send_uart)+ '#' + str(id_device_control) +'_'+ str(state_control) +'.'
+        data_send_uart = hello + str(len_data_send_uart)+ '#' + str(binTOdec) +'.'
+        print(data_send_uart.encode())  
         serial__.write(data_send_uart.encode())       
-        print(data_send_uart.encode())    
 
     def check_data_sql():
         # ban đầu khởi chạy sẽ check xem trong sql có data chưa.

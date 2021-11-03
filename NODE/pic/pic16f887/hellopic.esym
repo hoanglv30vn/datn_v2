@@ -1,8 +1,8 @@
-D G "LCD_LINE_LENGTH" 10 187 "20"
-D G "__PCM__" 0 282 ""5.015""
-D G "__DEVICE__" 0 282 "887"
-D G "__DATE__" 0 282 ""02-Nov-21""
-D G "__TIME__" 0 282 ""01:20:28"" "Standard Header file for the PIC16F887 device ////////////////"
+D G "strcopy" 3 54 "strcpy"
+D G "__PCM__" 3 191 ""5.015""
+D G "__DEVICE__" 3 191 "887"
+D G "__DATE__" 3 191 ""03-Nov-21""
+D G "__TIME__" 3 191 ""00:20:11"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 v L "value" 2 39 "int8" `54 
 f B "set_tris_a" 2 39 "void(int8 value)" `53 

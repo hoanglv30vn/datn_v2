@@ -94,29 +94,29 @@ Page ROM  %  RAM   Vol Diff  Functions:
 2    315   6    3   816  5.3  SEND_ANALOG_UART
 0      3   0    0             @const1167
  Inline         4             @PSTRINGC7_9600_62_63
-0      6   0    0   855  6.7  @const1170
+0      6   0    0             @const1170
  Inline         2   855  6.7  DIEUKHIENTHIETBI
-0      9   0    0   867  5.8  @const1173
-0      9   0    0   867  5.8  @const1174
-1     34   1    6  1362  8.4  @WRITEBITA
+0      9   0    0             @const1173
+0      9   0    0             @const1174
+1     34   1    6             @WRITEBITA
 1    807  16    5  1362  8.4  XU_LY_UART
-0      5   0    0   867  5.8  @const1183
-1     10   0    0   867  5.8  @goto12644
+0      5   0    0             @const1183
+1     10   0    0             @goto12644
 0     25   1    0   123  3.0  CHUONG_TRINH_CON
 2    264   5    1   898  5.8  MAIN
- Inline         0   867  5.8  @cinit1
+ Inline         0             @cinit1
 
 Program metrics:
-    Functions               42
+    Functions               35
     Statements              1172
     Comments                1042
-    Volume (V)              46413
-    Difficulty (D)          231.3
-    Effort to implement (E) 10734199
-    Time to implement (T)   165 hours, 39 minutes
-    Est Delivered Bugs (B)  16
-    Cyclomatic Complexity   117
-    Maintainability (MI)    130
+    Volume (V)              33567
+    Difficulty (D)          186.1
+    Effort to implement (E) 6247234
+    Time to implement (T)   96 hours, 24 minutes
+    Est Delivered Bugs (B)  11
+    Cyclomatic Complexity   79
+    Maintainability (MI)    119
 
  Segment     Used  Free
 -----------  ----  ----

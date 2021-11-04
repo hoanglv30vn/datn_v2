@@ -9,7 +9,7 @@ VOID QUET_PHIM()
    {
       IF (TMR1IF)
       {
-         OUTPUT_TOGGLE (PIN_D2);
+         OUTPUT_TOGGLE (PIN_D7);
          TMR1IF = 0; SET_TIMER1 (3036); BDT++;
       }
    }
@@ -106,40 +106,9 @@ VOID QUET_PHIM()
  }
  VOID DIEUKHIENTHIETBI()
  {
-    /* LAY TOKEN DAU TIEN */    
-    KYTU = 0;
-    TEMP_CHAR = "_";
-    LCD_GOTOXY (1, 1) ;
-    DELAY_MS (10);       
-    PRINTF (LCD_PUTC, KYTUCHAR2);   
-    PRINTF (LCD_PUTC, "                 ");
-    LCD_GOTOXY (1, 2) ;
-    DELAY_MS (10);          
-    PRINTF (LCD_PUTC, "                 ");    
-    CHAR * TOKEN;
-    TOKEN = STRTOK (KYTUCHAR2, TEMP_CHAR);   
-    
-    /* DUYET QUA CAC TOKEN CON LAI */                
-    WHILE (TOKEN != NULL)
-    {                
-       SWITCH(KYTU)
-       {
-         CASE 0:
-         ID_DEVICE_NHAN =  ATOI(TOKEN) +64 ;       
-         CASE 1: 
-         TT_DEVICE_NHAN =  ATOI(TOKEN);       
-         BREAK;                     
-         CASE 2:
-         STRCAT (ID_NODE_NHAN, TOKEN);
-         BREAK;              
-       } 
-       LCD_GOTOXY (7, 2) ;
-       DELAY_MS (10);       
-       PRINTF (LCD_PUTC, TOKEN);
-      TOKEN = STRTOK(NULL, TEMP_CHAR);
-      KYTU++;        
-    } 
-    OUTPUT_BIT (ID_DEVICE_NHAN, TT_DEVICE_NHAN);
+   LENH_DIEU_KHIEN = 0;  
+   LENH_DIEU_KHIEN = ATOI(KYTUCHAR2);
+   XUATTRANGTHAI(LENH_DIEU_KHIEN);
  }
 
  VOID XU_LY_UART()
@@ -191,6 +160,7 @@ VOID QUET_PHIM()
       /* SO SANH ID returns -1 if s1<s2, 0 if s1=s2, 1 if s1>s2 */
       SOSANH_IDGW = STRCMP(ID_GW_NHAN,ID_GATEWAY_CHAR);      
       SOSANH_IDNODE = STRCMP(ID_NODE_NHAN,ID_NODE_CHAR);    
+      
     IF ( SOSANH_IDGW == 0 && SOSANH_IDNODE == 0 && LEN_RET == DODAI_DATA_NHAN)
     {                      
       SWITCH(LENHDIEUKHIEN)
@@ -217,10 +187,10 @@ VOID QUET_PHIM()
  {
     FOR (INT I = 0; I <= 30; I++)
     {
-       OUTPUT_TOGGLE (PIN_D1);
+       OUTPUT_TOGGLE (PIN_D4);
        DELAY_MS (100);
     }
-    OUTPUT_TOGGLE(PIN_D0);
+    OUTPUT_TOGGLE(PIN_D4);
  }
 
  VOID MAIN  ()
@@ -246,9 +216,7 @@ VOID QUET_PHIM()
     TT_CONFIG_DONE = 0;
     TT_CONTROL = 1;
     OUTPUT_D (0X00);
-    TTNHAN = 0;
-    
-   
+    TTNHAN = 0;    
     WHILE (TRUE)
     {
        IF (TT_CONFIG)             {BUTT_FUN (); } // GOI HAM CHON LENH (SWITCH CASE)

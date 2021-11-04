@@ -1,6 +1,6 @@
 
-#DEFINE      DS             PIN_D1
-#DEFINE      SH_CP             PIN_D0  
+#DEFINE      DS               PIN_D1
+#DEFINE      SH_CP            PIN_D0  
 #DEFINE      STCP             PIN_D2
 VOID XUATTRANGTHAI(UNSIGNED INT8 BYTEXUAT)
 {

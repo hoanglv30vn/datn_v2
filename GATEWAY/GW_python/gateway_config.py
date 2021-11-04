@@ -67,6 +67,7 @@ from threading import Thread
 from PyQt5.QtCore import QDate, Qt
 import pyrebase
 import array as arr
+import re
 
 ############################# DATABASE SQL #########################################
 conn = sqlite3.connect('data_config.db')   #kết nối tới database
@@ -157,8 +158,6 @@ class Ui_MainWindow(object):
                         stt_thietbi_control = ""   
     def binaryToDecimal(self,n):        
         dec_value = 0        
-        # Initializing base
-        # value to 1, i.e 2 ^ 0
         base = 1                
         for i in n:                       
             dec_value += i * base
@@ -166,11 +165,11 @@ class Ui_MainWindow(object):
         return dec_value
     def send_data_control(self,id_node_control,binTOdec):
         hello=f'*#{id_gw}#{id_node_control}#2#{binTOdec}'
-        len_data_send_uart = len(hello) + 2
+        len_data_send_uart = len(hello) + 3
         hello=f'*#{id_gw}#{id_node_control}#2#'
         data_send_uart = hello + str(len_data_send_uart)+ '#' + str(binTOdec) +'.'
-        print(data_send_uart.encode())  
         serial__.write(data_send_uart.encode())       
+        print(data_send_uart.encode())  
 
     def check_data_sql():
         # ban đầu khởi chạy sẽ check xem trong sql có data chưa.
@@ -301,7 +300,22 @@ class Ui_MainWindow(object):
         # for 
         #     pass
 
-
+    def no_accent_vietnamese(self,s):
+        s = re.sub(r'[àáạảãâầấậẩẫăằắặẳẵ]', 'a', s)
+        s = re.sub(r'[ÀÁẠẢÃĂẰẮẶẲẴÂẦẤẬẨẪ]', 'A', s)
+        s = re.sub(r'[èéẹẻẽêềếệểễ]', 'e', s)
+        s = re.sub(r'[ÈÉẸẺẼÊỀẾỆỂỄ]', 'E', s)
+        s = re.sub(r'[òóọỏõôồốộổỗơờớợởỡ]', 'o', s)
+        s = re.sub(r'[ÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠ]', 'O', s)
+        s = re.sub(r'[ìíịỉĩ]', 'i', s)
+        s = re.sub(r'[ÌÍỊỈĨ]', 'I', s)
+        s = re.sub(r'[ùúụủũưừứựửữ]', 'u', s)
+        s = re.sub(r'[ƯỪỨỰỬỮÙÚỤỦŨ]', 'U', s)
+        s = re.sub(r'[ỳýỵỷỹ]', 'y', s)
+        s = re.sub(r'[ỲÝỴỶỸ]', 'Y', s)
+        s = re.sub(r'[Đ]', 'D', s)
+        s = re.sub(r'[đ]', 'd', s)
+        return s
                
     def thongtincauhinhnode(self,data):
         # tách thông tin cấu hình node
@@ -311,10 +325,16 @@ class Ui_MainWindow(object):
         id_node_nhan = data[4]    
         soluongcambien = 0
         soluongthietbi = 0    
+        curr = conn.cursor()
         curr.execute("SELECT * FROM DATA_NODE WHERE ID_NODE = ? ", [id_node_nhan] ) 
         if (len(curr.fetchall())>0): 
+            get_name_node = curr.execute("SELECT NAME_ID_NODE FROM DATA_NODE WHERE ID_NODE = ? ", [id_node_nhan] )             
+            name_node = get_name_node.fetchone()[0]
+            name_node_no_VN = self.no_accent_vietnamese(name_node)
+            print(name_node_no_VN)
             get_phanloai_node = curr.execute("SELECT PHANLOAI FROM DATA_NODE WHERE ID_NODE = ? ", [id_node_nhan] )             
             danhsachphanloai = get_phanloai_node.fetchall()
+            print(danhsachphanloai)
             for phanloaithietbi in danhsachphanloai:
                 phanloai = phanloaithietbi[0].split("_")
                 if phanloai[0] == "Thiết bị":
@@ -325,10 +345,10 @@ class Ui_MainWindow(object):
             curr.execute("UPDATE DATA_NODE SET TRANGTHAI_ACTIVE = 'active' WHERE ID_NODE = ? ", [id_node_nhan] ) 
             conn.commit()
             # gửi lại xác nhận cho node.
-            hello=f'*#{id_gw}#{id_node_nhan}#1#OK'+'_'+str(soluongthietbi)+'_'+str(soluongcambien)
+            hello=f'*#{id_gw}#{id_node_nhan}#1#{name_node_no_VN}'+'_'+str(soluongthietbi)+'_'+str(soluongcambien)
             len_data_send_uart = len(hello) + 3
             hello=f'*#{id_gw}#{id_node_nhan}#1#'
-            data_send_uart = hello + str(len_data_send_uart) +'#OK' + '_'+str(soluongthietbi)+'_'+str(soluongcambien)+'.'
+            data_send_uart = hello + str(len_data_send_uart) +f'#{name_node_no_VN}' + '_'+str(soluongthietbi)+'_'+str(soluongcambien)+'.'
             serial__.write(data_send_uart.encode())       
             print(data_send_uart.encode()) 
             print(data_send_uart) 

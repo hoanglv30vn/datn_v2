@@ -1,3 +1,4 @@
+from logging import error
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3
 import threading
@@ -10,20 +11,31 @@ import serial
 from threading import Thread
 from PyQt5.QtCore import QDate, Qt
 import pyrebase
+import array as arr
+import re
 ############################# DATABASE SQL #########################################
 
 #################################################################################### 
-# khởi tạo com
-global serial__ 
-serial__=serial.Serial()        
-serial__=serial.Serial('COM11', baudrate=9600 ,timeout=0.1)                
+# # khởi tạo com
+# global serial__ 
+# serial__=serial.Serial()        
+# serial__=serial.Serial('COM11', baudrate=9600 ,timeout=0.1)                
 
 
-a= [1,5,0]
-# print(a[-1])
-a[2]= 6
-print(a)
-hihi = input("v")
+
+a= no_accent_vietnamese("Việt Nam ẳ ấ ồ ư ị ỳ ùúụủũưừứựửữ  àáạảãâầấậẩẫăằắặẳẵ ý ỷĐất Nước Con Người")
+b= no_accent_vietnamese("Welcome to Vietnam !")
+c =no_accent_vietnamese("VIỆT NAM ĐẤT NƯỚC CON NGƯỜI")
+
+print(a,b,c)
+
+a= input("hi")
+
+# a= [1,5,0]
+# # print(a[-1])
+# a[2]= 6
+# print(a)
+# hihi = input("v")
 
 
 # while True:

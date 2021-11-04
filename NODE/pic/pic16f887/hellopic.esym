@@ -1,8 +1,7 @@
-D G "strcopy" 3 54 "strcpy"
-D G "__PCM__" 3 191 ""5.015""
-D G "__DEVICE__" 3 191 "887"
-D G "__DATE__" 3 191 ""03-Nov-21""
-D G "__TIME__" 3 191 ""00:20:11"" "Standard Header file for the PIC16F887 device ////////////////"
+D G "__PCM__" 0 250 ""5.015""
+D G "__DEVICE__" 0 250 "887"
+D G "__DATE__" 0 250 ""04-Nov-21""
+D G "__TIME__" 0 250 ""21:18:03"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 v L "value" 2 39 "int8" `54 
 f B "set_tris_a" 2 39 "void(int8 value)" `53 
@@ -1415,168 +1414,174 @@ C L "ldexp" 9 2 6 "FUNCTION"
 V L "value" 9 2209 "float" `1018 
 V L "exp" 9 2209 "sint8" `1019 
 F G "ldexp" 9 2210 "float(float value,sint8 exp)" `1017 
-D G "BT1_PIN" 1 10 "PIN_B1"
-D G "BT2_PIN" 1 11 "PIN_B2"
-D G "BT3_PIN" 1 12 "PIN_B3"
-D G "LCD_ENABLE_PIN" 1 13 "PIN_E0"
-D G "LCD_RS_PIN" 1 14 "PIN_E1"
-D G "LCD_RW_PIN" 1 15 "PIN_E2"
-D G "LCD_DATA4" 1 16 "PIN_C0"
-D G "LCD_DATA5" 1 17 "PIN_C1"
-D G "LCD_DATA6" 1 18 "PIN_C2"
-D G "LCD_DATA7" 1 19 "PIN_C3"
-D G "__LCD_C__" 10 76 ""
-T G "LCD_PIN_MAP" 10 90 "{int1 enable,int1 rs,int1 rw,int1 unused,int4 data}" `1033  "this is to improve compatability with previous LCD drivers that accepted"
-D G "lcd_output_enable" 10 112 "(x) output_bit(LCD_ENABLE_PIN, x)"
-D G "lcd_enable_tris" 10 113 "()  output_drive(LCD_ENABLE_PIN)"
-D G "lcd_output_rs" 10 120 "(x) output_bit(LCD_RS_PIN, x)"
-D G "lcd_rs_tris" 10 121 "()  output_drive(LCD_RS_PIN)"
-D G "lcd_output_rw" 10 128 "(x) output_bit(LCD_RW_PIN, x)"
-D G "lcd_rw_tris" 10 129 "()  output_drive(LCD_RW_PIN)"
-D G "LCD_TYPE" 10 179 "2" "0=5x7, 1=5x10, 2=2 lines"
-D G "LCD_LINE_TWO" 10 183 "0x40" "LCD RAM address for the second line"
-D G "LCD_LINE_LENGTH" 10 187 "20"
-f G "lcd_read_nibble" 10 190 "int8()" `1034 
-F G "lcd_read_byte" 10 193 "int8()" `1035 
-V L "low" 10 194 "int8" `1036 
-V L "high" 10 194 "int8" `1037 
-F G "lcd_read_nibble" 10 240 "int8()" `1034 
-V L "n" 10 242 "int8" `1039 
-C L "lcd_read_nibble" 10 2 1 "FUNCTION"
-V L "n" 10 256 "int8" `1041 
-F G "lcd_send_nibble" 10 257 "void(int8 n)" `1040 
-C L "lcd_send_nibble" 10 2 1 "FUNCTION"
-V L "address" 10 274 "int8" `1043 
-V L "n" 10 274 "int8" `1044 
-F G "lcd_send_byte" 10 275 "void(int8 address,int8 n)" `1042 
-F G "lcd_init" 10 300 "void()" `1045 
-V L "i" 10 301 "int8" `1046 
-V L "LCD_INIT_STRING" 10 302 "int8[4]" `1047 
-C L "lcd_init" 10 2 2 "FUNCTION"
-V L "x" 10 345 "int8" `1049 
-V L "y" 10 345 "int8" `1050 
-F G "lcd_gotoxy" 10 346 "void(int8 x,int8 y)" `1048 
-V L "address" 10 347 "int8" `1051 
-V L "c" 10 363 "int8" `1053 
-F G "lcd_putc" 10 364 "void(int8 c)" `1052 
-V L "x" 10 406 "int8" `1055 
-V L "y" 10 406 "int8" `1056 
-F G "lcd_getc" 10 407 "int8(int8 x,int8 y)" `1054 
-V L "value" 10 408 "int8" `1057 
-C L "lcd_getc" 10 2 1 "FUNCTION"
-C L "lcd_set_cgram_char" 10 2 5 "FUNCTION"
-V L "which" 10 424 "int8" `1059 
-V L "ptr" 10 424 "*int8" `1060 
-F G "lcd_set_cgram_char" 10 425 "void(int8 which,*int8 ptr)" `1058 
-V L "i" 10 426 "int8" `1061 
-C L "lcd_set_cgram_char" 10 2 1 "FUNCTION"
-V L "on" 10 443 "int8" `1063 
-F G "lcd_cursor_on" 10 444 "void(int8 on)" `1062 
-C L "lcd_cursor_on" 10 2 1 "FUNCTION"
-C L "lcd_cursor_on" 10 2 1 "FUNCTION"
-V G "KQADC" 11 1 "int16" `1065 
-V G "AN0" 11 1 "int16" `1066 
-V G "AN1" 11 1 "int16" `1067 
-V G "KET_QUA_ANALOG" 11 2 "int8[1]" `1068 
-V G "CONFIG_FUN" 11 3 "int8" `1069 
-V G "VT" 11 4 "int8" `1070 
-V G "KYTU" 11 4 "int8" `1071 
-V G "ID_DEVICE_NHAN" 11 5 "int8" `1072 
-V G "TT_DEVICE_NHAN" 11 5 "int8" `1073 
-V G "ID_GATEWAY" 11 6 "int8[6]" `1074 
-V G "ID_NODE" 11 7 "int8[4]" `1075 
-V G "LEN_PACKAGES" 11 8 "int8" `1076 
-V G "LENHDIEUKHIEN" 11 9 "int8" `1077 
-V G "DODAI_DATA_NHAN" 11 9 "int8" `1078 
-V G "SOLUONGTHIETBI_CONFIG" 11 10 "int8" `1079 
-V G "SOLUONGCAMBIEN_CONFIG" 11 10 "int8" `1080 
-V G "SOSANH_IDNODE" 11 11 "sint8" `1081 
-V G "SOSANH_IDGW" 11 11 "sint8" `1082 
-V G "TTNHAN" 11 13 "int1" `1083 
-V G "TT_CONFIG" 11 13 "int1" `1084 
-V G "TT_CONTROL" 11 13 "int1" `1085 
-V G "TT_CONFIG_DONE" 11 13 "int1" `1086 
-V G "TT_FUN" 11 13 "int1" `1087 
-V G "TT_STT" 11 13 "int1" `1088 
-V G "TT_CONFIG_OKE_UART" 11 13 "int1" `1089 
-V G "ID_NODE_CHAR" 11 15 "*int8[1]" `1090 
-V G "ID_GATEWAY_CHAR" 11 16 "*int8[1]" `1092 
-V G "ID_NODE_NHAN" 11 17 "*int8[1]" `1094 
-V G "ID_GW_NHAN" 11 18 "*int8[1]" `1096 
-V G "KYTUCHAR" 11 19 "int8[30]" `1098 
-V G "KYTUCHAR2" 11 20 "int8[15]" `1099 
-V G "TEMP_CHAR" 11 22 "*int8[1]" `1100 
-V G "TEMP_CHAR2" 11 23 "*int8[1]" `1102 
-C L "CHON_ID" 11 4 1 "FUNCTION"
-C L "CHON_ID" 1 25 1 "FUNCTION"
-C L "CHON_ID" 12 2 1 "FUNCTION"
-F G "CHON_ID" 12 4 "void()" `1104  "TT_CONFIG_DONE;"
-V L "num" 12 8 "int8" `1105 
-C L "CHON_ID" 12 2 2 "FUNCTION"
-C L "CHON_ID" 12 2 1 "FUNCTION"
-C L "CHON_ID" 12 2 1 "FUNCTION"
-F G "NHAPID_GW" 12 44 "void()" `1116 
-V L "num" 12 45 "int8" `1117 
-C L "NHAPID_GW" 12 2 2 "FUNCTION"
-C L "NHAPID_GW" 12 2 1 "FUNCTION"
-C L "NHAPID_GW" 12 2 1 "FUNCTION"
-F G "BUTT_OKE" 12 83 "void()" `1123 
-C L "BUTT_OKE" 12 2 1 "FUNCTION"
-C L "BUTT_OKE" 12 2 1 "FUNCTION"
-F G "SELLECT_FUN" 12 90 "void()" `1124 
-F G "BUTT_FUN" 12 106 "void()" `1125 
-C L "BUTT_FUN" 12 2 1 "FUNCTION"
-C L "BUTT_FUN" 12 2 1 "FUNCTION"
-C L "BUTT_FUN" 12 2 1 "FUNCTION"
-F G "XULY_IDNODE_NHAP" 12 149 "void()" `1130  "*TEMP_CHAR3 = "\0";"
-V L "j" 12 152 "int8" `1132 
-C L "XULY_IDNODE_NHAP" 12 2 3 "FUNCTION"
-F G "XULY_IDGW_NHAP" 12 162 "void()" `1133 
-V L "j" 12 165 "int8" `1135 
-F G "CONFIG_DONE" 12 175 "void()" `1136 
-V L "PACKAGE_CONFIG" 12 178 "*int8[1]" `1137 
-C L "CONFIG_DONE" 12 2 1 "FUNCTION"
-V L "j" 12 188 "int8" `1140 
-C L "CONFIG_DONE" 12 2 1 "FUNCTION"
-F G "XACNHANCONFIG" 12 214 "void()" `1145 
-V L "TOKEN" 12 220 "*int8" `1147 
-C L "QUET_PHIM" 12 2 1 "FUNCTION"
-F G "QUET_PHIM" 0 5 "void()" `1151 
-V L "BDT" 0 6 "int8" `1152 
+D G "DS" 10 2 "PIN_D1"
+D G "SH_CP" 10 3 "PIN_D0"
+D G "STCP" 10 4 "PIN_D2"
+V L "BYTEXUAT" 10 5 "int8" `1021 
+F G "XUATTRANGTHAI" 10 6 "void(int8 BYTEXUAT)" `1020 
+V L "SB" 10 7 "int8" `1022 
+C L "XUATTRANGTHAI" 10 14 1 "FUNCTION"
+D G "BT1_PIN" 1 11 "PIN_B1"
+D G "BT2_PIN" 1 12 "PIN_B2"
+D G "BT3_PIN" 1 13 "PIN_B3"
+D G "LCD_ENABLE_PIN" 1 14 "PIN_E0"
+D G "LCD_RS_PIN" 1 15 "PIN_E1"
+D G "LCD_RW_PIN" 1 16 "PIN_E2"
+D G "LCD_DATA4" 1 17 "PIN_C0"
+D G "LCD_DATA5" 1 18 "PIN_C1"
+D G "LCD_DATA6" 1 19 "PIN_C2"
+D G "LCD_DATA7" 1 20 "PIN_C3"
+D G "__LCD_C__" 11 76 ""
+T G "LCD_PIN_MAP" 11 90 "{int1 enable,int1 rs,int1 rw,int1 unused,int4 data}" `1037  "this is to improve compatability with previous LCD drivers that accepted"
+D G "lcd_output_enable" 11 112 "(x) output_bit(LCD_ENABLE_PIN, x)"
+D G "lcd_enable_tris" 11 113 "()  output_drive(LCD_ENABLE_PIN)"
+D G "lcd_output_rs" 11 120 "(x) output_bit(LCD_RS_PIN, x)"
+D G "lcd_rs_tris" 11 121 "()  output_drive(LCD_RS_PIN)"
+D G "lcd_output_rw" 11 128 "(x) output_bit(LCD_RW_PIN, x)"
+D G "lcd_rw_tris" 11 129 "()  output_drive(LCD_RW_PIN)"
+D G "LCD_TYPE" 11 179 "2" "0=5x7, 1=5x10, 2=2 lines"
+D G "LCD_LINE_TWO" 11 183 "0x40" "LCD RAM address for the second line"
+D G "LCD_LINE_LENGTH" 11 187 "20"
+f G "lcd_read_nibble" 11 190 "int8()" `1038 
+F G "lcd_read_byte" 11 193 "int8()" `1039 
+V L "low" 11 194 "int8" `1040 
+V L "high" 11 194 "int8" `1041 
+F G "lcd_read_nibble" 11 240 "int8()" `1038 
+V L "n" 11 242 "int8" `1043 
+C L "lcd_read_nibble" 11 2 1 "FUNCTION"
+V L "n" 11 256 "int8" `1045 
+F G "lcd_send_nibble" 11 257 "void(int8 n)" `1044 
+C L "lcd_send_nibble" 11 2 1 "FUNCTION"
+V L "address" 11 274 "int8" `1047 
+V L "n" 11 274 "int8" `1048 
+F G "lcd_send_byte" 11 275 "void(int8 address,int8 n)" `1046 
+F G "lcd_init" 11 300 "void()" `1049 
+V L "i" 11 301 "int8" `1050 
+V L "LCD_INIT_STRING" 11 302 "int8[4]" `1051 
+C L "lcd_init" 11 2 2 "FUNCTION"
+V L "x" 11 345 "int8" `1053 
+V L "y" 11 345 "int8" `1054 
+F G "lcd_gotoxy" 11 346 "void(int8 x,int8 y)" `1052 
+V L "address" 11 347 "int8" `1055 
+V L "c" 11 363 "int8" `1057 
+F G "lcd_putc" 11 364 "void(int8 c)" `1056 
+V L "x" 11 406 "int8" `1059 
+V L "y" 11 406 "int8" `1060 
+F G "lcd_getc" 11 407 "int8(int8 x,int8 y)" `1058 
+V L "value" 11 408 "int8" `1061 
+C L "lcd_getc" 11 2 1 "FUNCTION"
+C L "lcd_set_cgram_char" 11 2 5 "FUNCTION"
+V L "which" 11 424 "int8" `1063 
+V L "ptr" 11 424 "*int8" `1064 
+F G "lcd_set_cgram_char" 11 425 "void(int8 which,*int8 ptr)" `1062 
+V L "i" 11 426 "int8" `1065 
+C L "lcd_set_cgram_char" 11 2 1 "FUNCTION"
+V L "on" 11 443 "int8" `1067 
+F G "lcd_cursor_on" 11 444 "void(int8 on)" `1066 
+C L "lcd_cursor_on" 11 2 1 "FUNCTION"
+C L "lcd_cursor_on" 11 2 1 "FUNCTION"
+V G "KQADC" 12 1 "int16" `1069 
+V G "AN0" 12 1 "int16" `1070 
+V G "AN1" 12 1 "int16" `1071 
+V G "KET_QUA_ANALOG" 12 2 "int8[1]" `1072 
+V G "CONFIG_FUN" 12 3 "int8" `1073 
+V G "VT" 12 4 "int8" `1074 
+V G "KYTU" 12 4 "int8" `1075 
+V G "ID_DEVICE_NHAN" 12 5 "int8" `1076 
+V G "TT_DEVICE_NHAN" 12 5 "int8" `1077 
+V G "LENH_DIEU_KHIEN" 12 5 "int8" `1078 
+V G "ID_GATEWAY" 12 6 "int8[6]" `1079 
+V G "ID_NODE" 12 7 "int8[4]" `1080 
+V G "LEN_PACKAGES" 12 8 "int8" `1081 
+V G "LENHDIEUKHIEN" 12 9 "int8" `1082 
+V G "DODAI_DATA_NHAN" 12 9 "int8" `1083 
+V G "SOLUONGTHIETBI_CONFIG" 12 10 "int8" `1084 
+V G "SOLUONGCAMBIEN_CONFIG" 12 10 "int8" `1085 
+V G "SOSANH_IDNODE" 12 11 "sint8" `1086 
+V G "SOSANH_IDGW" 12 11 "sint8" `1087 
+V G "TTNHAN" 12 13 "int1" `1088 
+V G "TT_CONFIG" 12 13 "int1" `1089 
+V G "TT_CONTROL" 12 13 "int1" `1090 
+V G "TT_CONFIG_DONE" 12 13 "int1" `1091 
+V G "TT_FUN" 12 13 "int1" `1092 
+V G "TT_STT" 12 13 "int1" `1093 
+V G "TT_CONFIG_OKE_UART" 12 13 "int1" `1094 
+V G "ID_NODE_CHAR" 12 15 "*int8[1]" `1095 
+V G "ID_GATEWAY_CHAR" 12 16 "*int8[1]" `1097 
+V G "ID_NODE_NHAN" 12 17 "*int8[1]" `1099 
+V G "ID_GW_NHAN" 12 18 "*int8[1]" `1101 
+V G "KYTUCHAR" 12 19 "int8[50]" `1103 
+V G "KYTUCHAR2" 12 20 "int8[25]" `1104 
+V G "TEMP_CHAR" 12 22 "*int8[1]" `1105 
+V G "TEMP_CHAR2" 12 23 "*int8[1]" `1107 
+C L "CHON_ID" 12 4 1 "FUNCTION"
+C L "CHON_ID" 1 26 1 "FUNCTION"
+C L "CHON_ID" 13 2 1 "FUNCTION"
+F G "CHON_ID" 13 4 "void()" `1109  "TT_CONFIG_DONE;"
+V L "num" 13 8 "int8" `1110 
+C L "CHON_ID" 13 2 2 "FUNCTION"
+C L "CHON_ID" 13 2 1 "FUNCTION"
+C L "CHON_ID" 13 2 1 "FUNCTION"
+F G "NHAPID_GW" 13 44 "void()" `1121 
+V L "num" 13 45 "int8" `1122 
+C L "NHAPID_GW" 13 2 2 "FUNCTION"
+C L "NHAPID_GW" 13 2 1 "FUNCTION"
+C L "NHAPID_GW" 13 2 1 "FUNCTION"
+F G "BUTT_OKE" 13 83 "void()" `1128 
+C L "BUTT_OKE" 13 2 1 "FUNCTION"
+C L "BUTT_OKE" 13 2 1 "FUNCTION"
+F G "SELLECT_FUN" 13 90 "void()" `1129 
+F G "BUTT_FUN" 13 106 "void()" `1130 
+C L "BUTT_FUN" 13 2 1 "FUNCTION"
+C L "BUTT_FUN" 13 2 1 "FUNCTION"
+C L "BUTT_FUN" 13 2 1 "FUNCTION"
+F G "XULY_IDNODE_NHAP" 13 149 "void()" `1135  "*TEMP_CHAR3 = "\0";"
+V L "j" 13 152 "int8" `1137 
+C L "XULY_IDNODE_NHAP" 13 2 3 "FUNCTION"
+F G "XULY_IDGW_NHAP" 13 162 "void()" `1138 
+V L "j" 13 165 "int8" `1140 
+F G "CONFIG_DONE" 13 175 "void()" `1141 
+V L "PACKAGE_CONFIG" 13 178 "*int8[1]" `1142 
+C L "CONFIG_DONE" 13 2 1 "FUNCTION"
+V L "j" 13 188 "int8" `1145 
+C L "CONFIG_DONE" 13 2 1 "FUNCTION"
+F G "XACNHANCONFIG" 13 214 "void()" `1150 
+V L "TOKEN" 13 220 "*int8" `1152 
+C L "QUET_PHIM" 13 2 1 "FUNCTION"
+F G "QUET_PHIM" 0 5 "void()" `1156 
+V L "BDT" 0 6 "int8" `1157 
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
-F G "NGAT_NGOAI" 0 36 "void()" `1153 
-F G "NGAT" 0 42 "void()" `1154 
-V L "KENH" 0 54 "int8" `1156 
-F G "ADC_READ" 0 55 "int8(int8 KENH)" `1155 
-V L "ANALOG_PORT" 0 56 "int8[1]" `1157 
-V L "i" 0 62 "int8" `1158 
-F G "READ_ANALOG" 0 74 "void()" `1159 
-V L "K" 0 75 "int8" `1160 
-F G "SEND_ANALOG_UART" 0 81 "void()" `1161 
+F G "NGAT_NGOAI" 0 36 "void()" `1158 
+F G "NGAT" 0 42 "void()" `1159 
+V L "KENH" 0 54 "int8" `1161 
+F G "ADC_READ" 0 55 "int8(int8 KENH)" `1160 
+V L "ANALOG_PORT" 0 56 "int8[1]" `1162 
+V L "i" 0 62 "int8" `1163 
+F G "READ_ANALOG" 0 74 "void()" `1164 
+V L "K" 0 75 "int8" `1165 
+F G "SEND_ANALOG_UART" 0 81 "void()" `1166 
 C L "SEND_ANALOG_UART" 0 8 1 "FUNCTION"
-V L "PACKAGE_SS" 0 84 "*int8[1]" `1162 
-V L "DO_DAI" 0 87 "int8" `1164 
-V L "i" 0 89 "int8" `1165 
-F G "DIEUKHIENTHIETBI" 0 108 "void()" `1171  "LAY TOKEN DAU TIEN *"
-V L "TOKEN" 0 119 "*int8" `1175 
-C L "DIEUKHIENTHIETBI" 0 8 1 "FUNCTION"
-F G "XU_LY_UART" 0 146 "void()" `1180  "ID_NODE_NHAN = KYTU[1] - 48;"
+V L "PACKAGE_SS" 0 84 "*int8[1]" `1167 
+V L "DO_DAI" 0 87 "int8" `1169 
+V L "i" 0 89 "int8" `1170 
+F G "DIEUKHIENTHIETBI" 0 108 "void()" `1176 
+F G "XU_LY_UART" 0 115 "void()" `1177  "ID_NODE_NHAN = KYTU[1] - 48;"
 C L "XU_LY_UART" 0 8 3 "FUNCTION"
-V L "CH" 0 152 "int8" `1181 
-V L "RET" 0 153 "*int8" `1182 
-V L "LEN_RET" 0 157 "int8" `1184 
+V L "CH" 0 121 "int8" `1178 
+V L "RET" 0 122 "*int8" `1179 
+V L "LEN_RET" 0 126 "int8" `1181 
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
-V L "TOKEN" 0 163 "*int8" `1186 
+V L "TOKEN" 0 132 "*int8" `1183 
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
-F G "CHUONG_TRINH_CON" 0 217 "void()" `1188 
-V L "i" 0 218 "int8" `1189 
-F G "MAIN" 0 227 "void()" `1190 
+F G "CHUONG_TRINH_CON" 0 187 "void()" `1185 
+V L "i" 0 188 "int8" `1186 
+F G "MAIN" 0 197 "void()" `1187 
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"

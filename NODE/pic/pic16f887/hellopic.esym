@@ -1,7 +1,8 @@
-D G "__PCM__" 0 250 ""5.015""
-D G "__DEVICE__" 0 250 "887"
-D G "__DATE__" 0 250 ""04-Nov-21""
-D G "__TIME__" 0 250 ""21:18:03"" "Standard Header file for the PIC16F887 device ////////////////"
+D G "labs" 6 249 "abs"
+D G "__PCM__" 6 1103 ""5.015""
+D G "__DEVICE__" 6 1103 "887"
+D G "__DATE__" 6 1103 ""06-Nov-21""
+D G "__TIME__" 6 1103 ""23:27:33"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 v L "value" 2 39 "int8" `54 
 f B "set_tris_a" 2 39 "void(int8 value)" `53 
@@ -1481,107 +1482,101 @@ F G "lcd_cursor_on" 11 444 "void(int8 on)" `1066
 C L "lcd_cursor_on" 11 2 1 "FUNCTION"
 C L "lcd_cursor_on" 11 2 1 "FUNCTION"
 V G "KQADC" 12 1 "int16" `1069 
-V G "AN0" 12 1 "int16" `1070 
-V G "AN1" 12 1 "int16" `1071 
-V G "KET_QUA_ANALOG" 12 2 "int8[1]" `1072 
-V G "CONFIG_FUN" 12 3 "int8" `1073 
-V G "VT" 12 4 "int8" `1074 
-V G "KYTU" 12 4 "int8" `1075 
-V G "ID_DEVICE_NHAN" 12 5 "int8" `1076 
-V G "TT_DEVICE_NHAN" 12 5 "int8" `1077 
-V G "LENH_DIEU_KHIEN" 12 5 "int8" `1078 
-V G "ID_GATEWAY" 12 6 "int8[6]" `1079 
-V G "ID_NODE" 12 7 "int8[4]" `1080 
-V G "LEN_PACKAGES" 12 8 "int8" `1081 
-V G "LENHDIEUKHIEN" 12 9 "int8" `1082 
-V G "DODAI_DATA_NHAN" 12 9 "int8" `1083 
-V G "SOLUONGTHIETBI_CONFIG" 12 10 "int8" `1084 
-V G "SOLUONGCAMBIEN_CONFIG" 12 10 "int8" `1085 
-V G "SOSANH_IDNODE" 12 11 "sint8" `1086 
-V G "SOSANH_IDGW" 12 11 "sint8" `1087 
-V G "TTNHAN" 12 13 "int1" `1088 
-V G "TT_CONFIG" 12 13 "int1" `1089 
-V G "TT_CONTROL" 12 13 "int1" `1090 
-V G "TT_CONFIG_DONE" 12 13 "int1" `1091 
-V G "TT_FUN" 12 13 "int1" `1092 
-V G "TT_STT" 12 13 "int1" `1093 
-V G "TT_CONFIG_OKE_UART" 12 13 "int1" `1094 
-V G "ID_NODE_CHAR" 12 15 "*int8[1]" `1095 
-V G "ID_GATEWAY_CHAR" 12 16 "*int8[1]" `1097 
-V G "ID_NODE_NHAN" 12 17 "*int8[1]" `1099 
-V G "ID_GW_NHAN" 12 18 "*int8[1]" `1101 
-V G "KYTUCHAR" 12 19 "int8[50]" `1103 
-V G "KYTUCHAR2" 12 20 "int8[25]" `1104 
-V G "TEMP_CHAR" 12 22 "*int8[1]" `1105 
-V G "TEMP_CHAR2" 12 23 "*int8[1]" `1107 
+V G "KET_QUA_ANALOG" 12 2 "int8[1]" `1070 
+V G "CONFIG_FUN" 12 3 "int8" `1071 
+V G "VT" 12 4 "int8" `1072 
+V G "KYTU" 12 4 "int8" `1073 
+V G "LENH_DIEU_KHIEN" 12 5 "int8" `1074 
+V G "ID_GATEWAY" 12 6 "int8[6]" `1075 
+V G "ID_NODE" 12 7 "int8[4]" `1076 
+V G "LEN_PACKAGES" 12 8 "int8" `1077 
+V G "LENHDIEUKHIEN" 12 9 "int8" `1078 
+V G "DODAI_DATA_NHAN" 12 9 "int8" `1079 
+V G "SOLUONGTHIETBI_CONFIG" 12 10 "int8" `1080 
+V G "SOLUONGCAMBIEN_CONFIG" 12 10 "int8" `1081 
+V G "SOSANH_IDNODE" 12 11 "sint8" `1082 
+V G "SOSANH_IDGW" 12 11 "sint8" `1083 
+V G "TTNHAN" 12 13 "int1" `1084 
+V G "TT_CONFIG" 12 13 "int1" `1085 
+V G "TT_CONTROL" 12 13 "int1" `1086 
+V G "TT_CONFIG_DONE" 12 13 "int1" `1087 
+V G "TT_FUN" 12 13 "int1" `1088 
+V G "TT_STT" 12 13 "int1" `1089 
+V G "TT_CONFIG_OKE_UART" 12 13 "int1" `1090 
+V G "ID_NODE_CHAR" 12 15 "*int8[1]" `1091 
+V G "ID_GATEWAY_CHAR" 12 16 "*int8[1]" `1093 
+V G "ID_NODE_NHAN" 12 17 "*int8[1]" `1095 
+V G "ID_GW_NHAN" 12 18 "*int8[1]" `1097 
+V G "KYTUCHAR" 12 19 "int8[50]" `1099 
+V G "KYTUCHAR2" 12 20 "int8[25]" `1100 
+V G "TEMP_CHAR" 12 22 "*int8[1]" `1101 
+V G "TEMP_CHAR2" 12 23 "*int8[1]" `1103 
 C L "CHON_ID" 12 4 1 "FUNCTION"
 C L "CHON_ID" 1 26 1 "FUNCTION"
 C L "CHON_ID" 13 2 1 "FUNCTION"
-F G "CHON_ID" 13 4 "void()" `1109  "TT_CONFIG_DONE;"
-V L "num" 13 8 "int8" `1110 
+F G "CHON_ID" 13 4 "void()" `1105  "TT_CONFIG_DONE;"
+V L "num" 13 8 "int8" `1106 
 C L "CHON_ID" 13 2 2 "FUNCTION"
 C L "CHON_ID" 13 2 1 "FUNCTION"
 C L "CHON_ID" 13 2 1 "FUNCTION"
-F G "NHAPID_GW" 13 44 "void()" `1121 
-V L "num" 13 45 "int8" `1122 
+F G "NHAPID_GW" 13 44 "void()" `1117 
+V L "num" 13 45 "int8" `1118 
 C L "NHAPID_GW" 13 2 2 "FUNCTION"
 C L "NHAPID_GW" 13 2 1 "FUNCTION"
 C L "NHAPID_GW" 13 2 1 "FUNCTION"
-F G "BUTT_OKE" 13 83 "void()" `1128 
+F G "BUTT_OKE" 13 83 "void()" `1124 
 C L "BUTT_OKE" 13 2 1 "FUNCTION"
 C L "BUTT_OKE" 13 2 1 "FUNCTION"
-F G "SELLECT_FUN" 13 90 "void()" `1129 
-F G "BUTT_FUN" 13 106 "void()" `1130 
+F G "SELLECT_FUN" 13 90 "void()" `1125 
+F G "BUTT_FUN" 13 106 "void()" `1126 
 C L "BUTT_FUN" 13 2 1 "FUNCTION"
 C L "BUTT_FUN" 13 2 1 "FUNCTION"
 C L "BUTT_FUN" 13 2 1 "FUNCTION"
-F G "XULY_IDNODE_NHAP" 13 149 "void()" `1135  "*TEMP_CHAR3 = "\0";"
-V L "j" 13 152 "int8" `1137 
+F G "XULY_IDNODE_NHAP" 13 149 "void()" `1131  "*TEMP_CHAR3 = "\0";"
+V L "j" 13 152 "int8" `1133 
 C L "XULY_IDNODE_NHAP" 13 2 3 "FUNCTION"
-F G "XULY_IDGW_NHAP" 13 162 "void()" `1138 
-V L "j" 13 165 "int8" `1140 
-F G "CONFIG_DONE" 13 175 "void()" `1141 
-V L "PACKAGE_CONFIG" 13 178 "*int8[1]" `1142 
+F G "XULY_IDGW_NHAP" 13 162 "void()" `1134 
+V L "j" 13 165 "int8" `1136 
+F G "CONFIG_DONE" 13 175 "void()" `1137 
+V L "PACKAGE_CONFIG" 13 178 "*int8[1]" `1138 
+C L "CONFIG_DONE" 13 2 4 "FUNCTION"
 C L "CONFIG_DONE" 13 2 1 "FUNCTION"
-V L "j" 13 188 "int8" `1145 
-C L "CONFIG_DONE" 13 2 1 "FUNCTION"
-F G "XACNHANCONFIG" 13 214 "void()" `1150 
-V L "TOKEN" 13 220 "*int8" `1152 
+V L "j" 13 199 "int8" `1140 
+F G "XACNHANCONFIG" 13 217 "void()" `1145 
+V L "TOKEN" 13 222 "*int8" `1147 
 C L "QUET_PHIM" 13 2 1 "FUNCTION"
-F G "QUET_PHIM" 0 5 "void()" `1156 
-V L "BDT" 0 6 "int8" `1157 
+F G "QUET_PHIM" 0 5 "void()" `1151 
+V L "BDT" 0 6 "int8" `1152 
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
-F G "NGAT_NGOAI" 0 36 "void()" `1158 
-F G "NGAT" 0 42 "void()" `1159 
-V L "KENH" 0 54 "int8" `1161 
-F G "ADC_READ" 0 55 "int8(int8 KENH)" `1160 
-V L "ANALOG_PORT" 0 56 "int8[1]" `1162 
-V L "i" 0 62 "int8" `1163 
-F G "READ_ANALOG" 0 74 "void()" `1164 
-V L "K" 0 75 "int8" `1165 
-F G "SEND_ANALOG_UART" 0 81 "void()" `1166 
+F G "NGAT_NGOAI" 0 36 "void()" `1153 
+F G "NGAT" 0 42 "void()" `1154 
+V L "KENH" 0 54 "int8" `1156 
+F G "ADC_READ" 0 55 "int8(int8 KENH)" `1155 
+V L "ANALOG_PORT" 0 56 "int8[1]" `1157 
+V L "i" 0 62 "int8" `1158 
+F G "READ_ANALOG" 0 74 "void()" `1159 
+V L "K" 0 75 "int8" `1160 
+F G "SEND_ANALOG_UART" 0 81 "void()" `1161 
 C L "SEND_ANALOG_UART" 0 8 1 "FUNCTION"
-V L "PACKAGE_SS" 0 84 "*int8[1]" `1167 
-V L "DO_DAI" 0 87 "int8" `1169 
-V L "i" 0 89 "int8" `1170 
-F G "DIEUKHIENTHIETBI" 0 108 "void()" `1176 
-F G "XU_LY_UART" 0 115 "void()" `1177  "ID_NODE_NHAN = KYTU[1] - 48;"
+V L "PACKAGE_SS" 0 84 "*int8[1]" `1162 
+V L "DO_DAI" 0 87 "int8" `1164 
+V L "i" 0 89 "int8" `1165 
+F G "DIEUKHIENTHIETBI" 0 108 "void()" `1171 
+F G "XU_LY_UART" 0 115 "void()" `1172  "ID_NODE_NHAN = KYTU[1] - 48;"
 C L "XU_LY_UART" 0 8 3 "FUNCTION"
-V L "CH" 0 121 "int8" `1178 
-V L "RET" 0 122 "*int8" `1179 
-V L "LEN_RET" 0 126 "int8" `1181 
+V L "CH" 0 121 "int8" `1173 
+V L "RET" 0 122 "*int8" `1174 
+V L "LEN_RET" 0 126 "int8" `1176 
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
-V L "TOKEN" 0 132 "*int8" `1183 
+V L "TOKEN" 0 132 "*int8" `1178 
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
-F G "CHUONG_TRINH_CON" 0 187 "void()" `1185 
-V L "i" 0 188 "int8" `1186 
-F G "MAIN" 0 197 "void()" `1187 
+F G "MAIN" 0 187 "void()" `1180 
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"

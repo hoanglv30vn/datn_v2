@@ -175,25 +175,28 @@ VOID CONFIG_DONE()
 {
    TT_FUN = 0;
    TT_STT = 0;
-   CHAR *PACKAGE_CONFIG[]={"*", "LENGHT","C_F", "ID_GW1234" ,"ID_NODE","#"};
+   CHAR *PACKAGE_CONFIG[]={"*", "LENGHT","CF", "ID_GW1234" ,"ID_NODE","#"};
    XULY_IDGW_NHAP();
    PACKAGE_CONFIG[3] = ID_GATEWAY_CHAR;
    
    
    XULY_IDNODE_NHAP();
+
    PACKAGE_CONFIG[4] = ID_NODE_CHAR;    
-       
+      /*    
    LEN_PACKAGES = 0;
    PACKAGE_CONFIG[1] = "12"; //DO DAI CUA LENGHT CO DO DAI = 2
-   FOR (int J = 0; J < 6; J++)
+   FOR (int J = 0; J < 5; J++)
    {
       LEN_PACKAGES += strlen(PACKAGE_CONFIG[J]);
    }   
-   LEN_PACKAGES = LEN_PACKAGES+5; //5 @
+   */
+   LEN_PACKAGES = 20; //5 @
    ITOA (LEN_PACKAGES, 10, TEMP_CHAR);
+   
    PACKAGE_CONFIG[1] = TEMP_CHAR;
    
-   FOR ( J = 0; J < 6; J++)
+   FOR (INT J = 0; J < 6; J++)
    {
       PRINTF (PACKAGE_CONFIG[J]);
       PRINTF ("@");
@@ -212,8 +215,7 @@ VOID CONFIG_DONE()
 
  VOID XACNHANCONFIG()
  {   
-   KYTU=0;
-   OUTPUT_D (0XFF);       
+   KYTU=0;         
    LCD_GOTOXY (1, 1) ;
    DELAY_MS (10);
    TEMP_CHAR = "_";
@@ -237,9 +239,7 @@ VOID CONFIG_DONE()
       TOKEN = STRTOK(NULL, TEMP_CHAR);
       KYTU++;        
     }          
-   DELAY_MS(500);
-   DELAY_MS (1); 
-   OUTPUT_D (0XFF);     
+   DELAY_MS (1);      
    LCD_GOTOXY (1, 2) ;
    DELAY_MS (10);
    PRINTF (LCD_PUTC,"TB: ");   
@@ -248,11 +248,6 @@ VOID CONFIG_DONE()
    PRINTF (LCD_PUTC,"    CB:");   
    ITOA (SOLUONGCAMBIEN_CONFIG, 10, TEMP_CHAR);   
    PRINTF (LCD_PUTC,TEMP_CHAR);      
-   OUTPUT_D (0X00);
-   DELAY_MS(500);
-   OUTPUT_D (0XFF);    
-   DELAY_MS(500);
-   OUTPUT_D (0X00);
    TT_CONFIG_OKE_UART = 1;
    
  } 

@@ -73,7 +73,7 @@ import re
 conn = sqlite3.connect('data_config.db')   #kết nối tới database
 curr = conn.cursor()    #con trỏ
 curr.execute('''CREATE TABLE IF NOT EXISTS CONFIG_GW(ATTRIBUTES char[30], THONGTIN char[20])''') 
-curr.execute('''CREATE TABLE IF NOT EXISTS DATA_NODE(ID_NODE char[20], NAME_ID_NODE char[20],  ID_THIETBI CHAR[20], NAME_THIETBI CHAR[20], PHANLOAI CHAR[20], TRANGTHAI_ACTIVE CHAR[20])''') 
+curr.execute('''CREATE TABLE IF NOT EXISTS DATA_NODE(ID_NODE char[20], NAME_ID_NODE char[20],  ID_THIETBI CHAR[20], NAME_THIETBI CHAR[20], PHANLOAI CHAR[20], PHANLOAI_ID_THIETBI CHAR[10], TRANGTHAI_ACTIVE CHAR[20])''') 
 conn.commit()
 
 
@@ -105,8 +105,7 @@ global chuoinhiphan
 chuoinhiphan =[0,0,0,0,0,0,0,0]
 class Ui_MainWindow(object):    
 
-    def stream_handler(self, message):
-        global chuoinhiphan        
+    def stream_handler(self, message):    
         # hàm lắng nghe sự kiện từ firebase
         print('data thay doi tu firebase:')     
         event_fb = message["event"] # put
@@ -119,43 +118,49 @@ class Ui_MainWindow(object):
         # print(mess_fb)
         link_fb = path_fb.split("/")
         print(link_fb)
-        print(len(link_fb))
+        # print(len(link_fb))
         if len(link_fb) == 4:
             id_node_control = link_fb[1]
             # id_device_control = link_fb[2]
             # state_control = mess_fb
             # self.send_data_control(id_node_control,id_device_control,state_control) 
+            global chuoinhiphan
             chuoinhiphan =[0,0,0,0,0,0,0,0]
 
             data_control = firebase.database().child("ADMIN")
             data_gw = data_control.child(id_gw).child(id_node_control).get()
             data_object = data_gw.val()
 
-            self.get_data_control(data_object)
-            binTOdec = self.binaryToDecimal(chuoinhiphan)
-            print(chuoinhiphan)
+             
+            # print(chuoinhiphan)
+            binTOdec = self.get_data_control(data_object,id_node_control,"")           
             print(binTOdec)
             self.send_data_control(id_node_control,binTOdec) 
-    def get_data_control( self, data_object):
-        stt_thietbi_control=''
+    def get_data_control( self, data_object,id_node_ctrl, key__idtb):
+        stt_thietbi_control=""
         state_thietbi_control=''  
-        # chuoi_nhi_phan = ""
-        # global chuoinhiphan
-
+        key__temp = key__idtb
         for key, value in data_object.items():
             if isinstance(value, dict):
-                self.get_data_control(value)
+                key__temp = key
+                self.get_data_control(value ,id_node_ctrl,key__temp)
             else:
-                if(str(key)) == "phanloai":
-                    if str(value).find("TB")>0:
-                        stt_thietbi_control = str(value)[-1]
-                    else:
-                        stt_thietbi_control = ""
-                if(str(key)) == "trangthai": 
-                    if len(stt_thietbi_control)>0:
+                if(str(key)) == "trangthai":      
+                    conn_read_tb = sqlite3.connect('data_config.db')
+                    cursor_tb = conn_read_tb.cursor()
+                    cursor_tb.execute("SELECT PHANLOAI FROM DATA_NODE WHERE ID_NODE = ? AND ID_THIETBI = ? ", [id_node_ctrl,key__temp] )  
+                    # print(key__temp)
+                    if cursor_tb.fetchone()[0] == "Thiết bị":    
+                        get_id_phanloai_node = cursor_tb.execute("SELECT PHANLOAI_ID_THIETBI FROM DATA_NODE WHERE ID_NODE = ? AND ID_THIETBI = ? ", [id_node_ctrl,key__temp] )  
+                        stt_thietbi_control = get_id_phanloai_node.fetchone()[0] 
                         state_thietbi_control = str(value)
-                        chuoinhiphan [int(stt_thietbi_control)]= int(state_thietbi_control)
-                        stt_thietbi_control = ""   
+                        chuoinhiphan [int(stt_thietbi_control[2])]= int(state_thietbi_control)
+                        print(key__temp+ "-" + stt_thietbi_control + '__' + stt_thietbi_control[2])
+                        # print(chuoinhiphan)
+        binTOdec = self.binaryToDecimal(chuoinhiphan)
+        return binTOdec
+        # print(binTOdec)
+
     def binaryToDecimal(self,n):        
         dec_value = 0        
         base = 1                
@@ -211,8 +216,7 @@ class Ui_MainWindow(object):
         self.box_comport.clear()                
         self.box_comport.addItems(self.serial_ports())
 
-    def set_serial_change(self):   
-        global serial__             
+    def set_serial_change(self):            
         serial_com = self.box_comport.currentText()    
         curr.execute("UPDATE CONFIG_GW SET THONGTIN = ? WHERE ATTRIBUTES = ?",[serial_com, "COM_PORT"])
         conn.commit() 
@@ -260,7 +264,7 @@ class Ui_MainWindow(object):
             if do_dai_chuoi_nhan == lenght_data and id_gw_nhan == id_gw :
                 print("đúng độ dài - đúng id")
                 # phân tích lệnh, xử lý.
-                if thongtinlenh_nhan == 'C_F':
+                if thongtinlenh_nhan == 'CF':
                     self.thongtincauhinhnode(data)
                 # S_S == dữ liệu cảm biến.
                 elif thongtinlenh_nhan == 'SS':
@@ -284,17 +288,23 @@ class Ui_MainWindow(object):
         except:
             print("readDataUART error")
         self.timer.start()
-    # def senddata(self, tt):   
-    #     if (tt==1):
-    #         hello= 'on11237891' + '.'
-    #     else:
-    #         hello='1234_CH_ConfigOK' + '.'
-    #     serial__.write(hello.encode())       
-    #     print(hello.encode())
-      
+
     def uploadDataSensor(self, data):
         print("up load sensor")
         print(data)
+        id_gw_upload_sensor = data[3]
+        id_node_upload_sensor = data[4]
+        index = 0
+        curr = conn.cursor()
+        curr.execute("SELECT ID_THIETBI FROM DATA_NODE WHERE ID_NODE = ? AND PHANLOAI = ? ", [id_node_upload_sensor,"Cảm biến"] )  
+        id_thietbi_upload_sensor_sss = curr.fetchall()    
+        print(id_thietbi_upload_sensor_sss)           
+        for analog in data[5:-1]:
+            id_thietbi_upload_sensor = id_thietbi_upload_sensor_sss[index][0]
+            print(id_thietbi_upload_sensor)
+            db = firebase.database().child("ADMIN") 
+            db.child(id_gw_upload_sensor).child(id_node_upload_sensor).child(id_thietbi_upload_sensor).update({'trangthai':analog})              
+            index +=1
         # * ss idgw id node cb cb cb cb
         # dodai = len(data)
         # for 
@@ -336,10 +346,10 @@ class Ui_MainWindow(object):
             danhsachphanloai = get_phanloai_node.fetchall()
             print(danhsachphanloai)
             for phanloaithietbi in danhsachphanloai:
-                phanloai = phanloaithietbi[0].split("_")
-                if phanloai[0] == "Thiết bị":
+                # phanloai = phanloaithietbi[0].split("_")
+                if phanloaithietbi[0] == "Thiết bị":
                     soluongthietbi +=1
-                elif phanloai[0] == "Cảm biến":
+                elif phanloaithietbi[0] == "Cảm biến":
                     soluongcambien +=1
             print("id node nhận đc:"+ id_node_nhan )
             curr.execute("UPDATE DATA_NODE SET TRANGTHAI_ACTIVE = 'active' WHERE ID_NODE = ? ", [id_node_nhan] ) 
@@ -367,7 +377,7 @@ class Ui_MainWindow(object):
             print(data_send_uart.encode())           
 
 
-        self.ALL_DATA()          
+        self.ALL_DATA(1)          
         # DATA_NODE(ID_NODE char[20], NAME_ID_NODE char[20], PHANLOAI CHAR[20], ID_THIETBI CHAR[20], NAME_THIETBI CHAR[20]                  
 
 # ###############################3
@@ -379,7 +389,7 @@ class Ui_MainWindow(object):
             for r in range(row + 1, row + nrow):
                 t = self.table_danhsach.takeItem(r, c)
                 del t
-    def ALL_DATA(self): 
+    def ALL_DATA(self,update_firebase): 
         # in tên + id nhà
         # result = conn.execute("SELECT * FROM CONFIG_GW")  
         db = firebase.database().child("ADMIN")          
@@ -420,16 +430,17 @@ class Ui_MainWindow(object):
                     id_device_update = data
                 elif colum_number == 4:
                     phanloai_device_update = data
-                    if phanloai_device_update.find("_CB")>0:
+                    if phanloai_device_update == "Cảm biến":
                         giatri_update = "analog"
-                    elif phanloai_device_update.find("_TB")>0:
+                    elif phanloai_device_update == "Thiết bị":
                         giatri_update = 0
                     else:
                         giatri_update = "undefind"
-                    db = firebase.database().child("ADMIN")          
-                    db.child(id_gw).child(id_node_update).child(id_device_update).update({'phanloai':phanloai_device_update})  
-                    db = firebase.database().child("ADMIN") 
-                    db.child(id_gw).child(id_node_update).child(id_device_update).update({'trangthai':giatri_update})  
+                    # db = firebase.database().child("ADMIN")          
+                    # db.child(id_gw).child(id_node_update).child(id_device_update).update({'phanloai':phanloai_device_update})  
+                    if update_firebase == 0:
+                        db = firebase.database().child("ADMIN") 
+                        db.child(id_gw).child(id_node_update).child(id_device_update).update({'trangthai':giatri_update})  
 
                 # đổi màu
                 curr.execute("SELECT TRANGTHAI_ACTIVE FROM DATA_NODE WHERE NAME_ID_NODE = ? AND TRANGTHAI_ACTIVE = 'active'", [data])
@@ -486,7 +497,7 @@ class Ui_MainWindow(object):
         trangthai_active = "inactive"
         sothutu_thietbi = 0
         sothutu_cambien = 0
-
+        phanloai_id_thietbi = "none"
         for phong, nha in data_object.items():
             # print("phòng:" + str(phong))
             if isinstance(nha, dict):
@@ -504,12 +515,14 @@ class Ui_MainWindow(object):
                                 # print(phanloai)
                         # print (str(phong) + ":"+ str(thietbi)+ ":" + str(namethietbi)+ ":" + str(phanloai) )
                         if phanloai == 'Thiết bị':
-                            phanloai = phanloai + '_TB' +str(sothutu_thietbi)
+                            # phanloai = phanloai + '_TB' +str(sothutu_thietbi)
+                            phanloai_id_thietbi =  'TB' +str(sothutu_thietbi)
                             sothutu_thietbi +=1
                         elif phanloai == 'Cảm biến':
-                            phanloai = phanloai + '_CB' +str(sothutu_cambien)
+                            # phanloai = phanloai + '_CB' +str(sothutu_cambien)
+                            phanloai_id_thietbi =  'CB' +str(sothutu_cambien)
                             sothutu_cambien +=1                            
-                        curr.execute("INSERT INTO DATA_NODE VALUES (?,?,?,?,?,?)",[phong,tenphongsql,thietbi,namethietbi,phanloai,trangthai_active])                                        
+                        curr.execute("INSERT INTO DATA_NODE VALUES (?,?,?,?,?,?,?)",[phong,tenphongsql,thietbi,namethietbi,phanloai,phanloai_id_thietbi,trangthai_active])                                        
                     else:
                         # print("tên phòng:" + tenphong)
                         tenphongsql = tenphong
@@ -520,7 +533,7 @@ class Ui_MainWindow(object):
                 tennhasql=str(nha)
                 curr.execute("INSERT INTO CONFIG_GW VALUES (?,?)",["name_nha",tennhasql])                            
         conn.commit()        
-        self.ALL_DATA()
+        self.ALL_DATA(0)
 
     # def pretty( self, data_object):
     #     for key, value in data_object.items():
@@ -636,7 +649,7 @@ class Ui_MainWindow(object):
 #
 # ####################################################################
         # self.check_data_from_sql()
-        self.ALL_DATA()
+        self.ALL_DATA(0)
         self.add_com()
         self.set_serial()
         self.box_comport.currentIndexChanged.connect(self.set_serial_change)

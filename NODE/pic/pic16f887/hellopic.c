@@ -9,7 +9,7 @@ VOID QUET_PHIM()
    {
       IF (TMR1IF)
       {
-         OUTPUT_TOGGLE (PIN_D7);
+         OUTPUT_TOGGLE (PIN_D3);
          TMR1IF = 0; SET_TIMER1 (3036); BDT++;
       }
    }
@@ -79,7 +79,7 @@ VOID QUET_PHIM()
 
  VOID SEND_ANALOG_UART()
  {
-   OUTPUT_TOGGLE(PIN_D6);
+   OUTPUT_TOGGLE(PIN_D3);
    //CHAR *PACKAGE_SS[]={"*", "26","SS", "IDGW12" ,"NODE","ZZ","AA","VV","CC","SS"};
    CHAR *PACKAGE_SS[]={"IDGW12" ,"NODE","ZZ","AA","VV","CC","SS"};   
    PACKAGE_SS[0] = ID_GATEWAY_CHAR;
@@ -101,7 +101,7 @@ VOID QUET_PHIM()
       PRINTF ("@");
    }
    PRINTF ("#");
-   OUTPUT_TOGGLE(PIN_D6);
+   OUTPUT_TOGGLE(PIN_D3);
    
  }
  VOID DIEUKHIENTHIETBI()
@@ -183,16 +183,6 @@ VOID QUET_PHIM()
  }
 
 
- VOID CHUONG_TRINH_CON ()
- {
-    FOR (INT I = 0; I <= 30; I++)
-    {
-       OUTPUT_TOGGLE (PIN_D4);
-       DELAY_MS (100);
-    }
-    OUTPUT_TOGGLE(PIN_D4);
- }
-
  VOID MAIN  ()
  {
     SET_TRIS_D (0X00);
@@ -224,8 +214,7 @@ VOID QUET_PHIM()
        ELSE
        {
           WHILE (!TT_CONFIG)
-          {
-             CHUONG_TRINH_CON ();                      
+          {                         
              IF (TTNHAN == 1)
              {
                 TTNHAN = 0;
@@ -233,10 +222,10 @@ VOID QUET_PHIM()
              } 
              
              IF (TT_CONFIG_OKE_UART == 1){
+               DELAY_MS(2000);
                READ_ANALOG();
                IF (KET_QUA_ANALOG[0]>28)
-               {
-               DELAY_MS(500);
+               {               
                SEND_ANALOG_UART();
                }
              }

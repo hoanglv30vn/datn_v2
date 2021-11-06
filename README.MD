@@ -34,3 +34,11 @@ https://github.com/hoanglv30vn/datn
 - PYTHON NHẬP ID GW, GET DATA TỪ FIREBASE.
 - PIC NHẬP ID GW, ID NODE, ĐỂ XÁC NHẬN.
 - ĐIỀU KHIỂN THIẾT BỊ
+6/11: KHÁ LÀ OKE RỒI
+- [CONFIG] cấu hình node, nhập ID GW, IDNODE, Gửi tới GW. GW gửi xác nhận.
+- [ĐIỀU KHIỂN] node nhận thông tin điều khiển từ GW, điều khiển thiết bị qua IC 74595. (dịch bit, đk 8 thiết bị)
+- [ANALOG] nhận số thiết bị cảm biến từ GW. đo nhiệt độ, gửi uart.
+- [GW] nhập ID nhà, nhấn oke để load dữ liệu từ FIREBASE
+- [GW] hiện danh sách các thiết bị, trạng thái phòng active. đánh số thứ tự cho các thiết bị để điều khiển, và 1 số hàm chuyển đổi
+- [GW] nhận dữ liệu từ uart, gửi firebase.
+- ... kế thừa 1 số tính năng từ V1

@@ -23,11 +23,14 @@ import re
 
 
 
-a= no_accent_vietnamese("Việt Nam ẳ ấ ồ ư ị ỳ ùúụủũưừứựửữ  àáạảãâầấậẩẫăằắặẳẵ ý ỷĐất Nước Con Người")
-b= no_accent_vietnamese("Welcome to Vietnam !")
-c =no_accent_vietnamese("VIỆT NAM ĐẤT NƯỚC CON NGƯỜI")
+# a= no_accent_vietnamese("Việt Nam ẳ ấ ồ ư ị ỳ ùúụủũưừứựửữ  àáạảãâầấậẩẫăằắặẳẵ ý ỷĐất Nước Con Người")
+# b= no_accent_vietnamese("Welcome to Vietnam !")
+# c =no_accent_vietnamese("VIỆT NAM ĐẤT NƯỚC CON NGƯỜI")
 
-print(a,b,c)
+# print(a,b,c)
+mang = ['*', '26', 'SS', '026636', '7599', '30', '28','2','54','82', '#']
+for index in mang[5:-1]:
+    print(index)
 
 a= input("hi")
 

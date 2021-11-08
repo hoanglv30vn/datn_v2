@@ -19,8 +19,8 @@ Type=4
 5=C:\Program Files (x86)\PICC\Drivers\STDIO.H
 6=C:\Program Files (x86)\PICC\Devices\16F887.H
 7=xuatbyte74595.c
-8=
-9=
+8=analog.c
+9=DIEU_KHIEN.c
 10=
 [Units]
 Count=1

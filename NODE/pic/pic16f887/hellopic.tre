@@ -1,5 +1,5 @@
 ÀÄhellopic
-   ÃÄMAIN  2/287  Ram=1
+   ÃÄMAIN  2/283  Ram=1
    ³  ÃÄ@cinit1  (Inline)  Ram=0
    ³  ÃÄlcd_init  0/102  Ram=6
    ³  ³  ÃÄ@delay_ms1  0/20  Ram=1
@@ -134,14 +134,14 @@
    ³  ³  ÀÄ@PSTRINGC7_1056  0/80  Ram=4
    ³  ³     ÀÄ*
    ³  ÃÄXU_LY_UART  1/556  Ram=5
-   ³  ³  ÃÄ@const1197  0/5  Ram=0
+   ³  ³  ÃÄ@const1207  0/5  Ram=0
    ³  ³  ÃÄstrchr  (Inline)  Ram=4
    ³  ³  ÃÄstrlen  (Inline)  Ram=5
-   ³  ³  ÃÄ@const1193  0/6  Ram=0
+   ³  ³  ÃÄ@const1199  0/6  Ram=0
    ³  ³  ÃÄstrtok  1/241  Ram=10
    ³  ³  ³  ÃÄstrspn  (Inline)  Ram=9
    ³  ³  ³  ÀÄstrpbrk  (Inline)  Ram=9
-   ³  ³  ÃÄ@goto12708  1/10  Ram=0
+   ³  ³  ÃÄ@goto12748  1/10  Ram=0
    ³  ³  ÃÄstrcat  0/62  Ram=9
    ³  ³  ÃÄstrcat  0/62  Ram=9
    ³  ³  ÃÄatoi  1/227  Ram=9
@@ -191,7 +191,7 @@
    ³  ³  ³  ÃÄatoi  1/227  Ram=9
    ³  ³  ³  ³  ÀÄ*
    ³  ³  ³  ÃÄ@WRITEBITA  0/34  Ram=6
-   ³  ³  ³  ÀÄXUAT_DIEU_KHIEN  1/170  Ram=2
+   ³  ³  ³  ÀÄXUAT_DIEU_KHIEN  1/386  Ram=2
    ³  ³  ³     ÃÄBIN_TO_DEC  (Inline)  Ram=4
    ³  ³  ³     ³  ÃÄ@READBITA  1/25  Ram=5
    ³  ³  ³     ³  ÀÄ@MUL88  0/39  Ram=2
@@ -205,21 +205,32 @@
    ³  ³  ³     ÃÄ@READBITA  1/25  Ram=5
    ³  ³  ³     ÃÄitoa  0/288  Ram=27
    ³  ³  ³     ³  ÀÄ*
+   ³  ³  ³     ÃÄ@PSTRINGR_1056  0/29  Ram=2
+   ³  ³  ³     ³  ÀÄ*
+   ³  ³  ³     ÃÄ@const1171  0/7  Ram=0
+   ³  ³  ³     ÃÄ@const1172  0/7  Ram=0
+   ³  ³  ³     ÃÄ@const1173  0/7  Ram=0
+   ³  ³  ³     ÃÄ@PSTRINGR_9600_62_63  0/30  Ram=2
+   ³  ³  ³     ÃÄ@PSTRINGC7_9600_62_63  1/82  Ram=4
+   ³  ³  ³     ÃÄ@PSTRINGR_9600_62_63  0/30  Ram=2
+   ³  ³  ³     ÃÄ@PSTRINGR_9600_62_63  0/30  Ram=2
+   ³  ³  ³     ÃÄitoa  0/288  Ram=27
+   ³  ³  ³     ³  ÀÄ*
+   ³  ³  ³     ÃÄ@PSTRINGR_9600_62_63  0/30  Ram=2
+   ³  ³  ³     ÃÄ@const1109  0/6  Ram=0
+   ³  ³  ³     ÃÄ@READBITA  1/25  Ram=5
+   ³  ³  ³     ÃÄitoa  0/288  Ram=27
+   ³  ³  ³     ³  ÀÄ*
    ³  ³  ³     ÀÄ@PSTRINGR_1056  0/29  Ram=2
    ³  ³  ³        ÀÄ*
    ³  ³  ÀÄ@delay_ms1  0/20  Ram=1
-   ³  ÃÄREAD_BTN_STATE  1/132  Ram=3
-   ³  ³  ÃÄ@WRITEBITA  0/34  Ram=6
-   ³  ³  ÃÄ@READBITA  1/25  Ram=5
-   ³  ³  ÃÄ@delay_ms1  0/20  Ram=1
-   ³  ³  ÃÄ@READBITA  1/25  Ram=5
-   ³  ³  ÃÄ@WRITEBITA  0/34  Ram=6
+   ³  ÃÄREAD_BTN_STATE  1/77  Ram=3
    ³  ³  ÃÄ@WRITEBITA  0/34  Ram=6
    ³  ³  ÃÄ@READBITA  1/25  Ram=5
    ³  ³  ÃÄ@delay_ms1  0/20  Ram=1
    ³  ³  ÃÄ@READBITA  1/25  Ram=5
    ³  ³  ÀÄ@WRITEBITA  0/34  Ram=6
-   ³  ÃÄXUAT_DIEU_KHIEN  1/170  Ram=2
+   ³  ÃÄXUAT_DIEU_KHIEN  1/386  Ram=2
    ³  ³  ÀÄ*
    ³  ÃÄ@delay_ms1  0/20  Ram=1
    ³  ÃÄREAD_ANALOG  2/425  Ram=2
@@ -230,12 +241,11 @@
    ³  ³     ÃÄ@ITOF  (Inline)  Ram=2
    ³  ³     ÃÄ@DIVFF  (Inline)  Ram=14
    ³  ³     ÀÄ@SFTOI  (Inline)  Ram=4
-   ³  ÃÄSEND_ANALOG_UART  1/218  Ram=3
+   ³  ÃÄSEND_ANALOG_UART  2/223  Ram=3
    ³  ³  ÃÄitoa  0/288  Ram=27
    ³  ³  ³  ÀÄ*
    ³  ³  ÃÄitoa  0/288  Ram=27
    ³  ³  ³  ÀÄ*
-   ³  ³  ÃÄ@PSTRINGC7_9600_62_63  1/82  Ram=4
    ³  ³  ÃÄ@PSTRINGR_9600_62_63  0/30  Ram=2
    ³  ³  ÃÄ@PSTRINGC7_9600_62_63  1/82  Ram=4
    ³  ³  ÀÄ@PSTRINGR_9600_62_63  0/30  Ram=2

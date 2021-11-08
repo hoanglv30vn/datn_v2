@@ -1,8 +1,8 @@
 D G "LCD_LINE_LENGTH" 11 187 "20"
-D G "__PCM__" 0 269 ""5.015""
-D G "__DEVICE__" 0 269 "887"
-D G "__DATE__" 0 269 ""08-Nov-21""
-D G "__TIME__" 0 269 ""23:59:15"" "Standard Header file for the PIC16F887 device ////////////////"
+D G "__PCM__" 0 211 ""5.015""
+D G "__DEVICE__" 0 211 "887"
+D G "__DATE__" 0 211 ""09-Nov-21""
+D G "__TIME__" 0 211 ""00:52:32"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 v L "value" 2 39 "int8" `54 
 f B "set_tris_a" 2 39 "void(int8 value)" `53 
@@ -1549,17 +1549,32 @@ V L "TOKEN" 13 222 "*int8" `1149
 C L "READ_BTN_STATE" 13 2 1 "FUNCTION"
 F G "READ_BTN_STATE" 14 2 "void()" `1153 
 V L "TB" 14 4 "int8" `1154 
-F G "BIN_TO_DEC" 14 25 "int8()" `1162 
-V L "DEC_VL" 14 26 "int8" `1163 
-V L "base" 14 27 "int8" `1164 
-V L "i" 14 28 "int8" `1165 
-F G "XUAT_DIEU_KHIEN" 14 39 "void()" `1166 
-V L "ST" 14 45 "int8" `1168 
-F G "DIEUKHIENTHIETBI" 14 52 "void()" `1170 
-V L "MA_DEC" 14 53 "int8" `1171 
-V L "SB" 14 56 "int8" `1172 
-F G "QUET_PHIM" 0 6 "void()" `1174 
-V L "BDT" 0 7 "int8" `1175 
+V L "ID_TB" 14 5 "int8" `1155 
+C L "READ_BTN_STATE" 14 14 4 "FUNCTION"
+F G "BIN_TO_DEC" 14 27 "int8()" `1163 
+V L "DEC_VL" 14 28 "int8" `1164 
+V L "base" 14 29 "int8" `1165 
+V L "i" 14 30 "int8" `1166 
+F G "XUAT_DIEU_KHIEN" 14 41 "void()" `1167 
+V L "ST" 14 47 "int8" `1169 
+C L "XUAT_DIEU_KHIEN" 14 14 1 "FUNCTION"
+F G "DIEUKHIENTHIETBI" 14 74 "void()" `1181 
+V L "MA_DEC" 14 75 "int8" `1182 
+V L "SB" 14 78 "int8" `1183 
+V L "KENH" 15 2 "int8" `1186 
+F G "ADC_READ" 15 3 "int8(int8 KENH)" `1185 
+V L "ANALOG_PORT" 15 4 "int8[1]" `1187 
+V L "i" 15 10 "int8" `1188 
+F G "READ_ANALOG" 15 22 "void()" `1189 
+V L "K" 15 23 "int8" `1190 
+F G "SEND_ANALOG_UART" 15 29 "void()" `1191 
+C L "SEND_ANALOG_UART" 15 31 1 "FUNCTION"
+V L "PACKAGE_SS" 15 32 "*int8[1]" `1192 
+V L "DO_DAI" 15 35 "int8" `1194 
+V L "i" 15 37 "int8" `1195 
+C L "QUET_PHIM" 15 31 34 "FUNCTION"
+F G "QUET_PHIM" 0 6 "void()" `1200 
+V L "BDT" 0 7 "int8" `1201 
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
@@ -1567,30 +1582,19 @@ C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
-F G "NGAT_NGOAI" 0 44 "void()" `1176 
-F G "NGAT" 0 50 "void()" `1177 
-V L "KENH" 0 64 "int8" `1179 
-F G "ADC_READ" 0 65 "int8(int8 KENH)" `1178 
-V L "ANALOG_PORT" 0 66 "int8[1]" `1180 
-V L "i" 0 72 "int8" `1181 
-F G "READ_ANALOG" 0 83 "void()" `1182 
-V L "K" 0 84 "int8" `1183 
-F G "SEND_ANALOG_UART" 0 91 "void()" `1184 
-C L "SEND_ANALOG_UART" 0 8 1 "FUNCTION"
-V L "PACKAGE_SS" 0 94 "*int8[1]" `1185 
-V L "DO_DAI" 0 97 "int8" `1187 
-V L "i" 0 99 "int8" `1188 
-F G "XU_LY_UART" 0 123 "void()" `1194  "ID_NODE_NHAN = KYTU[1] - 48;"
+F G "NGAT_NGOAI" 0 44 "void()" `1202 
+F G "NGAT" 0 50 "void()" `1203 
+F G "XU_LY_UART" 0 65 "void()" `1204  "ID_NODE_NHAN = KYTU[1] - 48;"
 C L "XU_LY_UART" 0 8 3 "FUNCTION"
-V L "CH" 0 128 "int8" `1195 
-V L "RET" 0 129 "*int8" `1196 
-V L "LEN_RET" 0 133 "int8" `1198 
+V L "CH" 0 70 "int8" `1205 
+V L "RET" 0 71 "*int8" `1206 
+V L "LEN_RET" 0 75 "int8" `1208 
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
-V L "TOKEN" 0 140 "*int8" `1200 
+V L "TOKEN" 0 82 "*int8" `1210 
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
-F G "MAIN" 0 207 "void()" `1202 
+F G "MAIN" 0 149 "void()" `1212 
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"

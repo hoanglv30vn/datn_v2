@@ -2,15 +2,16 @@ VOID READ_BTN_STATE()
 {
    
    INT TB = 0;
-   FOR (TB = 0; TB < 4; TB++)
-   {      
-       IF (!INPUT (52 + TB))
+   INT ID_TB =52;
+   FOR (TB = 0; TB < SOLUONGTHIETBI_CONFIG; TB++)
+   {   IF (TB>4) ID_TB = 64;
+       IF (!INPUT (ID_TB + TB))
       {  
          DELAY_MS(200);
          TT_THIETBI_TEMP[TB] = ~TT_THIETBI_TEMP[TB];         
       }
    }
-
+/*
    FOR (TB = 0; TB < 4; TB++)
    {
 
@@ -20,6 +21,7 @@ VOID READ_BTN_STATE()
           TT_THIETBI_TEMP[TB + 4] = ~TT_THIETBI_TEMP[TB + 4];           
       }
    }
+*/
 }
 INT BIN_TO_DEC()
 {
@@ -47,6 +49,26 @@ INT BIN_TO_DEC()
       ITOA(TT_THIETBI_TEMP[ST],10,TEMP_CHAR);
       PRINTF (LCD_PUTC, TEMP_CHAR);
    }
+   //CHAR *PACKAGE_CONFIG[]={"*", "LENGHT","CF", "ID_GW1234" ,"ID_NODE","#"};
+   IF(LENH_DIEU_KHIEN<10) TEMP_CHAR ="22";
+   ELSE IF(LENH_DIEU_KHIEN>=10 && LENH_DIEU_KHIEN <100) TEMP_CHAR ="23";
+   ELSE TEMP_CHAR ="24";    
+   PRINTF ("*@");
+   PRINTF (TEMP_CHAR);
+   PRINTF ("@DK@");
+   PRINTF (ID_GATEWAY_CHAR);
+   PRINTF ("@");
+   PRINTF (ID_NODE_CHAR);
+   PRINTF ("@");
+   ITOA(LENH_DIEU_KHIEN,10,TEMP_CHAR);
+   PRINTF (TEMP_CHAR);
+   PRINTF ("@#");
+   FOR (ST=0;ST<8;ST++){
+      TEMP_CHAR = "0";
+      ITOA(TT_THIETBI_TEMP[ST],10,TEMP_CHAR);
+      PRINTF (LCD_PUTC, TEMP_CHAR);
+   }   
+   
  }
  VOID DIEUKHIENTHIETBI ()
  {

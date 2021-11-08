@@ -269,6 +269,9 @@ class Ui_MainWindow(object):
                 # S_S == dữ liệu cảm biến.
                 elif thongtinlenh_nhan == 'SS':
                     self.uploadDataSensor(data)     
+                elif thongtinlenh_nhan == 'DK':
+                    print("đúng lệnh đk")              
+                    self.update_state_thietbi(data)
             else:
                 print("config error")        
                 # gửi lại xác nhận cho node.            
@@ -288,6 +291,29 @@ class Ui_MainWindow(object):
         except:
             print("readDataUART error")
         self.timer.start()
+
+
+    def update_state_thietbi(self, data):
+        index = 0
+        state_thietbi_dec = int(data[5])
+        state_thietbi_bin= str(bin(state_thietbi_dec))[2:10]
+        id_gw_upload_state = data[3]
+        id_node_upload_state = data[4]        
+        onoff = 0
+        print(state_thietbi_bin)
+        curr = conn.cursor()
+        curr.execute("SELECT ID_THIETBI FROM DATA_NODE WHERE ID_NODE = ? AND PHANLOAI = ? ", [id_node_upload_state,"Thiết bị"] )          
+        id_thietbi_upload_state_sss = curr.fetchall() 
+        len_thietbi = len(id_thietbi_upload_state_sss)
+        for i in state_thietbi_bin[0:len_thietbi]:
+            id_thietbi_upload_state = id_thietbi_upload_state_sss[index][0]
+            if i == '1':
+                onoff = 1
+            else:
+                onoff = 0
+            db = firebase.database().child("ADMIN") 
+            db.child(id_gw_upload_state).child(id_node_upload_state).child(id_thietbi_upload_state).update({'onoff':onoff})                  
+            index +=1            
 
     def uploadDataSensor(self, data):
         print("up load sensor")

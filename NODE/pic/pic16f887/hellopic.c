@@ -9,7 +9,7 @@ VOID QUET_PHIM()
    {
       IF (TMR1IF)
       {
-         OUTPUT_TOGGLE (PIN_D3);
+         OUTPUT_TOGGLE (PIN_C4);
          TMR1IF = 0; SET_TIMER1 (3036); BDT++;
       }
    }
@@ -24,9 +24,15 @@ VOID QUET_PHIM()
       TT_FUN = 0;
    }
 
-   ELSE
+   ELSE IF (BDT >1 && BDT <20)
    {
       BUTT_OKE (); //OKE
+   }
+   ELSE {
+      TT_SW = 1;
+      OUTPUT_HIGH(PIN_D3);
+
+
    }
 }
 
@@ -79,7 +85,7 @@ VOID QUET_PHIM()
 
  VOID SEND_ANALOG_UART()
  {
-   OUTPUT_TOGGLE(PIN_D3);
+   OUTPUT_TOGGLE(PIN_C4);
    //CHAR *PACKAGE_SS[]={"*", "26","SS", "IDGW12" ,"NODE","ZZ","AA","VV","CC","SS"};
    CHAR *PACKAGE_SS[]={"IDGW12" ,"NODE","ZZ","AA","VV","CC","SS"};   
    PACKAGE_SS[0] = ID_GATEWAY_CHAR;
@@ -101,7 +107,7 @@ VOID QUET_PHIM()
       PRINTF ("@");
    }
    PRINTF ("#");
-   OUTPUT_TOGGLE(PIN_D3);
+   OUTPUT_TOGGLE(PIN_C4);
    
  }
  VOID DIEUKHIENTHIETBI()
@@ -185,7 +191,7 @@ VOID QUET_PHIM()
 
  VOID MAIN  ()
  {
-    SET_TRIS_D (0X00);
+    SET_TRIS_D (0XF0);
     SET_TRIS_B (0XFF);
     SET_TRIS_E (0);
     SET_TRIS_C (0X80);
@@ -205,8 +211,18 @@ VOID QUET_PHIM()
     TT_CONFIG = 0;
     TT_CONFIG_DONE = 0;
     TT_CONTROL = 1;
-    OUTPUT_D (0X00);
+    OUTPUT_HIGH(PIN_D3);
     TTNHAN = 0;    
+
+    FOR (INT TB = 0; TB<4; TB++)             
+    {
+       TT_THIETBI_TEMP[TB]=INPUT(52+TB)  ;
+    }          
+    FOR ( TB = 0; TB<4; TB++)             
+    {
+       TT_THIETBI_TEMP[TB+4]=INPUT(68+TB);
+    } 
+    
     WHILE (TRUE)
     {
        IF (TT_CONFIG)             {BUTT_FUN (); } // GOI HAM CHON LENH (SWITCH CASE)
@@ -220,8 +236,36 @@ VOID QUET_PHIM()
                 TTNHAN = 0;
                 XU_LY_UART();
              } 
-             
-             IF (TT_CONFIG_OKE_UART == 1){
+             IF (TT_CONFIG_OKE_UART == 1)
+             {
+                FOR (TB = 0; TB<4; TB++)             
+                {
+                   IF(INPUT (52+TB) != TT_THIETBI_TEMP[TB] )
+                      {
+                          TT_THIETBI_TEMP[TB]=INPUT(52+TB)  ;
+                          OUTPUT_LOW(PIN_D3);
+                      }
+                }          
+                FOR ( TB = 0; TB<4; TB++)             
+                {
+                   IF(INPUT (68+TB) != TT_THIETBI_TEMP[TB+4] )
+                      {
+                          TT_THIETBI_TEMP[TB+4]=INPUT(68+TB)  ;
+                          OUTPUT_LOW(PIN_D3);
+                      }
+                }             
+                IF (TT_SW == 1)
+                {
+                  TT_SW = 0 ;
+                  LCD_GOTOXY (1, 2) ;
+                  DELAY_MS (10);
+                  PRINTF (LCD_PUTC, "SW: ");      
+                  FOR (INT SW = 0 ;  SW<8; SW++)
+                  {
+                     ITOA(TT_THIETBI_TEMP[SW],10,TEMP_CHAR);
+                     PRINTF (TEMP_CHAR);
+                  }        
+                }             
                DELAY_MS(2000);
                READ_ANALOG();
                IF (KET_QUA_ANALOG[0]>28)

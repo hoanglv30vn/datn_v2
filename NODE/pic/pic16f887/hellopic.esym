@@ -1,8 +1,8 @@
-D G "labs" 6 249 "abs"
-D G "__PCM__" 6 1103 ""5.015""
-D G "__DEVICE__" 6 1103 "887"
-D G "__DATE__" 6 1103 ""06-Nov-21""
-D G "__TIME__" 6 1103 ""23:27:33"" "Standard Header file for the PIC16F887 device ////////////////"
+D G "LCD_LINE_LENGTH" 11 187 "20"
+D G "__PCM__" 0 283 ""5.015""
+D G "__DEVICE__" 0 283 "887"
+D G "__DATE__" 0 283 ""08-Nov-21""
+D G "__TIME__" 0 283 ""17:54:48"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 v L "value" 2 39 "int8" `54 
 f B "set_tris_a" 2 39 "void(int8 value)" `53 
@@ -1496,92 +1496,96 @@ V G "SOLUONGTHIETBI_CONFIG" 12 10 "int8" `1080
 V G "SOLUONGCAMBIEN_CONFIG" 12 10 "int8" `1081 
 V G "SOSANH_IDNODE" 12 11 "sint8" `1082 
 V G "SOSANH_IDGW" 12 11 "sint8" `1083 
-V G "TTNHAN" 12 13 "int1" `1084 
-V G "TT_CONFIG" 12 13 "int1" `1085 
-V G "TT_CONTROL" 12 13 "int1" `1086 
-V G "TT_CONFIG_DONE" 12 13 "int1" `1087 
-V G "TT_FUN" 12 13 "int1" `1088 
-V G "TT_STT" 12 13 "int1" `1089 
-V G "TT_CONFIG_OKE_UART" 12 13 "int1" `1090 
-V G "ID_NODE_CHAR" 12 15 "*int8[1]" `1091 
-V G "ID_GATEWAY_CHAR" 12 16 "*int8[1]" `1093 
-V G "ID_NODE_NHAN" 12 17 "*int8[1]" `1095 
-V G "ID_GW_NHAN" 12 18 "*int8[1]" `1097 
-V G "KYTUCHAR" 12 19 "int8[50]" `1099 
-V G "KYTUCHAR2" 12 20 "int8[25]" `1100 
-V G "TEMP_CHAR" 12 22 "*int8[1]" `1101 
-V G "TEMP_CHAR2" 12 23 "*int8[1]" `1103 
+V G "TT_THIETBI_TEMP" 12 13 "int1[8]" `1084 
+V G "TTNHAN" 12 14 "int1" `1085 
+V G "TT_CONFIG" 12 14 "int1" `1086 
+V G "TT_CONTROL" 12 14 "int1" `1087 
+V G "TT_CONFIG_DONE" 12 14 "int1" `1088 
+V G "TT_FUN" 12 14 "int1" `1089 
+V G "TT_STT" 12 14 "int1" `1090 
+V G "TT_CONFIG_OKE_UART" 12 14 "int1" `1091 
+V G "TT_SW" 12 14 "int1" `1092 
+V G "ID_NODE_CHAR" 12 16 "*int8[1]" `1093 
+V G "ID_GATEWAY_CHAR" 12 17 "*int8[1]" `1095 
+V G "ID_NODE_NHAN" 12 18 "*int8[1]" `1097 
+V G "ID_GW_NHAN" 12 19 "*int8[1]" `1099 
+V G "KYTUCHAR" 12 20 "int8[50]" `1101 
+V G "KYTUCHAR2" 12 21 "int8[25]" `1102 
+V G "TEMP_CHAR" 12 23 "*int8[1]" `1103 
+V G "TEMP_CHAR2" 12 24 "*int8[1]" `1105 
 C L "CHON_ID" 12 4 1 "FUNCTION"
 C L "CHON_ID" 1 26 1 "FUNCTION"
 C L "CHON_ID" 13 2 1 "FUNCTION"
-F G "CHON_ID" 13 4 "void()" `1105  "TT_CONFIG_DONE;"
-V L "num" 13 8 "int8" `1106 
+F G "CHON_ID" 13 4 "void()" `1107  "TT_CONFIG_DONE;"
+V L "num" 13 8 "int8" `1108 
 C L "CHON_ID" 13 2 2 "FUNCTION"
 C L "CHON_ID" 13 2 1 "FUNCTION"
 C L "CHON_ID" 13 2 1 "FUNCTION"
-F G "NHAPID_GW" 13 44 "void()" `1117 
-V L "num" 13 45 "int8" `1118 
+F G "NHAPID_GW" 13 44 "void()" `1119 
+V L "num" 13 45 "int8" `1120 
 C L "NHAPID_GW" 13 2 2 "FUNCTION"
 C L "NHAPID_GW" 13 2 1 "FUNCTION"
 C L "NHAPID_GW" 13 2 1 "FUNCTION"
-F G "BUTT_OKE" 13 83 "void()" `1124 
+F G "BUTT_OKE" 13 83 "void()" `1126 
 C L "BUTT_OKE" 13 2 1 "FUNCTION"
 C L "BUTT_OKE" 13 2 1 "FUNCTION"
-F G "SELLECT_FUN" 13 90 "void()" `1125 
-F G "BUTT_FUN" 13 106 "void()" `1126 
+F G "SELLECT_FUN" 13 90 "void()" `1127 
+F G "BUTT_FUN" 13 106 "void()" `1128 
 C L "BUTT_FUN" 13 2 1 "FUNCTION"
 C L "BUTT_FUN" 13 2 1 "FUNCTION"
 C L "BUTT_FUN" 13 2 1 "FUNCTION"
-F G "XULY_IDNODE_NHAP" 13 149 "void()" `1131  "*TEMP_CHAR3 = "\0";"
-V L "j" 13 152 "int8" `1133 
+F G "XULY_IDNODE_NHAP" 13 149 "void()" `1133  "*TEMP_CHAR3 = "\0";"
+V L "j" 13 152 "int8" `1135 
 C L "XULY_IDNODE_NHAP" 13 2 3 "FUNCTION"
-F G "XULY_IDGW_NHAP" 13 162 "void()" `1134 
-V L "j" 13 165 "int8" `1136 
-F G "CONFIG_DONE" 13 175 "void()" `1137 
-V L "PACKAGE_CONFIG" 13 178 "*int8[1]" `1138 
+F G "XULY_IDGW_NHAP" 13 162 "void()" `1136 
+V L "j" 13 165 "int8" `1138 
+F G "CONFIG_DONE" 13 175 "void()" `1139 
+V L "PACKAGE_CONFIG" 13 178 "*int8[1]" `1140 
 C L "CONFIG_DONE" 13 2 4 "FUNCTION"
 C L "CONFIG_DONE" 13 2 1 "FUNCTION"
-V L "j" 13 199 "int8" `1140 
-F G "XACNHANCONFIG" 13 217 "void()" `1145 
-V L "TOKEN" 13 222 "*int8" `1147 
+V L "j" 13 199 "int8" `1142 
+F G "XACNHANCONFIG" 13 217 "void()" `1147 
+V L "TOKEN" 13 222 "*int8" `1149 
 C L "QUET_PHIM" 13 2 1 "FUNCTION"
-F G "QUET_PHIM" 0 5 "void()" `1151 
-V L "BDT" 0 6 "int8" `1152 
+F G "QUET_PHIM" 0 5 "void()" `1153 
+V L "BDT" 0 6 "int8" `1154 
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
-F G "NGAT_NGOAI" 0 36 "void()" `1153 
-F G "NGAT" 0 42 "void()" `1154 
-V L "KENH" 0 54 "int8" `1156 
-F G "ADC_READ" 0 55 "int8(int8 KENH)" `1155 
-V L "ANALOG_PORT" 0 56 "int8[1]" `1157 
-V L "i" 0 62 "int8" `1158 
-F G "READ_ANALOG" 0 74 "void()" `1159 
-V L "K" 0 75 "int8" `1160 
-F G "SEND_ANALOG_UART" 0 81 "void()" `1161 
+F G "NGAT_NGOAI" 0 42 "void()" `1155 
+F G "NGAT" 0 48 "void()" `1156 
+V L "KENH" 0 60 "int8" `1158 
+F G "ADC_READ" 0 61 "int8(int8 KENH)" `1157 
+V L "ANALOG_PORT" 0 62 "int8[1]" `1159 
+V L "i" 0 68 "int8" `1160 
+F G "READ_ANALOG" 0 80 "void()" `1161 
+V L "K" 0 81 "int8" `1162 
+F G "SEND_ANALOG_UART" 0 87 "void()" `1163 
 C L "SEND_ANALOG_UART" 0 8 1 "FUNCTION"
-V L "PACKAGE_SS" 0 84 "*int8[1]" `1162 
-V L "DO_DAI" 0 87 "int8" `1164 
-V L "i" 0 89 "int8" `1165 
-F G "DIEUKHIENTHIETBI" 0 108 "void()" `1171 
-F G "XU_LY_UART" 0 115 "void()" `1172  "ID_NODE_NHAN = KYTU[1] - 48;"
+V L "PACKAGE_SS" 0 90 "*int8[1]" `1164 
+V L "DO_DAI" 0 93 "int8" `1166 
+V L "i" 0 95 "int8" `1167 
+F G "DIEUKHIENTHIETBI" 0 114 "void()" `1173 
+F G "XU_LY_UART" 0 121 "void()" `1174  "ID_NODE_NHAN = KYTU[1] - 48;"
 C L "XU_LY_UART" 0 8 3 "FUNCTION"
-V L "CH" 0 121 "int8" `1173 
-V L "RET" 0 122 "*int8" `1174 
-V L "LEN_RET" 0 126 "int8" `1176 
+V L "CH" 0 127 "int8" `1175 
+V L "RET" 0 128 "*int8" `1176 
+V L "LEN_RET" 0 132 "int8" `1178 
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
-V L "TOKEN" 0 132 "*int8" `1178 
+V L "TOKEN" 0 138 "*int8" `1180 
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
-F G "MAIN" 0 187 "void()" `1180 
+F G "MAIN" 0 193 "void()" `1182 
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
+V L "TB" 0 217 "int8" `1185 
 C L "MAIN" 0 8 1 "FUNCTION"
+V L "SW" 0 263 "int8" `1194 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep_ulpwu" 1 0

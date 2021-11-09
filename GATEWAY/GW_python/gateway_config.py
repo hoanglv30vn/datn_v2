@@ -56,10 +56,6 @@
 from logging import error
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3
-import threading
-import time
-import datetime
-import socket
 import sys
 import glob
 import serial
@@ -68,6 +64,7 @@ from PyQt5.QtCore import QDate, Qt
 import pyrebase
 import array as arr
 import re
+import random
 
 ############################# DATABASE SQL #########################################
 conn = sqlite3.connect('data_config.db')   #kết nối tới database
@@ -133,7 +130,7 @@ class Ui_MainWindow(object):
             # print(chuoinhiphan)
             binTOdec = self.get_data_control(data_object,id_node_control,"")           
             print(binTOdec)
-            self.send_data_control(id_node_control,binTOdec) 
+            # self.send_data_control(id_node_control,binTOdec) 
     def get_data_control( self, data_object,id_node_ctrl, key__idtb):
         stt_thietbi_control=""
         state_thietbi_control=''  
@@ -151,7 +148,10 @@ class Ui_MainWindow(object):
                     if cursor_tb.fetchone()[0] == "Thiết bị":    
                         get_id_phanloai_node = cursor_tb.execute("SELECT PHANLOAI_ID_THIETBI FROM DATA_NODE WHERE ID_NODE = ? AND ID_THIETBI = ? ", [id_node_ctrl,key__temp] )  
                         stt_thietbi_control = get_id_phanloai_node.fetchone()[0] 
-                        state_thietbi_control = str(value)
+                        value_encode = str(value)
+                        print(value_encode)
+                        state_thietbi_control = self.decode_data(value_encode)
+                        print(f'mã hóa:{state_thietbi_control}')
                         chuoinhiphan [int(stt_thietbi_control[2])]= int(state_thietbi_control)
                         print(key__temp+ "-" + stt_thietbi_control + '__' + stt_thietbi_control[2])
                         # print(chuoinhiphan)
@@ -296,7 +296,7 @@ class Ui_MainWindow(object):
         state_thietbi_bin= str(bin(state_thietbi_dec))[2:10]
         id_gw_upload_state = data[3]
         id_node_upload_state = data[4]        
-        onoff = 0
+        onoff =" 0"
         index = 0
         print(state_thietbi_bin)
         curr = conn.cursor()
@@ -314,12 +314,9 @@ class Ui_MainWindow(object):
         db.child("NONE").stream(self.stream_handler) 
         for i in state_bin:
             id_thietbi_upload_state = id_thietbi_upload_state_sss[index][0]
-            if i == '1':
-                onoff = 1
-            else:
-                onoff = 0
+            onoff_encode = self.encode_data(i)
             db = firebase.database().child("ADMIN")  
-            db.child(id_gw_upload_state).child(id_node_upload_state).child(id_thietbi_upload_state).update({'trangthai':onoff,'onoff':onoff})                  
+            db.child(id_gw_upload_state).child(id_node_upload_state).child(id_thietbi_upload_state).update({'trangthai':onoff_encode,'onoff':onoff_encode})                  
             # db.child(id_gw_upload_state).child(id_node_upload_state).child(id_thietbi_upload_state).update({'onoff':onoff})                  
             print(id_thietbi_upload_state +":--:"+ str(onoff))
             index +=1     
@@ -340,8 +337,9 @@ class Ui_MainWindow(object):
         for analog in data[5:-1]:
             id_thietbi_upload_sensor = id_thietbi_upload_sensor_sss[index][0]
             print(id_thietbi_upload_sensor)
+            analog_encode = self.encode_data(analog)
             db = firebase.database().child("ADMIN") 
-            db.child(id_gw_upload_sensor).child(id_node_upload_sensor).child(id_thietbi_upload_sensor).update({'trangthai':analog})              
+            db.child(id_gw_upload_sensor).child(id_node_upload_sensor).child(id_thietbi_upload_sensor).update({'trangthai':analog_encode})              
             index +=1
         # * ss idgw id node cb cb cb cb
         # dodai = len(data)
@@ -469,16 +467,17 @@ class Ui_MainWindow(object):
                 elif colum_number == 4:
                     phanloai_device_update = data
                     if phanloai_device_update == "Cảm biến":
-                        giatri_update = "analog"
+                        giatri_update = "analog"                        
                     elif phanloai_device_update == "Thiết bị":
-                        giatri_update = 0
+                        giatri_update = 0                        
                     else:
                         giatri_update = "undefind"
+                    giatri_update_encode = self.encode_data(giatri_update)
                     # db = firebase.database().child("ADMIN")          
                     # db.child(id_gw).child(id_node_update).child(id_device_update).update({'phanloai':phanloai_device_update})  
                     if update_firebase == 0:
                         db = firebase.database().child("ADMIN") 
-                        db.child(id_gw).child(id_node_update).child(id_device_update).update({'trangthai':giatri_update,'onoff':giatri_update})  
+                        db.child(id_gw).child(id_node_update).child(id_device_update).update({'trangthai':giatri_update_encode,'onoff':giatri_update_encode})  
                         # db.child(id_gw).child(id_node_update).child(id_device_update).update({'onoff':giatri_update}) 
 
                 # đổi màu
@@ -527,9 +526,9 @@ class Ui_MainWindow(object):
         data_object=data_gw.val()
         try:
             self.check_data_from_sql(id_nha,id_gw_from_line,name_nha)             
-            self.pretty(data_object)
         except:
             print("error")
+        self.pretty(data_object)
         print("oke")    
     def pretty( self, data_object):
         tenphongsql = "tentam"
@@ -547,10 +546,10 @@ class Ui_MainWindow(object):
                     if isinstance(tenphong, dict):
                         for doituong, dulieu in tenphong.items():                            
                             if doituong == "namethietbi":
-                                namethietbi = dulieu
+                                namethietbi = self.decode_data(dulieu)
                                 # print(namethietbi)
                             elif doituong == "phanloai":
-                                phanloai = dulieu
+                                phanloai =  self.decode_data(dulieu)
                                 # print(phanloai)
                         # print (str(phong) + ":"+ str(thietbi)+ ":" + str(namethietbi)+ ":" + str(phanloai) )
                         if phanloai == 'Thiết bị':
@@ -564,12 +563,12 @@ class Ui_MainWindow(object):
                         curr.execute("INSERT INTO DATA_NODE VALUES (?,?,?,?,?,?,?)",[phong,tenphongsql,thietbi,namethietbi,phanloai,phanloai_id_thietbi,trangthai_active])                                        
                     else:
                         # print("tên phòng:" + tenphong)
-                        tenphongsql = tenphong
+                        tenphongsql =  self.decode_data(tenphong)
                         curr.execute("UPDATE DATA_NODE SET NAME_ID_NODE = ? WHERE ID_NODE = ?",[tenphongsql,phong])                                             
                 # pass
             else:
-                print("nhà" + str(nha))    
-                tennhasql=str(nha)
+                tennhasql= self.decode_data(nha)
+                print("nhà" + tennhasql)    
                 curr.execute("INSERT INTO CONFIG_GW VALUES (?,?)",["name_nha",tennhasql])                            
         conn.commit()        
         self.ALL_DATA(0)
@@ -582,6 +581,51 @@ class Ui_MainWindow(object):
     #         else:
     #             print("value" + str(value))    
 
+
+    def encode_data(self,data):
+        # d=103
+        d=463
+        p=19
+        q=11
+        n=p*q  
+        wn = (p-1)*(q-1)      
+        e=7    
+        list_m_int = [5, 7, 17, 31, 57,23,19,29,41,47,63,97,61]
+        m=  random.choice(list_m_int)    
+        c= pow(m,e) % n
+        kqmahoa=''
+        j=1
+        for i in str(data):
+            # char to ascii
+            j=j+1
+            somahoaascii = j*m - j + 3
+            dauconghoactru = pow(-1,j%2+1)
+            somahoaascii = somahoaascii % 15 + 1
+            kqmahoa += chr( ord(i)+ dauconghoactru*somahoaascii)
+        kqmahoa = kqmahoa + "___" + str(c) + "___" + str(n)
+        return kqmahoa
+
+
+    def decode_data (self,datas):
+        data = str(datas).split("___")
+        if len(data)<2:
+            return datas
+        elif len(data)>2:
+            print("data:___")
+            print(data)        
+            c= int(data[1])
+            n= int(data[2])
+            d=463
+            kq_M=pow(c,d)%n
+            kqgiaima=''
+            j=1
+            for i in data[0]:
+                j=j+1
+                somahoaascii = j*kq_M - j + 3
+                dauconghoactru = pow(-1,j%2+1)
+                somahoaascii = somahoaascii % 15 + 1
+                kqgiaima += chr( ord(i)- dauconghoactru*somahoaascii)
+            return kqgiaima 
 
 
 # ####################################################################

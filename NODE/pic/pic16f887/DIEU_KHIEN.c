@@ -4,7 +4,7 @@ VOID READ_BTN_STATE()
    INT TB = 0;
    INT ID_TB =52;
    FOR (TB = 0; TB < SOLUONGTHIETBI_CONFIG; TB++)
-   {   IF (TB>4) ID_TB = 64;
+   {   IF (TB>3) ID_TB = 64;
        IF (!INPUT (ID_TB + TB))
       {  
          DELAY_MS(200);

@@ -1,4 +1,4 @@
-CCS PCM C Compiler, Version 5.015, 5967               09-Nov-21 10:21
+CCS PCM C Compiler, Version 5.015, 5967               09-Nov-21 14:50
 
                Filename:   E:\DATN_V2\NODE\pic\pic16f887\hellopic.lst
 
@@ -8041,14 +8041,14 @@ CCS PCM C Compiler, Version 5.015, 5967               09-Nov-21 10:21
 12BE:  CLRF   40
 12BF:  MOVLW  07
 12C0:  MOVWF  41
-.................... UNSIGNED INT8 ID_NODE[4] = {1,8,1,0}; 
-12C1:  MOVLW  01
-12C2:  MOVWF  42
-12C3:  MOVLW  08
-12C4:  MOVWF  43
-12C5:  MOVLW  01
-12C6:  MOVWF  44
-12C7:  CLRF   45
+.................... UNSIGNED INT8 ID_NODE[4] = {0,1,5,2}; 
+12C1:  CLRF   42
+12C2:  MOVLW  01
+12C3:  MOVWF  43
+12C4:  MOVLW  05
+12C5:  MOVWF  44
+12C6:  MOVLW  02
+12C7:  MOVWF  45
 .................... UNSIGNED INT8 LEN_PACKAGES = 0; 
 .................... UNSIGNED INT8 LENHDIEUKHIEN =0, DODAI_DATA_NHAN =0; 
 .................... UNSIGNED INT8 SOLUONGTHIETBI_CONFIG=0, SOLUONGCAMBIEN_CONFIG = 3; 
@@ -9492,9 +9492,9 @@ CCS PCM C Compiler, Version 5.015, 5967               09-Nov-21 10:21
 0F7D:  SUBWF  10,W
 0F7E:  BTFSC  03.0
 0F7F:  GOTO   7BE
-....................    {   IF (TB>4) ID_TB = 64; 
+....................    {   IF (TB>3) ID_TB = 64; 
 0F80:  MOVF   10,W
-0F81:  SUBLW  04
+0F81:  SUBLW  03
 0F82:  BTFSC  03.0
 0F83:  GOTO   786
 0F84:  MOVLW  40

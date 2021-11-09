@@ -29,21 +29,25 @@
  {
    OUTPUT_TOGGLE(PIN_C4);
    //CHAR *PACKAGE_SS[]={"*", "26","SS", "IDGW12" ,"NODE","ZZ","AA","VV","CC","SS"};
-   CHAR *PACKAGE_SS[]={"IDGW12" ,"NODE","ZZ","AA","VV","CC","SS"};   
+   CHAR *PACKAGE_SS[]={"ZZ","AA","VV","CC","SS"};   
    PACKAGE_SS[0] = ID_GATEWAY_CHAR;
    PACKAGE_SS[1] = ID_NODE_CHAR;
    UNSIGNED INT8 DO_DAI =20;
    
    FOR(INT I = 0; I<SOLUONGCAMBIEN_CONFIG; I++)
    {
-      ITOA(KET_QUA_ANALOG[I],10,PACKAGE_SS[2+I]);
+      ITOA(KET_QUA_ANALOG[I],10,PACKAGE_SS[I]);
       DO_DAI = DO_DAI + 3;
    }      
    ITOA(DO_DAI,10,TEMP_CHAR2);
    PRINTF ("*@");   
    PRINTF (TEMP_CHAR2);
    PRINTF ("@SS@");   
-   FOR ( I = 0; I < 2 + SOLUONGCAMBIEN_CONFIG; I++)
+   PRINTF (ID_GATEWAY_CHAR);
+   PRINTF ("@");
+   PRINTF (ID_NODE_CHAR);
+   PRINTF ("@");   
+   FOR ( I = 0; I < SOLUONGCAMBIEN_CONFIG; I++)
    {
       PRINTF (PACKAGE_SS[I]);
       PRINTF ("@");

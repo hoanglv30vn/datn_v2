@@ -31,8 +31,14 @@ import re
 mang = ['*', '26', 'SS', '026636', '7599', '30', '28','2','54','82', '#']
 for index in mang[5:-1]:
     print(index)
-print(str(bin(158))[2:10]+"hoang")
-a= input("hi")
+a=str(bin(158))[2:10]
+b=a
+# a.reverse()
+b=a[::-1]
+print(a)
+print(b)
+
+c= input("hi")
 
 # a= [1,5,0]
 # # print(a[-1])

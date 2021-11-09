@@ -1,8 +1,8 @@
-004-005 @WRITE_PROGRAM_MEMORY8.P1
-004-005 @READ_PROGRAM_MEMORY8.P2
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
 00C.0   TMR1IF
-015     CCP_1_LOW
 015     CCP_1
+015     CCP_1_LOW
 016     CCP_1_HIGH
 01B     CCP_2
 01B     CCP_2_LOW
@@ -70,19 +70,19 @@
 108.6   C2OUT
 10D-10E @WRITE_PROGRAM_MEMORY8.P1
 10D-10E @READ_PROGRAM_MEMORY8.P2
-110-113 atan2.y
-110     lcd_init.i
-110     READ_ANALOG.K
-110     XU_LY_UART.CH
 110     NHAPID_GW.num
+110-113 atan2.y
 110     READ_BTN_STATE.TB
+110     XU_LY_UART.CH
+110     READ_ANALOG.K
 110-11B CONFIG_DONE.PACKAGE_CONFIG
 110     CHON_ID.num
-110-11D SEND_ANALOG_UART.PACKAGE_SS
+110-119 SEND_ANALOG_UART.PACKAGE_SS
+110     lcd_init.i
 110     BUTT_FUN.@SCRATCH1
 110     MAIN.@SCRATCH1
-111-112 XU_LY_UART.RET
 111-114 lcd_init.LCD_INIT_STRING
+111-112 XU_LY_UART.RET
 111     READ_BTN_STATE.ID_TB
 111     CHON_ID.@SCRATCH1
 111     NHAPID_GW.@SCRATCH1
@@ -96,75 +96,75 @@
 113     CHON_ID.@SCRATCH3
 113     NHAPID_GW.@SCRATCH3
 114-115 XU_LY_UART.TOKEN
-114-117 atan2.x
 114     @DIV88.P1
 114-11A ADC_READ.ANALOG_PORT
+114-117 atan2.x
 115     @DIV88.P1
 115     lcd_init.@SCRATCH1
-116-117 XACNHANCONFIG.TOKEN
-116-117 strcmp.s1
 116-117 strchr.s
-116     DIEUKHIENTHIETBI.MA_DEC
 116.0   DIEUKHIENTHIETBI.BSERI
+116     DIEUKHIENTHIETBI.MA_DEC
+116-117 strcmp.s1
+116-117 XACNHANCONFIG.TOKEN
 116-117 strlen.s
 116     @DIV88.@SCRATCH1
 116     XU_LY_UART.@SCRATCH1
 117     DIEUKHIENTHIETBI.SB
 117     XU_LY_UART.@SCRATCH2
+118-119 strtok.s1
 118     XUAT_DIEU_KHIEN.ST
 118-119 strcmp.s2
-118-119 strtok.s1
 118-119 atoi.s
-118-119 strlen.sc
-118     strchr.c
 118-11B atan2.z
+118     strchr.c
+118-119 strlen.sc
 118     XACNHANCONFIG.@SCRATCH1
 118     DIEUKHIENTHIETBI.@SCRATCH1
-119     XUATTRANGTHAI.BYTEXUAT
 119     BIN_TO_DEC.DEC_VL
+119     XUATTRANGTHAI.BYTEXUAT
 119     @WRITEBITA.P1
 119.7   XUATTRANGTHAI.BSERI
 119     strchr.@SCRATCH1
 119     @PSTRINGR_1056.@SCRATCH1
 119     XACNHANCONFIG.@SCRATCH2
 119     XUAT_DIEU_KHIEN.@SCRATCH1
-11A-11B strtok.s2
-11A     @WRITEBITA.P1
 11A     BIN_TO_DEC.base
+11A-128 SEND_ANALOG_UART.@PACKAGE_SS
 11A     XUATTRANGTHAI.SB
 11A     atoi.result
+11A-11B strtok.s2
+11A     @WRITEBITA.P1
 11A     strcmp.@SCRATCH1
 11A     strlen.@SCRATCH1
 11A     @PSTRINGR_1056.@SCRATCH2
 11A     XUAT_DIEU_KHIEN.@SCRATCH2
-11B-11C @WRITEBITA.P1
-11B     atoi.sign
 11B     ADC_READ.i
 11B     BIN_TO_DEC.i
-11C.0   atan2.sign
+11B-11C @WRITEBITA.P1
+11B     atoi.sign
 11C-11F @SFTOI.P1
-11C-11F @DIVFF.P2
-11C-11D @ITOF.P3
-11C     @READBITA.P4
-11C-11D strtok.beg
-11C-13B CONFIG_DONE.@PACKAGE_CONFIG
+11C     @READBITA.P2
 11C     atoi.base
+11C.0   atan2.sign
+11C-13B CONFIG_DONE.@PACKAGE_CONFIG
+11C-11D strtok.beg
+11C-11F @DIVFF.P1
+11C-11D @ITOF.P2
 11C     BIN_TO_DEC.@SCRATCH1
 11C     ADC_READ.@SCRATCH1
-11D-11E @READBITA.P1
 11D     atan2.quad
 11D     atoi.index
+11D-11E @READBITA.P1
 11D     ADC_READ.@SCRATCH2
 11E     atoi.c
-11E-138 SEND_ANALOG_UART.@PACKAGE_SS
 11E-11F strtok.end
 11E     ADC_READ.@SCRATCH3
 11F     @MUL88.P1
 11F     atoi.@SCRATCH1
 11F     ADC_READ.@SCRATCH4
-120     @MUL88.P1
 120-121 strpbrk.s1
 120-123 @DIVFF.P1
+120     @MUL88.P2
 120-121 strspn.s1
 120     strtok.@SCRATCH1
 120     atoi.@SCRATCH2
@@ -176,40 +176,40 @@
 124-125 strpbrk.sc1
 124     @DIVFF.@SCRATCH1
 125     @DIVFF.@SCRATCH2
-126-127 strspn.sc2
 126-127 strpbrk.sc2
+126-127 strspn.sc2
 126     @DIVFF.@SCRATCH3
 127     @DIVFF.@SCRATCH4
 128     strpbrk.@SCRATCH1
 128     strspn.@SCRATCH1
 128     @DIVFF.@SCRATCH5
+129     SEND_ANALOG_UART.DO_DAI
 129     @DIVFF.@SCRATCH6
-139     SEND_ANALOG_UART.DO_DAI
-13A     SEND_ANALOG_UART.i
-13B     @PSTRINGC7_9600_62_63.@SCRATCH1
-13B     SEND_ANALOG_UART.@SCRATCH1
+12A     SEND_ANALOG_UART.i
+12B     @PSTRINGC7_9600_62_63.@SCRATCH1
+12B     SEND_ANALOG_UART.@SCRATCH1
+12C     @PSTRINGC7_9600_62_63.@SCRATCH2
+12C     SEND_ANALOG_UART.@SCRATCH2
+12D     @PSTRINGC7_9600_62_63.@SCRATCH3
+12D     SEND_ANALOG_UART.@SCRATCH3
+12E     @PSTRINGC7_9600_62_63.@SCRATCH4
 13C     CONFIG_DONE.j
-13C     @PSTRINGC7_9600_62_63.@SCRATCH2
-13C     SEND_ANALOG_UART.@SCRATCH2
 13D     XULY_IDGW_NHAP.j
 13D     XULY_IDNODE_NHAP.j
 13D     @PSTRINGC7_1056.@SCRATCH1
 13D     CONFIG_DONE.@SCRATCH1
-13D     @PSTRINGC7_9600_62_63.@SCRATCH3
-13D     SEND_ANALOG_UART.@SCRATCH3
 13E-13F strcat.s1
 13E     @PSTRINGC7_1056.@SCRATCH2
 13E     XULY_IDNODE_NHAP.@SCRATCH1
 13E     XULY_IDGW_NHAP.@SCRATCH1
 13E     CONFIG_DONE.@SCRATCH2
-13E     @PSTRINGC7_9600_62_63.@SCRATCH4
 13F-142 itoa.num
 13F     @PSTRINGC7_1056.@SCRATCH3
 13F     XULY_IDNODE_NHAP.@SCRATCH2
 13F     XULY_IDGW_NHAP.@SCRATCH2
 13F     @PSTRINGR_9600_62_63.@SCRATCH1
-140     lcd_putc.c
 140-141 strcat.s2
+140     lcd_putc.c
 140     @PSTRINGC7_1056.@SCRATCH4
 140     XULY_IDNODE_NHAP.@SCRATCH3
 140     XULY_IDGW_NHAP.@SCRATCH3
@@ -231,13 +231,13 @@
 144     lcd_gotoxy.@SCRATCH1
 145     lcd_send_byte.address
 145     strcat.@SCRATCH2
-146-149 itoa.temp
 146     lcd_send_byte.n
+146-149 itoa.temp
 146     strcat.@SCRATCH3
 147     lcd_read_byte.low
 147     lcd_send_byte.@SCRATCH1
-148     lcd_read_byte.high
 148     lcd_send_nibble.n
+148     lcd_read_byte.high
 149     lcd_read_nibble.n
 149     lcd_read_byte.@SCRATCH1
 14A     itoa.i
@@ -309,11 +309,11 @@ FFF     @INTERRUPT_AREA
 ROM Allocation:
 000058  @const1109.call
 00005E  @const1148.call
-000064  @const1171.call
-00006B  @const1172.call
-000072  @const1173.call
-000079  @const1199.call
-00007F  @const1207.call
+000064  @const1170.call
+00006B  @const1171.call
+000072  @const1172.call
+000079  @const1201.call
+00007F  @const1209.call
 000084  @const1110.call
 000088  @const1112.call
 000090  @const1113.call
@@ -331,8 +331,8 @@ ROM Allocation:
 0000F6  @const1150.call
 0000FD  @const1151.call
 000100  @const1152.call
-000104  @const1168.call
-000107  @const1175.call
+000104  @const1174.call
+000107  @const1179.call
 00010A  @const1197.call
 00010D  QUET_PHIM
 00010D  NGAT_NGOAI
@@ -378,7 +378,7 @@ ROM Allocation:
 000D94  strlen
 000E60  XACNHANCONFIG
 000F3B  DIEUKHIENTHIETBI
-000F6B  @goto12748
+000F6B  @goto12754
 000F75  READ_BTN_STATE
 001000  READ_ANALOG
 001010  ADC_READ
@@ -386,9 +386,9 @@ ROM Allocation:
 0010A5  @DIVFF
 001176  @SFTOI
 0011A9  SEND_ANALOG_UART
-001288  @cinit1
-001288  MAIN
-0012BD  @cinit2
+001279  MAIN
+001279  @cinit1
+0012AE  @cinit2
 0136  StrtoulGO
 0136  StrtolGO
 
@@ -396,8 +396,8 @@ Project Directory:
     E:\DATN_V2\NODE\pic\pic16f887\
 
 Project Files:
-    hellopic.c                                              [09-Nov-21 00:09  CRC=F23E70BF]
-    thuvien.c                                               [09-Nov-21 00:07  CRC=0967C4DF]
+    hellopic.c                                              [09-Nov-21 01:11  CRC=F23E70BF]
+    thuvien.c                                               [09-Nov-21 01:11  CRC=0967C4DF]
     C:\Program Files (x86)\PICC\Devices\16F887.H            [12-Nov-13 14:35  CRC=6CB1A611]
     C:\Program Files (x86)\PICC\Drivers\STRING.H            [14-Jul-11 10:13  CRC=23EDEC8F]
     C:\Program Files (x86)\PICC\Drivers\stddef.h            [16-Jul-10 09:27  CRC=897CEC6C]
@@ -410,10 +410,10 @@ Project Files:
     C:\Program Files (x86)\PICC\Drivers\LCD.C               [19-Sep-13 15:38  CRC=D1A6378A]
     khaibaobien.c                                           [08-Nov-21 20:25  CRC=5F54B4C2]
     config_1.C                                              [08-Nov-21 20:25  CRC=46BE1182]
-    DIEU_KHIEN.C                                            [09-Nov-21 00:52  CRC=07B95F7B]
-    analog.C                                                [09-Nov-21 00:08  CRC=5878693F]
+    DIEU_KHIEN.C                                            [09-Nov-21 10:19  CRC=3089D4FA]
+    analog.C                                                [09-Nov-21 10:21  CRC=2D4318A4]
 
-Source signature=0848A0AA
+Source signature=DAAE74F3
 
 Units:
     hellopic (main)

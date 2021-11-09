@@ -107,7 +107,6 @@ class Ui_MainWindow(object):
 
     def stream_handler(self, message):    
         # hàm lắng nghe sự kiện từ firebase
-        print('data thay doi tu firebase:')     
         event_fb = message["event"] # put
         print("event:" + event_fb)
         path_fb = message["path"] # /-K7yGTTEp7O549EzTYtI
@@ -119,7 +118,8 @@ class Ui_MainWindow(object):
         link_fb = path_fb.split("/")
         print(link_fb)
         # print(len(link_fb))
-        if len(link_fb) == 4:
+        if len(link_fb) == 4 and link_fb[-1]=="onoff":
+            print('data thay doi tu firebase:')     
             id_node_control = link_fb[1]
             # id_device_control = link_fb[2]
             # state_control = mess_fb
@@ -130,8 +130,6 @@ class Ui_MainWindow(object):
             data_control = firebase.database().child("ADMIN")
             data_gw = data_control.child(id_gw).child(id_node_control).get()
             data_object = data_gw.val()
-
-             
             # print(chuoinhiphan)
             binTOdec = self.get_data_control(data_object,id_node_control,"")           
             print(binTOdec)
@@ -145,7 +143,7 @@ class Ui_MainWindow(object):
                 key__temp = key
                 self.get_data_control(value ,id_node_ctrl,key__temp)
             else:
-                if(str(key)) == "trangthai":      
+                if(str(key)) == "onoff":      
                     conn_read_tb = sqlite3.connect('data_config.db')
                     cursor_tb = conn_read_tb.cursor()
                     cursor_tb.execute("SELECT PHANLOAI FROM DATA_NODE WHERE ID_NODE = ? AND ID_THIETBI = ? ", [id_node_ctrl,key__temp] )  
@@ -294,26 +292,40 @@ class Ui_MainWindow(object):
 
 
     def update_state_thietbi(self, data):
-        index = 0
         state_thietbi_dec = int(data[5])
         state_thietbi_bin= str(bin(state_thietbi_dec))[2:10]
         id_gw_upload_state = data[3]
         id_node_upload_state = data[4]        
         onoff = 0
+        index = 0
         print(state_thietbi_bin)
         curr = conn.cursor()
         curr.execute("SELECT ID_THIETBI FROM DATA_NODE WHERE ID_NODE = ? AND PHANLOAI = ? ", [id_node_upload_state,"Thiết bị"] )          
         id_thietbi_upload_state_sss = curr.fetchall() 
         len_thietbi = len(id_thietbi_upload_state_sss)
-        for i in state_thietbi_bin[0:len_thietbi]:
+        print(len_thietbi)
+        state_bin_temp = state_thietbi_bin[0:len_thietbi]
+        state_bin = state_bin_temp
+        state_bin = state_bin_temp[::-1]
+        for idx in range (len_thietbi - len(state_bin)):
+            state_bin +='0'
+
+        db = firebase.database().child("ADMIN")  
+        db.child("NONE").stream(self.stream_handler) 
+        for i in state_bin:
             id_thietbi_upload_state = id_thietbi_upload_state_sss[index][0]
             if i == '1':
                 onoff = 1
             else:
                 onoff = 0
-            db = firebase.database().child("ADMIN") 
-            db.child(id_gw_upload_state).child(id_node_upload_state).child(id_thietbi_upload_state).update({'onoff':onoff})                  
-            index +=1            
+            db = firebase.database().child("ADMIN")  
+            db.child(id_gw_upload_state).child(id_node_upload_state).child(id_thietbi_upload_state).update({'trangthai':onoff,'onoff':onoff})                  
+            # db.child(id_gw_upload_state).child(id_node_upload_state).child(id_thietbi_upload_state).update({'onoff':onoff})                  
+            print(id_thietbi_upload_state +":--:"+ str(onoff))
+            index +=1     
+
+        db = firebase.database().child("ADMIN")  
+        db.child(id_gw_upload_state).stream(self.stream_handler)        
 
     def uploadDataSensor(self, data):
         print("up load sensor")
@@ -466,7 +478,8 @@ class Ui_MainWindow(object):
                     # db.child(id_gw).child(id_node_update).child(id_device_update).update({'phanloai':phanloai_device_update})  
                     if update_firebase == 0:
                         db = firebase.database().child("ADMIN") 
-                        db.child(id_gw).child(id_node_update).child(id_device_update).update({'trangthai':giatri_update})  
+                        db.child(id_gw).child(id_node_update).child(id_device_update).update({'trangthai':giatri_update,'onoff':giatri_update})  
+                        # db.child(id_gw).child(id_node_update).child(id_device_update).update({'onoff':giatri_update}) 
 
                 # đổi màu
                 curr.execute("SELECT TRANGTHAI_ACTIVE FROM DATA_NODE WHERE NAME_ID_NODE = ? AND TRANGTHAI_ACTIVE = 'active'", [data])

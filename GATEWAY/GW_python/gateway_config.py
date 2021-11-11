@@ -130,7 +130,9 @@ class Ui_MainWindow(object):
             # print(chuoinhiphan)
             binTOdec = self.get_data_control(data_object,id_node_control,"")           
             print(binTOdec)
-            # self.send_data_control(id_node_control,binTOdec) 
+            self.send_data_control(id_node_control,binTOdec) 
+        elif  len(link_fb) == 3:
+            self.load_data_node()
     def get_data_control( self, data_object,id_node_ctrl, key__idtb):
         stt_thietbi_control=""
         state_thietbi_control=''  
@@ -174,11 +176,18 @@ class Ui_MainWindow(object):
         serial__.write(data_send_uart.encode())       
         print(data_send_uart.encode())  
 
-    def check_data_sql():
-        # ban đầu khởi chạy sẽ check xem trong sql có data chưa.
-        # kiểm tra đối chiếu giữa data sql và data firebase
-        # cái này căng à, chưa làm, để sau tính :v
-        pass
+    def load_data_node(self):
+        db = firebase.database().child("ADMIN")        
+        name_nha = "name_nha"
+        id_nha = "id_nha"
+        data_gw = db.child(id_gw).get()
+        try:
+            self.check_data_from_sql(id_nha,id_gw,name_nha)             
+            data_object=data_gw.val()   
+        except:
+            print("error")
+        self.pretty(data_object)    
+        print("oke")           
     def serial_ports(self):
         """ Lists serial port names
 
@@ -523,9 +532,9 @@ class Ui_MainWindow(object):
         name_nha = "name_nha"
         id_nha = "id_nha"
         data_gw = db.child(id_gw_from_line).get()
-        data_object=data_gw.val()
         try:
             self.check_data_from_sql(id_nha,id_gw_from_line,name_nha)             
+            data_object=data_gw.val()   
         except:
             print("error")
         self.pretty(data_object)
@@ -602,16 +611,16 @@ class Ui_MainWindow(object):
             dauconghoactru = pow(-1,j%2+1)
             somahoaascii = somahoaascii % 15 + 1
             kqmahoa += chr( ord(i)+ dauconghoactru*somahoaascii)
-        kqmahoa = kqmahoa + "___" + str(c) + "___" + str(n)
+        kqmahoa = kqmahoa + "_æ_" + str(c) + "_æ_" + str(n)
         return kqmahoa
 
 
     def decode_data (self,datas):
-        data = str(datas).split("___")
+        data = str(datas).split("_æ_")
         if len(data)<2:
             return datas
         elif len(data)>2:
-            print("data:___")
+            print("data:_æ_")
             print(data)        
             c= int(data[1])
             n= int(data[2])

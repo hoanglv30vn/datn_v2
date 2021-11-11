@@ -198,10 +198,11 @@ VOID QUET_PHIM()
                 DELAY_MS (100) ;
                 READ_ANALOG () ;
 
-                IF (KET_QUA_ANALOG[0] > 28)
+                IF (TT_SEND_ANALOG)
                 {
+                  TT_SEND_ANALOG = 0;
                    SEND_ANALOG_UART () ;
-                   DELAY_MS (2000) ;
+                   DELAY_MS (200) ;
                 }
              }
           }

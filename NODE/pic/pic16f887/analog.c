@@ -20,11 +20,17 @@
 
  VOID READ_ANALOG ( )
  {
+   SIGNED INT8 CHENH_LECH = 0;
    FOR(INT K = 0; K<SOLUONGCAMBIEN_CONFIG; K++){
       KET_QUA_ANALOG[K] = ADC_READ (K);  
+      CHENH_LECH = ABS( KET_QUA_ANALOG[K] -KET_QUA_ANALOG_TEMP[K] );
+      IF (CHENH_LECH>0.5){
+      TT_SEND_ANALOG = 1;
+      }
+      KET_QUA_ANALOG_TEMP[K] = KET_QUA_ANALOG[K];
    }
  }
-
+/*
  VOID SEND_ANALOG_UART()
  {
    OUTPUT_TOGGLE(PIN_C4);
@@ -58,7 +64,7 @@
  }
  
  
- 
+ */
  
  /*
  INT ADC_READ (INT KENH)
@@ -86,7 +92,7 @@
        KET_QUA_ANALOG[K] = ADC_READ (K);
     }
  }
-
+*/
  VOID SEND_ANALOG_UART ()
  {
     OUTPUT_TOGGLE (PIN_C4) ;
@@ -103,7 +109,7 @@
     }
 
     ITOA (DO_DAI, 10, TEMP_CHAR2) ;
-    PRINTF (" * @");
+    PRINTF ("*@");
     PRINTF (TEMP_CHAR2);
     PRINTF ("@SS@");
     FOR (I = 0; I < 2 + SOLUONGCAMBIEN_CONFIG; I++)
@@ -116,6 +122,6 @@
     OUTPUT_TOGGLE (PIN_C4) ;
  }
 
-*/
+
 
 

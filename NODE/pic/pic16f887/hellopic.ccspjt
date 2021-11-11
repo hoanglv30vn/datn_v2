@@ -18,9 +18,9 @@ Type=4
 4=C:\Program Files (x86)\PICC\Devices\16F887.H
 5=config_1.C
 6=khaibaobien.c
-7=
-8=analog.c
-9=DIEU_KHIEN.c
+7=analog.C
+8=C:\Program Files (x86)\PICC\Drivers\MATH.H
+9=
 10=
 [Units]
 Count=1

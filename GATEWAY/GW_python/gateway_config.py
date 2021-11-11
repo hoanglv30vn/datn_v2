@@ -132,7 +132,8 @@ class Ui_MainWindow(object):
             print(binTOdec)
             self.send_data_control(id_node_control,binTOdec) 
         elif  len(link_fb) == 3:
-            self.load_data_node()
+            pass
+            # self.load_data_node()
     def get_data_control( self, data_object,id_node_ctrl, key__idtb):
         stt_thietbi_control=""
         state_thietbi_control=''  

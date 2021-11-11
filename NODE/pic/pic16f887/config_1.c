@@ -1,3 +1,13 @@
+VOID READ_EEPROMP_DATA_NODE(){   
+   FOR (int j = 0; j < 4; j++)
+   {
+      ID_NODE[j] = read_eeprom(10+j);
+   }  
+   FOR (j = 0; j < 6; j++)
+   {
+      ID_GATEWAY[j] = read_eeprom(14+j);
+   }  
+}
 
 //--------------------------------------------------------------------//
 VOID CHON_ID()
@@ -10,7 +20,8 @@ VOID CHON_ID()
    LCD_GOTOXY (1, 2) ;
    DELAY_MS (10);
    PRINTF (LCD_PUTC, "NODE: ");
-   PRINTF (LCD_PUTC, "0000          ");
+   PRINTF (LCD_PUTC, ID_NODE_CHAR);
+   PRINTF (LCD_PUTC, "          ");
    LCD_GOTOXY (1, 1) ;
    PRINTF (LCD_PUTC, "      _              ");//6 SPACE PHIA TRUOC "_"
    //ID_GW = "1234";    
@@ -49,7 +60,8 @@ VOID NHAPID_GW()
    LCD_GOTOXY (1, 2) ;
    DELAY_MS (10);
    PRINTF (LCD_PUTC, "ID_GW:");
-   PRINTF (LCD_PUTC, "000000        ");
+   PRINTF (LCD_PUTC, ID_GATEWAY_CHAR);
+   PRINTF (LCD_PUTC, "          ");
    LCD_GOTOXY (1, 1) ;
    PRINTF (LCD_PUTC, "      _                ");//6 SPACE PHIA TRUOC "_"
    //ID_GW = "1234";    
@@ -151,6 +163,7 @@ VOID XULY_IDNODE_NHAP(){
    *ID_NODE_CHAR = "\0";
    FOR (int j = 0; j < 4; j++)
    {
+      write_eeprom(10+j, ID_NODE[j]);
       ITOA (ID_NODE[j], 10, TEMP_CHAR);
       DELAY_MS (1);
       STRCAT (ID_NODE_CHAR, TEMP_CHAR);
@@ -164,6 +177,7 @@ VOID XULY_IDGW_NHAP(){
    *ID_GATEWAY_CHAR = "\0";
    FOR (int j = 0; j < 6; j++)
    {
+      write_eeprom(14+j, ID_GATEWAY[j]);
       ITOA (ID_GATEWAY[j], 10, TEMP_CHAR);
       DELAY_MS (1);
       STRCAT (ID_GATEWAY_CHAR, TEMP_CHAR);

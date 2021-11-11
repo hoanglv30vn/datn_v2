@@ -14,11 +14,11 @@ Type=4
 [Opened Files]
 1=hellopic.c
 2=thuvien.c
-3=khaibaobien.c
-4=config_1.C
-5=C:\Program Files (x86)\PICC\Drivers\STDIO.H
-6=C:\Program Files (x86)\PICC\Devices\16F887.H
-7=xuatbyte74595.c
+3=testepprom.c
+4=C:\Program Files (x86)\PICC\Devices\16F887.H
+5=config_1.C
+6=khaibaobien.c
+7=
 8=analog.c
 9=DIEU_KHIEN.c
 10=

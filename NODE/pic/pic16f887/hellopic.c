@@ -169,6 +169,8 @@ VOID QUET_PHIM()
     OUTPUT_HIGH (PIN_D3) ;
     TTNHAN = 0;
 
+    READ_EEPROMP_DATA_NODE();
+    CONFIG_DONE();
 
     
     WHILE (TRUE)

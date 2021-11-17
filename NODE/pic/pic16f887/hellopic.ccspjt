@@ -20,8 +20,9 @@ Type=4
 6=khaibaobien.c
 7=analog.C
 8=C:\Program Files (x86)\PICC\Drivers\MATH.H
-9=
-10=
+9=C:\Program Files (x86)\PICC\Drivers\STRING.H
+10=..\..\..\..\DATN_DOC\test_piic_napcode\testnapcode.c
+11=
 [Units]
 Count=1
 1=hellopic (main)

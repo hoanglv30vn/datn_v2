@@ -412,7 +412,7 @@ Project Directory:
     E:\DATN_V2\NODE\pic\pic16f887\
 
 Project Files:
-    hellopic.c                                              [11-Nov-21 15:28  CRC=959056A2]
+    hellopic.c                                              [13-Nov-21 01:31  CRC=959056A2]
     thuvien.c                                               [09-Nov-21 01:11  CRC=0967C4DF]
     C:\Program Files (x86)\PICC\Devices\16F887.H            [12-Nov-13 14:35  CRC=6CB1A611]
     C:\Program Files (x86)\PICC\Drivers\STRING.H            [14-Jul-11 10:13  CRC=23EDEC8F]
@@ -424,10 +424,10 @@ Project Files:
     C:\Program Files (x86)\PICC\Drivers\MATH.H              [28-Sep-12 11:35  CRC=546412C9]
     xuatbyte74595.c                                         [08-Nov-21 20:25  CRC=C3061C7F]
     C:\Program Files (x86)\PICC\Drivers\LCD.C               [19-Sep-13 15:38  CRC=D1A6378A]
-    khaibaobien.c                                           [11-Nov-21 15:28  CRC=0763DF5B]
+    khaibaobien.c                                           [13-Nov-21 01:31  CRC=0763DF5B]
     config_1.C                                              [11-Nov-21 15:09  CRC=5C51C6C9]
     DIEU_KHIEN.C                                            [10-Nov-21 00:18  CRC=3089D4FA]
-    analog.C                                                [11-Nov-21 15:54  CRC=AF01A568]
+    analog.C                                                [13-Nov-21 01:31  CRC=AF01A568]
 
 Source signature=3F20543E
 

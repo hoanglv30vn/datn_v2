@@ -15,9 +15,10 @@ data='hi'
 # serial__=serial.Serial()
 serial_com = input("SELLECT COM: ")
 serial__=serial.Serial(serial_com, baudrate=9600 ,timeout=0.1)
-HEADER_LENGTH = 40
+HEADER_LENGTH = 10
 
-IP = "127.0.0.1"
+print(socket.gethostbyname(socket.gethostname()))
+IP = socket.gethostbyname(socket.gethostname())
 PORT = 8888
 # Create a socket
 # socket.AF_INET - address family, IPv4, some otehr possible are AF_INET6, AF_BLUETOOTH, AF_UNIX
@@ -38,6 +39,9 @@ server_socket.listen()
 
 # List of sockets for select.select()
 sockets_list = [server_socket]
+
+
+# abcd= input("hoang:")
 
 # List of connected clients - socket as a key, user header and name as data
 clients = {}
@@ -69,7 +73,8 @@ class chaylen (threading.Thread):
                 messheader= f"{len(data):<{HEADER_LENGTH}}".encode('utf-8')
                 messdata= data.encode('utf-8')
                 for client_socket in clients:
-                    client_socket.send( userheader + userdata + messheader + messdata)                      
+                    # client_socket.send( userheader + userdata + messheader + messdata)     
+                    client_socket.send(messdata)         
                     
 class udp (threading.Thread):
     def __init__(self,  threadID, name):
@@ -138,7 +143,9 @@ class udp (threading.Thread):
                     # Also save username and username header
                     clients[client_socket] = user
 
+
                     print('Accepted new connection from {}:{}, username: {}'.format(*client_address, user['data'].decode('utf-8')))
+                        
 
                 # Else existing socket is sending a message
                 else:
@@ -146,6 +153,8 @@ class udp (threading.Thread):
                     message = receive_message(notified_socket)
                     # If False, client disconnected, cleanup
                     if message is False:
+                        # pass
+                        # continue
                         print('Closed connection from: {}'.format(clients[notified_socket]['data'].decode('utf-8')))
 
                         # Remove from list for socket.socket()

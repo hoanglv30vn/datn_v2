@@ -114,22 +114,22 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0     70   1    0    12  0.8  NGAT_NGOAI
 0     29   1    2   163  3.9  NGAT
 2    600  11    5  1362  8.4  XU_LY_UART
-0      5   0    0   163  3.9  @const1212
+0      5   0    0             @const1212
 2     10   0    0             @goto12774
 2    292   5    1  1046  4.9  MAIN
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               40
+    Functions               39
     Statements              1214
     Comments                1129
-    Volume (V)              37791
-    Difficulty (D)          210.4
-    Effort to implement (E) 7951727
-    Time to implement (T)   122 hours, 43 minutes
+    Volume (V)              37348
+    Difficulty (D)          206.2
+    Effort to implement (E) 7701162
+    Time to implement (T)   118 hours, 51 minutes
     Est Delivered Bugs (B)  13
-    Cyclomatic Complexity   90
-    Maintainability (MI)    126
+    Cyclomatic Complexity   89
+    Maintainability (MI)    123
 
  Segment     Used  Free
 -----------  ----  ----

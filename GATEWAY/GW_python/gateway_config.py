@@ -248,7 +248,7 @@ class Ui_MainWindow(object):
         try:
             serial__=serial.Serial(serial_com, baudrate=serial_baud ,timeout=0.1)
         except:
-            serial_com = self.box_com.currentText()    
+            serial_com = self.box_comport.currentText()    
             curr.execute("UPDATE CONFIG_GW SET THONGTIN = ? WHERE ATTRIBUTES = ?",[serial_com, "COM_PORT"])
             conn.commit()              
             serial__=serial.Serial(serial_com, baudrate=serial_baud ,timeout=0.1)
@@ -265,30 +265,31 @@ class Ui_MainWindow(object):
             data = data_recv.split("@")
             print(data)
             print(id_gw)
-            do_dai_chuoi_nhan = data[1]
-            thongtinlenh_nhan = data[2]
-            id_gw_nhan = data[3]
-            id_node_nhan = data[4]            
-            if do_dai_chuoi_nhan == lenght_data and id_gw_nhan == id_gw :
-                print("đúng độ dài - đúng id")
-                # phân tích lệnh, xử lý.
-                if thongtinlenh_nhan == 'CF':
-                    self.thongtincauhinhnode(data)
-                # S_S == dữ liệu cảm biến.
-                elif thongtinlenh_nhan == 'SS':
-                    self.uploadDataSensor(data)     
-                elif thongtinlenh_nhan == 'DK':
-                    print("đúng lệnh đk")              
-                    self.update_state_thietbi(data)
-            else:
-                print("config error")        
-                # gửi lại xác nhận cho node.            
-                hello=f'*#{id_gw_nhan}#{id_node_nhan}#1#ERROR GW'
-                len_data_send_uart = len(hello) + 3
-                hello=f'*#{id_gw_nhan}#{id_node_nhan}#1#'
-                data_send_uart = hello + str(len_data_send_uart) +'#ERROR GW' +'.'
-                serial__.write(data_send_uart.encode())       
-                print(data_send_uart.encode())                    
+            if len(data)>2:
+                do_dai_chuoi_nhan = data[1]
+                thongtinlenh_nhan = data[2]
+                id_gw_nhan = data[3]
+                id_node_nhan = data[4]            
+                if do_dai_chuoi_nhan == lenght_data and id_gw_nhan == id_gw :
+                    print("đúng độ dài - đúng id")
+                    # phân tích lệnh, xử lý.
+                    if thongtinlenh_nhan == 'CF':
+                        self.thongtincauhinhnode(data)
+                    # S_S == dữ liệu cảm biến.
+                    elif thongtinlenh_nhan == 'SS':
+                        self.uploadDataSensor(data)     
+                    elif thongtinlenh_nhan == 'DK':
+                        print("đúng lệnh đk")              
+                        self.update_state_thietbi(data)
+                else:
+                    print("config error")        
+                    # gửi lại xác nhận cho node.            
+                    hello=f'*#{id_gw_nhan}#{id_node_nhan}#1#ERROR GW'
+                    len_data_send_uart = len(hello) + 3
+                    hello=f'*#{id_gw_nhan}#{id_node_nhan}#1#'
+                    data_send_uart = hello + str(len_data_send_uart) +'#ERROR GW' +'.'
+                    serial__.write(data_send_uart.encode())       
+                    print(data_send_uart.encode())                    
 
     def read_interval(self):
         # thread

@@ -14,7 +14,7 @@ data='hi'
 serial_com = input("SELLECT COM: ")
 # serial_com = "COM11"
 serial__=serial.Serial(serial_com, baudrate=9600 ,timeout=0.1)
-IP = "192.168.0.212"
+IP = "192.168.0.161"
 PORT = 8888
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -40,7 +40,8 @@ class chaylen (threading.Thread):
             if serial__.in_waiting >0:
                 global data
                 data = serial__.readline()                
-                client_socket.send(data)      
+                client_socket.send(data)    
+                print("hoang_data")  
                 print(data)
 class udp (threading.Thread):
     def __init__(self,  threadID, name):
@@ -56,9 +57,10 @@ class udp (threading.Thread):
             try:
                 while True:
                     message = client_socket.recv(1).decode('utf-8')
-                    if message == '#':
-                        print(message__.encode())
-                        serial__.write(message__.encode())
+                    if message == '.':
+                        message_____oke = '*'+message__+'.'
+                        print(message_____oke.encode())
+                        serial__.write(message_____oke.encode())
                     elif message == '*':
                         message__ = ''
                         message = ''                        

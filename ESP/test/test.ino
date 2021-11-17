@@ -14,6 +14,7 @@ LiquidCrystal_I2C lcd(0x27,16,2);
 
 //----------------Biến--------------//
 int button = 12; //GPIO12 -- D6  
+int led_baohieu = 14; //GPIO12 -- D6  
 int buttonState = 0;
 int count = 0;
 char *data_uart_char ="";
@@ -146,6 +147,8 @@ void setup() {
   WiFiServer server(port);  
   
   pinMode(button, INPUT);
+  pinMode(led_baohieu, OUTPUT);
+  digitalWrite(led_baohieu, LOW);
   lcd.begin();
   lcd.backlight();
   lcd.print("Heyyy u");
@@ -166,9 +169,9 @@ void loop() {
   lcd.setCursor(14,0);
   lcd.print(len_data);        
   lcd.setCursor(8,0);
-  lcd.print(count);    
-  delay(1000);  
-  lcd.setCursor(0,1);
-  lcd.print("                 "); 
+  lcd.print(count);   
+  digitalWrite(led_baohieu, LOW);
+  delay(1000);   
+  digitalWrite(led_baohieu, HIGH); 
   delay(500);
 }

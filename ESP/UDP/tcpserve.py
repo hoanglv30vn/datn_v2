@@ -95,7 +95,10 @@ class udp (threading.Thread):
             # Convert header to int value
             message_length = int(message_header.decode('utf-8').strip())
             # Return an object of message header and message data
-            return {'header': message_header, 'data': client_socket.recv(message_length)}
+            data_client_rcv = client_socket.recv(message_length)
+            print(f"header: {message_header}---data:{data_client_rcv}")
+
+            return {'header': message_header, 'data':data_client_rcv}
 
         except:
 
@@ -141,9 +144,7 @@ class udp (threading.Thread):
                     sockets_list.append(client_socket)
 
                     # Also save username and username header
-                    clients[client_socket] = user
-
-
+                    clients[client_socket] = user                          
                     print('Accepted new connection from {}:{}, username: {}'.format(*client_address, user['data'].decode('utf-8')))
                         
 
@@ -171,7 +172,11 @@ class udp (threading.Thread):
                     print(f'Received message from {user["data"].decode("utf-8")}: {message["data"].decode("utf-8")}')
                     # khi nhan data from udp --> uart
                     hello= message["data"].decode("utf-8") + '.'
-                    serial__.write(hello.encode())    
+                    # client_socket.send(b'oke')
+                    try:
+                        serial__.write(hello.encode())    
+                    except:
+                        print("disconnect uart")
             # It's not really necessary to have this, but will handle some socket exceptions just in case
             for notified_socket in exception_sockets:
 

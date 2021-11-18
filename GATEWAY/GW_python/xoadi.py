@@ -17,9 +17,9 @@ import re
 
 #################################################################################### 
 # # khởi tạo com
-# global serial__ 
-# serial__=serial.Serial()        
-# serial__=serial.Serial('COM11', baudrate=9600 ,timeout=0.1)                
+global serial__ 
+serial__=serial.Serial()        
+serial__=serial.Serial('COM12', baudrate=9600 ,timeout=0.1)                
 
 
 
@@ -28,17 +28,19 @@ import re
 # c =no_accent_vietnamese("VIỆT NAM ĐẤT NƯỚC CON NGƯỜI")
 
 # print(a,b,c)
-mang = ['*', '26', 'SS', '026636', '7599', '30', '28','2','54','82', '#']
-for index in mang[5:-1]:
-    print(index)
-a=str(bin(158))[2:10]
-b=a
-# a.reverse()
-b=a[::-1]
-print(a)
-print(b)
-
-c= input("hi")
+# mang = ['*', '26', 'SS', '026636', '7599', '30', '28','2','54','82', '#']
+# for index in mang[5:-1]:
+#     print(index)
+# a=str(bin(158))[2:10]
+# b=a
+# # a.reverse()
+# b=a[::-1]
+# print(a)
+# print(b)
+while True:
+    data_send_uart =input("hi:")
+    serial__.write(data_send_uart.encode())
+    # c= input("hi")
 
 # a= [1,5,0]
 # # print(a[-1])

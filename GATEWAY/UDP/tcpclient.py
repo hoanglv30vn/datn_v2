@@ -16,7 +16,7 @@ data='hi'
 serial_com = input("SELLECT COM: ")
 serial__=serial.Serial(serial_com, baudrate=9600 ,timeout=0.1)
 
-HEADER_LENGTH = 40
+HEADER_LENGTH = 10
 
 IP = "127.0.0.161"
 IP = socket.gethostbyname(socket.gethostname())

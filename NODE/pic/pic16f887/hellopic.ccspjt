@@ -13,16 +13,18 @@ Type=4
 1=hellopic.c
 [Opened Files]
 1=hellopic.c
-2=thuvien.c
-3=testepprom.c
+2=..\..\..\..\STUDY\VXL\TTVXL\vxl\BAI_614_LCD_GIO_PHUT_GIAY_TIMER\BAI_615_LCD_GIO_PHUT_GIAY_TIMER.c
+3=thuvien.c
 4=C:\Program Files (x86)\PICC\Devices\16F887.H
-5=config_1.C
+5=
 6=khaibaobien.c
 7=analog.C
 8=C:\Program Files (x86)\PICC\Drivers\MATH.H
 9=C:\Program Files (x86)\PICC\Drivers\STRING.H
 10=..\..\..\..\DATN_DOC\test_piic_napcode\testnapcode.c
-11=
+11=C:\Program Files (x86)\PICC\Drivers\STDLIB.H
+12=C:\Program Files (x86)\PICC\Drivers\LCD.C
+13=
 [Units]
 Count=1
 1=hellopic (main)

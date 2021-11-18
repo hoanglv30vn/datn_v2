@@ -31,6 +31,7 @@ String host = "192.168.0.000";
 String name_esp = "";
 String HEADER_NAME = "";
 String HEADER_LENGHT = "";
+char HEADER_SEND[60];
 char data_send[60];
 char data_read_tcp[60];
 //----------------Hàm--------------//
@@ -130,7 +131,7 @@ void connect_config_wifi(){
         }
       }                  
     }        
-   delay(100);
+   delay(10);
   return  index;
   }
 
@@ -202,10 +203,10 @@ void setup()
     }    
     HEADER_NAME = HEADER_LENGHT + name_esp;
     for( i =0; i<60; i++){
-      data_send[i] = HEADER_NAME[i];      
+      HEADER_SEND[i] = HEADER_NAME[i];      
     }
     client.connect(host, port);
-    client.write(data_send);
+    client.write(HEADER_SEND);
 //    client.connect(host, port);
     
 }
@@ -215,6 +216,20 @@ void loop()
     digitalWrite(led_baohieu, HIGH);
     //s.println("Connected to server successful!");
     //client.println("Hello From ESP8266");
+    if (!client.connected()) {
+      delay(200);
+      digitalWrite(led_baohieu, LOW);
+      delay(200);
+      digitalWrite(led_baohieu, HIGH);
+      delay(200);
+//      Serial.println();
+//      Serial.println("disconnecting.");
+      client.flush();
+      client.stop();
+      client.connect(host, port);
+      client.write(HEADER_SEND);     
+      return;       
+    }    
     tt_tcp = false;
     delay(250);  
     index_tcp = 0;  
@@ -227,6 +242,8 @@ void loop()
     }
     if (tt_tcp){
       s.write(data_read_tcp);
+//      client.connect(host, port);
+//      client.write(HEADER_SEND);       
     }
 
     len_data = 0;
@@ -246,17 +263,25 @@ void loop()
         }
         for( i =10; i<len_data+10; i++){
           data_send[i] = uart_data_rcv[i-10];      
-        }        
-        client.write(data_send);        
+        }   
+//        client.connect(host, port);
+//           
+        len_data = 0;
+        for (int i = 0; i<50; i++)
+        {
+          uart_data_rcv[i]='\0';
+        }       
+        client.write(data_send);  
+        /*XOA DATA UART*/                 
     }
     else {
       int reset_esp=-1;
       String data_rset = uart_data_rcv ;       
       reset_esp = data_rset.indexOf("RST_ESP");
       if (reset_esp >= 0){
-//    client.connect(host, port);
-//    client.write(data_send);        
-        ESP.reset();
+        client.connect(host, port);
+        client.write(data_send);        
+//        ESP.reset();
       }
     }
     buttonState=digitalRead(button);  

@@ -14,7 +14,7 @@ VOID QUET_PHIM()
       }
    }
 
-   IF (BDT > 20)
+   IF (BDT > 10)
    {
       //CONFIG NODE
       TT_CONFIG = ~TT_CONFIG; // VAO TRANG THAI CONFIG
@@ -24,7 +24,7 @@ VOID QUET_PHIM()
       TT_FUN = 0;
    }
 
-   ELSE IF (BDT > 1&&BDT < 20)
+   ELSE IF (BDT > 1&&BDT < 10)
    {
       BUTT_OKE (); //OKE
    }
@@ -152,7 +152,9 @@ VOID QUET_PHIM()
     SET_TRIS_E (0);
     SET_TRIS_C (0X80);
     SETUP_ADC (ADC_CLOCK_DIV_8);
-    ENABLE_INTERRUPTS (INT_TIMER0);
+    //SETUP_TIMER_0(T0_INTERNAL | T0_DIV_1);
+    //ENABLE_INTERRUPTS (INT_TIMER0);
+    
     ENABLE_INTERRUPTS (INT_EXT); //CHO PHEP NGAT NGOAI
     ENABLE_INTERRUPTS (INT_EXT_H2L); //NGAT XAY RA KHI CO XUNG TU CAO XUONG THAP
     ENABLE_INTERRUPTS (INT_RDA);
@@ -169,10 +171,20 @@ VOID QUET_PHIM()
     OUTPUT_HIGH (PIN_D3) ;
     TTNHAN = 0;
 
+
+      
+      LCD_GOTOXY (1, 2) ;
+      DELAY_MS (10);
+      PRINTF (LCD_PUTC, "hihihoang");    
+      FOR (INT ABCD = 0; ABCD <10; ABCD ++){
+         
+         OUTPUT_TOGGLE (PIN_C4);
+         DELAY_MS(500);
+      }
+      PRINTF (LCD_PUTC, "CHAOHOANG");        
     READ_EEPROMP_DATA_NODE();
     CONFIG_DONE();
 
-    
     WHILE (TRUE)
     {
        IF (TT_CONFIG)   {BUTT_FUN (); } // GOI HAM CHON LENH (SWITCH CASE)

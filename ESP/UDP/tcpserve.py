@@ -1,6 +1,7 @@
 import threading
 import time
 import socket
+from socket import SHUT_RDWR
 import select
 import serial
 
@@ -38,6 +39,7 @@ server_socket.bind((IP, PORT))
 server_socket.listen()
 
 # List of sockets for select.select()
+# global sockets_list
 sockets_list = [server_socket]
 
 
@@ -65,16 +67,17 @@ class chaylen (threading.Thread):
             if serial__.in_waiting >0:
                 global data
                 data = serial__.readline()
-                data = data.decode('utf-8')
-                print(data)   
-
-                userheader= f"{len('H'):<{HEADER_LENGTH}}".encode('utf-8')
-                userdata= 'H'.encode('utf-8')
-                messheader= f"{len(data):<{HEADER_LENGTH}}".encode('utf-8')
-                messdata= data.encode('utf-8')
+                # data = data.decode('utf-8')                
+                # userheader= f"{len('H'):<{HEADER_LENGTH}}".encode('utf-8')
+                # userdata= 'H'.encode('utf-8')
+                # messheader= f"{len(data):<{HEADER_LENGTH}}".encode('utf-8')
+                # messdata= data.encode('utf-8')
+                print(data) 
+                print(clients)
                 for client_socket in clients:
                     # client_socket.send( userheader + userdata + messheader + messdata)     
-                    client_socket.send(messdata)         
+                    client_socket.send(data)    
+                    print(data)     
                     
 class udp (threading.Thread):
     def __init__(self,  threadID, name):
@@ -106,7 +109,9 @@ class udp (threading.Thread):
             # or just lost his connection
             # socket.close() also invokes socket.shutdown(socket.SHUT_RDWR) what sends information about closing the socket (shutdown read/write)
             # and that's also a cause when we receive an empty message
-            return False
+            pass
+            # return False
+            
 
     def udp_truyen_nhan(self,receive_message):
         while True:            
@@ -164,14 +169,17 @@ class udp (threading.Thread):
                         # Remove from our list of users
                         del clients[notified_socket]
 
+                        # server_socket.shutdown(SHUT_RDWR)  
                         continue
 
                     # Get user by notified socket, so we will know who sent the message
                     user = clients[notified_socket]
-
-                    print(f'Received message from {user["data"].decode("utf-8")}: {message["data"].decode("utf-8")}')
+                    try:
+                        print(f'Received message from {user["data"].decode("utf-8")}: {message["data"].decode("utf-8")}')
+                        hello= message["data"].decode("utf-8") + '.'
+                    except:
+                        pass
                     # khi nhan data from udp --> uart
-                    hello= message["data"].decode("utf-8") + '.'
                     # client_socket.send(b'oke')
                     try:
                         serial__.write(hello.encode())    

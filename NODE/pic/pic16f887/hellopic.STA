@@ -1,9 +1,9 @@
 
-ROM used:   5428/8192 (66%)
-            5636/8192 (69%) including unused fragments
+ROM used:   5474/8192 (67%)
+            5634/8192 (69%) including unused fragments
 
             0.8 Average locations per line
-            4.4 Average locations per statement
+            4.5 Average locations per statement
 
 RAM used:   181/368 (49%) at main() level
             267/368 (73%) worst case
@@ -13,7 +13,7 @@ Stack size: 8
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  225   123  10  hellopic.c
+  229   127  10  hellopic.c
    32     0   0  thuvien.c
   768     0   0  C:\Program Files (x86)\PICC\Devices\16F887.H
   423   125  10  C:\Program Files (x86)\PICC\Drivers\STRING.H
@@ -30,7 +30,7 @@ Lines Stmts  %   Files
    91    50   4  DIEU_KHIEN.C
   128    38   3  analog.C
 ----- -----
- 6539  1221 Total
+ 6543  1225 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
@@ -40,7 +40,7 @@ Page ROM  %  RAM   Vol Diff  Functions:
  Inline         9   288  6.0  strpbrk
  Inline         9   346  7.5  strspn
 1    241   4   10   475  7.2  strtok
- Inline         5   129  4.6  strlen
+0     32   1    5   129  4.6  strlen
 0     39   1    2             @MUL88
  Inline         2             @ITOF
  Inline        14             @DIVFF
@@ -93,27 +93,27 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0      7   0    0             @const1154
 0      3   0    0             @const1155
 0      4   0    0             @const1156
-1     81   1    3   294  6.2  READ_BTN_STATE
+1     77   1    3   294  6.2  READ_BTN_STATE
 0     34   1    6             @WRITEBITA
-0     25   0    5             @READBITA
+1     25   0    5             @READBITA
  Inline         4   237  5.5  BIN_TO_DEC
-1    392   7    2  1086  6.3  XUAT_DIEU_KHIEN
+1    386   7    2  1086  6.3  XUAT_DIEU_KHIEN
 0      7   0    0             @const1174
 0      7   0    0             @const1175
 0      7   0    0             @const1176
 0      3   0    0             @const1178
-1     82   2    4             @PSTRINGC7_9600_62_63
+1     82   1    4             @PSTRINGC7_9600_62_63
 0      3   0    0             @const1183
  Inline         2   251  4.2  DIEUKHIENTHIETBI
  Inline        13   475  6.3  ADC_READ
 2    580  11    4   321  5.1  READ_ANALOG
-1    219   4    3   816  5.3  SEND_ANALOG_UART
+1    245   4    3   876  5.3  SEND_ANALOG_UART
 0      3   0    0             @const1202
 0      6   0    0             @const1204
  Inline         1   450  6.1  QUET_PHIM
 0     70   1    0    12  0.8  NGAT_NGOAI
 0     29   1    2   163  3.9  NGAT
-2    600  11    5  1362  8.4  XU_LY_UART
+2    598  11    2  1493  8.4  XU_LY_UART
 0      5   0    0             @const1212
 2     10   0    0             @goto12771
 2    350   6    1  1377  6.8  MAIN
@@ -123,12 +123,12 @@ Page ROM  %  RAM   Vol Diff  Functions:
 
 Program metrics:
     Functions               39
-    Statements              1221
+    Statements              1225
     Comments                1131
-    Volume (V)              37850
-    Difficulty (D)          207.9
-    Effort to implement (E) 7867296
-    Time to implement (T)   121 hours, 25 minutes
+    Volume (V)              38144
+    Difficulty (D)          208.0
+    Effort to implement (E) 7932063
+    Time to implement (T)   122 hours, 25 minutes
     Est Delivered Bugs (B)  13
     Cyclomatic Complexity   90
     Maintainability (MI)    123
@@ -137,9 +137,9 @@ Program metrics:
 -----------  ----  ----
 00000-00003     4  0  
 00004-00057    84  0  
-00058-007FF  1945  15  
-00800-00FFF  1855  193  
-01000-017FF  1540  508  
+00058-007FF  1952  8  
+00800-00FFF  1896  152  
+01000-017FF  1538  510  
 01800-01FFF     0  2048  
 
 

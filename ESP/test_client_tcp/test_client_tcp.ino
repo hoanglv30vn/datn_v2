@@ -24,6 +24,7 @@ int index_tcp =0;
 int len_data =0;
 bool tt_tcp= false;
 bool tt_config_client = 0;
+bool state_connect_tcp = false;
 
 const uint16_t port = 8888;
 String host = "192.168.0.000";
@@ -174,6 +175,52 @@ void config_client_host_port(){
     }    
   }
 }
+
+bool check_connect_serve_tcp(){
+    client.flush();
+    if (!client.connected()) {
+      buttonState=digitalRead(button);  
+      delay(250);
+      if (buttonState){
+        checkbutt();
+        }         
+      digitalWrite(led_baohieu, LOW);
+      delay(200);
+      digitalWrite(led_baohieu, HIGH);
+      delay(200);
+//      Serial.println();
+//      Serial.println("disconnecting.");
+      client.flush();
+      client.stop();
+      client.connect(host, port);
+      client.write(HEADER_SEND);     
+      return false;       
+    }
+    else return true;       
+  
+}
+
+void read_data_tcp(){
+      tt_tcp = false;      
+    index_tcp = 0;  
+    while (client.available() > 0 && index_tcp<60)
+    {
+        char c = client.read();
+//        s.write(c); 
+        data_read_tcp[index_tcp] = c;
+        tt_tcp = true;
+        index_tcp ++;
+    }
+    if (tt_tcp){
+      client.flush();
+      s.write(data_read_tcp); 
+      delay(100);
+      for (int i = 0; i<60; i++)
+      {
+        data_read_tcp[i]='\0';
+      }            
+    }
+}
   
 void setup()
 {
@@ -215,38 +262,9 @@ void loop()
 {    
     digitalWrite(led_baohieu, HIGH);
     //s.println("Connected to server successful!");
-    //client.println("Hello From ESP8266");
-    if (!client.connected()) {
-      delay(200);
-      digitalWrite(led_baohieu, LOW);
-      delay(200);
-      digitalWrite(led_baohieu, HIGH);
-      delay(200);
-//      Serial.println();
-//      Serial.println("disconnecting.");
-      client.flush();
-      client.stop();
-      client.connect(host, port);
-      client.write(HEADER_SEND);     
-      return;       
-    }    
-    tt_tcp = false;
-    delay(250);  
-    index_tcp = 0;  
-    while (client.available() > 0)
-    {
-        char c = client.read();
-        data_read_tcp[index_tcp] = c;
-        tt_tcp = true;
-        index_tcp ++;
-    }
-    if (tt_tcp){
-      s.write(data_read_tcp);
-//      client.connect(host, port);
-//      client.write(HEADER_SEND);       
-    }
-
-    len_data = 0;
+    //client.println("Hello From ESP8266");           
+    read_data_tcp();
+    state_connect_tcp = check_connect_serve_tcp();
     len_data = read_uart_char();
     delay(250);
     if (len_data>10 && len_data <100){
@@ -270,8 +288,11 @@ void loop()
         for (int i = 0; i<50; i++)
         {
           uart_data_rcv[i]='\0';
-        }       
-        client.write(data_send);  
+        }
+        if (state_connect_tcp)   {
+           client.write(data_send);  
+        }
+        
         /*XOA DATA UART*/                 
     }
     else {

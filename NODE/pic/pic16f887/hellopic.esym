@@ -1,7 +1,8 @@
-D G "__PCM__" 0 232 ""5.015""
-D G "__DEVICE__" 0 232 "887"
-D G "__DATE__" 0 232 ""18-Nov-21""
-D G "__TIME__" 0 232 ""21:50:33"" "Standard Header file for the PIC16F887 device ////////////////"
+D G "LCD_LINE_LENGTH" 11 187 "20"
+D G "__PCM__" 12 1 ""5.015""
+D G "__DEVICE__" 12 1 "887"
+D G "__DATE__" 12 1 ""19-Nov-21""
+D G "__TIME__" 12 1 ""15:12:44"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 v L "value" 2 39 "int8" `54 
 f B "set_tris_a" 2 39 "void(int8 value)" `53 
@@ -1590,21 +1591,21 @@ F G "NGAT_NGOAI" 0 44 "void()" `1207
 F G "NGAT" 0 50 "void()" `1208 
 F G "XU_LY_UART" 0 65 "void()" `1209  "ID_NODE_NHAN = KYTU[1] - 48;"
 C L "XU_LY_UART" 0 8 3 "FUNCTION"
-V L "CH" 0 70 "int8" `1210 
-V L "RET" 0 71 "*int8" `1211 
-V L "LEN_RET" 0 75 "int8" `1213 
+V L "CH" 0 74 "int8" `1210 
+V L "RET" 0 75 "*int8" `1211 
+V L "LEN_RET" 0 79 "int8" `1213 
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
-V L "TOKEN" 0 82 "*int8" `1215 
+V L "TOKEN" 0 86 "*int8" `1215 
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
-F G "MAIN" 0 149 "void()" `1217 
+F G "MAIN" 0 153 "void()" `1217 
 C L "MAIN" 0 8 2 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
-V L "ABCD" 0 179 "int8" `1221 
+V L "ABCD" 0 183 "int8" `1221 
 C L "MAIN" 0 8 1 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0

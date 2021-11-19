@@ -39,6 +39,7 @@ serial__=serial.Serial('COM12', baudrate=9600 ,timeout=0.1)
 # print(b)
 while True:
     data_send_uart =input("hi:")
+    data_send_uart = "*#277339#7415#2#20#8."
     serial__.write(data_send_uart.encode())
     # c= input("hi")
 

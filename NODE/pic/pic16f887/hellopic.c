@@ -67,6 +67,10 @@ VOID QUET_PHIM()
     //ID_DEVICE_NHAN = KYTU[2] - 48 + 64;
     //TT_DEVICE_NHAN = KYTU[3] - 48; // - 48 ASCII -- > S?. + 64 -- > PORT_D (D0 = 64)
     /* TINH DO DAI*/
+    
+    LCD_GOTOXY (1, 2) ;
+    DELAY_MS (10);
+    PRINTF (LCD_PUTC,KYTUCHAR );    
     CHAR CH = '*';
     CHAR * RET;
     * ID_NODE_NHAN = '\0';

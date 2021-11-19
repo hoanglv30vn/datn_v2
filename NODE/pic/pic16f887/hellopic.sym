@@ -117,7 +117,6 @@
 11C.0   DIEUKHIENTHIETBI.BSERI
 11C-11D strchr.s
 11C     DIEUKHIENTHIETBI.MA_DEC
-11C-11D strlen.s
 11C-11F @FLT.P1
 11C     @DIV88.@SCRATCH1
 11C     XU_LY_UART.@SCRATCH1
@@ -125,48 +124,46 @@
 11D     DIEUKHIENTHIETBI.SB
 11D     XU_LY_UART.@SCRATCH2
 11E-11F atoi.s
+11E-11F strcmp.s2
 11E     XUAT_DIEU_KHIEN.ST
 11E     strchr.c
-11E-11F strcmp.s2
 11E-11F strtok.s1
-11E-11F strlen.sc
 11E     XACNHANCONFIG.@SCRATCH1
 11E     DIEUKHIENTHIETBI.@SCRATCH1
 11F     BIN_TO_DEC.DEC_VL
-11F     @WRITEBITA.P1
 11F     XUATTRANGTHAI.BYTEXUAT
+11F     @WRITEBITA.P1
 11F.7   XUATTRANGTHAI.BSERI
 11F     strchr.@SCRATCH1
 11F     @PSTRINGR_1056.@SCRATCH1
 11F     XACNHANCONFIG.@SCRATCH2
 11F     XUAT_DIEU_KHIEN.@SCRATCH1
+120     @WRITEBITA.P1
 120     XUATTRANGTHAI.SB
 120     atoi.result
-120     @WRITEBITA.P1
-120     BIN_TO_DEC.base
 120-121 strtok.s2
+120     BIN_TO_DEC.base
 120     strcmp.@SCRATCH1
-120     strlen.@SCRATCH1
 120     @FLT.@SCRATCH1
 120     @PSTRINGR_1056.@SCRATCH2
 120     XUAT_DIEU_KHIEN.@SCRATCH2
 121-122 @WRITEBITA.P1
-121     atoi.sign
 121.0   atan2.sign
 121     BIN_TO_DEC.i
+121     atoi.sign
 121     @FLT.@SCRATCH2
-122-123 strtok.beg
-122     atan2.quad
 122     atoi.base
-122-141 CONFIG_DONE.@PACKAGE_CONFIG
+122-123 strtok.beg
 122     ADC_READ.i
+122     atan2.quad
 122     @READBITA.P1
+122-141 CONFIG_DONE.@PACKAGE_CONFIG
 122     BIN_TO_DEC.@SCRATCH1
-123-124 @READBITA.P1
-123-126 @SFTOI.P2
 123     atoi.index
-123-124 @ITOF.P1
-123-126 @DIVFF.P2
+123-124 @READBITA.P1
+123-124 @ITOF.P2
+123-126 @SFTOI.P3
+123-126 @DIVFF.P4
 123     ADC_READ.@SCRATCH1
 124-125 strtok.end
 124     atoi.c
@@ -176,8 +173,8 @@
 125     atoi.@SCRATCH1
 125     ADC_READ.@SCRATCH3
 126     @MUL88.P1
-126-127 strpbrk.s1
 126-127 strspn.s1
+126-127 strpbrk.s1
 126     strtok.@SCRATCH1
 126     atoi.@SCRATCH2
 126     ADC_READ.@SCRATCH4
@@ -205,6 +202,7 @@
 142     CONFIG_DONE.j
 142     @PSTRINGC7_9600_62_63.@SCRATCH2
 142     SEND_ANALOG_UART.@SCRATCH2
+143-144 strlen.s
 143     XULY_IDNODE_NHAP.j
 143     XULY_IDGW_NHAP.j
 143     @PSTRINGC7_1056.@SCRATCH1
@@ -218,6 +216,7 @@
 144     CONFIG_DONE.@SCRATCH2
 144     @PSTRINGC7_9600_62_63.@SCRATCH4
 145-148 itoa.num
+145-146 strlen.sc
 145     @PSTRINGC7_1056.@SCRATCH3
 145     XULY_IDNODE_NHAP.@SCRATCH2
 145     XULY_IDGW_NHAP.@SCRATCH2
@@ -230,6 +229,7 @@
 146     @PSTRINGR_9600_62_63.@SCRATCH2
 147     @delay_ms1.P1
 147     lcd_gotoxy.x
+147     strlen.@SCRATCH1
 147     XULY_IDNODE_NHAP.@SCRATCH4
 147     XULY_IDGW_NHAP.@SCRATCH4
 148-149 strcat.s
@@ -374,10 +374,10 @@ ROM Allocation:
 000664  XULY_IDNODE_NHAP
 000715  @PSTRINGR_1056
 000732  @DIV88
-000749  @MUL88
-000770  strcmp
-0007B6  @WRITEBITA
-0007D8  @READBITA
+000749  strlen
+000769  @MUL88
+000790  strcmp
+0007D6  @WRITEBITA
 000800  BUTT_FUN
 00088B  SELLECT_FUN
 000893  CHON_ID
@@ -386,28 +386,28 @@ ROM Allocation:
 000A7E  strspn
 000AF1  strpbrk
 000B56  atoi
-000C39  @PSTRINGC7_9600_62_63
-000C8B  BIN_TO_DEC
-000C8B  XUAT_DIEU_KHIEN
-000CB9  XUATTRANGTHAI
-000E13  READ_BTN_STATE
-000E64  SEND_ANALOG_UART
+000C39  @READBITA
+000C52  @PSTRINGC7_9600_62_63
+000CA4  BIN_TO_DEC
+000CA4  XUAT_DIEU_KHIEN
+000CD0  XUATTRANGTHAI
+000E26  READ_BTN_STATE
+000E73  SEND_ANALOG_UART
 001000  XU_LY_UART
-00102C  strchr
-001055  strlen
-001135  XACNHANCONFIG
-001220  DIEUKHIENTHIETBI
-001258  @goto12771
-001262  READ_ANALOG
-001273  ADC_READ
-0012DC  @ITOF
-001308  @DIVFF
-0013D9  @SFTOI
-001419  @SITOF
-00144A  @FLT
-0014A6  @cinit1
-0014A6  MAIN
-0014DA  @cinit2
+001042  strchr
+001133  XACNHANCONFIG
+00121E  DIEUKHIENTHIETBI
+001256  @goto12771
+001260  READ_ANALOG
+001271  ADC_READ
+0012DA  @ITOF
+001306  @DIVFF
+0013D7  @SFTOI
+001417  @SITOF
+001448  @FLT
+0014A4  @cinit1
+0014A4  MAIN
+0014D8  @cinit2
 0136  StrtoulGO
 0136  StrtolGO
 
@@ -415,8 +415,8 @@ Project Directory:
     E:\DATN_V2\NODE\pic\pic16f887\
 
 Project Files:
-    hellopic.c                                              [18-Nov-21 21:50  CRC=1589F001]
-    thuvien.c                                               [18-Nov-21 17:19  CRC=7D72B6A7]
+    hellopic.c                                              [19-Nov-21 15:12  CRC=A310F5EC]
+    thuvien.c                                               [18-Nov-21 22:58  CRC=7D72B6A7]
     C:\Program Files (x86)\PICC\Devices\16F887.H            [12-Nov-13 14:35  CRC=6CB1A611]
     C:\Program Files (x86)\PICC\Drivers\STRING.H            [14-Jul-11 10:13  CRC=23EDEC8F]
     C:\Program Files (x86)\PICC\Drivers\stddef.h            [16-Jul-10 09:27  CRC=897CEC6C]
@@ -430,9 +430,9 @@ Project Files:
     khaibaobien.c                                           [13-Nov-21 01:31  CRC=0763DF5B]
     config_1.C                                              [11-Nov-21 15:09  CRC=5C51C6C9]
     DIEU_KHIEN.C                                            [10-Nov-21 00:18  CRC=3089D4FA]
-    analog.C                                                [13-Nov-21 01:31  CRC=AF01A568]
+    analog.C                                                [19-Nov-21 14:12  CRC=AF01A568]
 
-Source signature=3324DF65
+Source signature=C0ABE550
 
 Units:
     hellopic (main)

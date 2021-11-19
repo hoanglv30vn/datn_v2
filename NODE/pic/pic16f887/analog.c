@@ -105,7 +105,7 @@
     FOR (INT I = 0; I < SOLUONGCAMBIEN_CONFIG; I++)
     {
        ITOA (KET_QUA_ANALOG[I], 10, PACKAGE_SS[2 + I]) ;
-       DO_DAI = DO_DAI + 3;
+       DO_DAI = DO_DAI + strlen(PACKAGE_SS[2 + I])+1;
     }
 
     ITOA (DO_DAI, 10, TEMP_CHAR2) ;

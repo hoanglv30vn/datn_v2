@@ -17,12 +17,19 @@ import re
 
 #################################################################################### 
 # # khởi tạo com
+com_input = input("COM:")
+com_port = "COM"+com_input
 global serial__ 
-serial__=serial.Serial()        
-serial__=serial.Serial('COM12', baudrate=9600 ,timeout=0.1)                
+serial__=serial.Serial()     
+
+serial__=serial.Serial(com_port, baudrate=9600 ,timeout=0.1)                
 
 
-
+# def get_ip_socket_serve():
+IP = socket.gethostbyname(socket.gethostname())
+data_send_uart = "CF_CLIENT_TCP%"+IP+"#TCP%OKE"
+serial__.write(data_send_uart.encode())       
+print(data_send_uart.encode())        
 # a= no_accent_vietnamese("Việt Nam ẳ ấ ồ ư ị ỳ ùúụủũưừứựửữ  àáạảãâầấậẩẫăằắặẳẵ ý ỷĐất Nước Con Người")
 # b= no_accent_vietnamese("Welcome to Vietnam !")
 # c =no_accent_vietnamese("VIỆT NAM ĐẤT NƯỚC CON NGƯỜI")

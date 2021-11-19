@@ -65,6 +65,7 @@ import pyrebase
 import array as arr
 import re
 import random
+import socket
 
 ############################# DATABASE SQL #########################################
 conn = sqlite3.connect('data_config.db')   #kết nối tới database
@@ -638,6 +639,13 @@ class Ui_MainWindow(object):
                 kqgiaima += chr( ord(i)- dauconghoactru*somahoaascii)
             return kqgiaima 
 
+    def get_ip_socket_serve(self):
+        IP = socket.gethostbyname(socket.gethostname())
+        data_send_uart = "CF_CLIENT_TCP%"+IP+"#TCP%OKE"
+        serial__.write(data_send_uart.encode())       
+        print(data_send_uart.encode())          
+
+
 
 # ####################################################################
 
@@ -671,6 +679,14 @@ class Ui_MainWindow(object):
             "#table_danhsach{\n"
             "font-size:20px;\n"
             "}\n"
+            "#butt_ip_socket{\n"
+            "border-radius: 30%;\n"
+            "font-size:20px;\n"
+            "background-color:rgb(223, 223, 167)\n"
+            "}\n"
+            "#table_danhsach{\n"
+            "font-size:20px;\n"
+            "}\n"            
             "")
 # 
 #
@@ -710,6 +726,9 @@ class Ui_MainWindow(object):
         self.butt_oke = QtWidgets.QPushButton(self.tab_config)
         self.butt_oke.setGeometry(QtCore.QRect(550, 120, 91, 61))
         self.butt_oke.setObjectName("butt_oke")
+        self.butt_ip_socket = QtWidgets.QPushButton(self.tab_config)
+        self.butt_ip_socket.setGeometry(QtCore.QRect(670, 340, 91, 61))
+        self.butt_ip_socket.setObjectName("butt_ip_socket")        
         self.line_idgw = QtWidgets.QLineEdit(self.tab_config)
         self.line_idgw.setGeometry(QtCore.QRect(120, 120, 381, 61))
         self.line_idgw.setText("")
@@ -721,13 +740,13 @@ class Ui_MainWindow(object):
         self.lab_comport.setGeometry(QtCore.QRect(120, 260, 191, 41))
         self.lab_comport.setObjectName("lab_comport")
         self.lab_baudrate = QtWidgets.QLabel(self.tab_config)
-        self.lab_baudrate.setGeometry(QtCore.QRect(450, 260, 191, 41))
+        self.lab_baudrate.setGeometry(QtCore.QRect(410, 260, 191, 41))
         self.lab_baudrate.setObjectName("lab_baudrate")
         self.box_comport = QtWidgets.QComboBox(self.tab_config)
         self.box_comport.setGeometry(QtCore.QRect(120, 340, 191, 51))
         self.box_comport.setObjectName("box_comport")
         self.box_baudrate = QtWidgets.QComboBox(self.tab_config)
-        self.box_baudrate.setGeometry(QtCore.QRect(450, 340, 191, 51))
+        self.box_baudrate.setGeometry(QtCore.QRect(410, 340, 191, 51))
         self.box_baudrate.setObjectName("box_baudrate")
         self.box_baudrate.addItems(["9600", "2400", "4800", "9600", "14400", "19200", "38400", "57600", "115200", "128000"])
 
@@ -752,6 +771,7 @@ class Ui_MainWindow(object):
         t1.start()         
         # nhập id gw, nhấn nút thì đọc từ firebase.
         self.butt_oke.clicked.connect(self.read_idGW_firebase)
+        self.butt_ip_socket.clicked.connect(self.get_ip_socket_serve)
         # db.child(id_gw).stream(self.stream_handler) 
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(1)
@@ -774,6 +794,7 @@ class Ui_MainWindow(object):
         # self.lab_name_gw.setText(_translate("MainWindow", "    NAME GATEWAY"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_hienthi), _translate("MainWindow", "LIST"))
         self.butt_oke.setText(_translate("MainWindow", "OK"))
+        self.butt_ip_socket.setText(_translate("MainWindow", "IP"))
         self.label.setText(_translate("MainWindow", "   ID GATEWAY "))
         self.lab_comport.setText(_translate("MainWindow", "       COM PORT"))
         self.lab_baudrate.setText(_translate("MainWindow", "       BAUD RATE"))

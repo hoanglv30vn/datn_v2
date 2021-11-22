@@ -67,10 +67,7 @@ VOID QUET_PHIM()
     //ID_DEVICE_NHAN = KYTU[2] - 48 + 64;
     //TT_DEVICE_NHAN = KYTU[3] - 48; // - 48 ASCII -- > S?. + 64 -- > PORT_D (D0 = 64)
     /* TINH DO DAI*/
-    
-    LCD_GOTOXY (1, 2) ;
-    DELAY_MS (10);
-    PRINTF (LCD_PUTC,KYTUCHAR );    
+   
     CHAR CH = '*';
     CHAR * RET;
     * ID_NODE_NHAN = '\0';
@@ -148,6 +145,7 @@ VOID QUET_PHIM()
     }
 
  }
+ 
 
  VOID MAIN ()
  {
@@ -173,10 +171,7 @@ VOID QUET_PHIM()
     TT_CONFIG_DONE = 0;
     TT_CONTROL = 1;
     OUTPUT_HIGH (PIN_D3) ;
-    TTNHAN = 0;
-
-
-      
+    TTNHAN = 0;      
       LCD_GOTOXY (1, 2) ;
       DELAY_MS (10);
       PRINTF (LCD_PUTC, "hihihoang");    
@@ -185,7 +180,7 @@ VOID QUET_PHIM()
          OUTPUT_TOGGLE (PIN_C4);
          DELAY_MS(500);
       }
-      PRINTF (LCD_PUTC, "CHAOHOANG");        
+    PRINTF (LCD_PUTC, "CHAOHOANG");        
     READ_EEPROMP_DATA_NODE();
     CONFIG_DONE();
 
@@ -196,7 +191,7 @@ VOID QUET_PHIM()
        ELSE
        {
           WHILE (!TT_CONFIG)
-          {
+          {             
              IF (TTNHAN == 1)
              {
                 TTNHAN = 0;

@@ -391,23 +391,23 @@ ROM Allocation:
 000CA4  BIN_TO_DEC
 000CA4  XUAT_DIEU_KHIEN
 000CD0  XUATTRANGTHAI
-000E26  READ_BTN_STATE
-000E73  SEND_ANALOG_UART
+000E20  READ_BTN_STATE
+000E6D  SEND_ANALOG_UART
 001000  XU_LY_UART
-001042  strchr
-001133  XACNHANCONFIG
-00121E  DIEUKHIENTHIETBI
-001256  @goto12771
-001260  READ_ANALOG
-001271  ADC_READ
-0012DA  @ITOF
-001306  @DIVFF
-0013D7  @SFTOI
-001417  @SITOF
-001448  @FLT
-0014A4  @cinit1
-0014A4  MAIN
-0014D8  @cinit2
+00102C  strchr
+00111D  XACNHANCONFIG
+001208  DIEUKHIENTHIETBI
+001240  @goto12771
+00124A  READ_ANALOG
+00125B  ADC_READ
+0012C4  @ITOF
+0012F0  @DIVFF
+0013C1  @SFTOI
+001401  @SITOF
+001432  @FLT
+00148E  @cinit1
+00148E  MAIN
+0014C2  @cinit2
 0136  StrtoulGO
 0136  StrtolGO
 
@@ -415,7 +415,7 @@ Project Directory:
     E:\DATN_V2\NODE\pic\pic16f887\
 
 Project Files:
-    hellopic.c                                              [19-Nov-21 15:12  CRC=A310F5EC]
+    hellopic.c                                              [21-Nov-21 00:47  CRC=C30557C5]
     thuvien.c                                               [18-Nov-21 22:58  CRC=7D72B6A7]
     C:\Program Files (x86)\PICC\Devices\16F887.H            [12-Nov-13 14:35  CRC=6CB1A611]
     C:\Program Files (x86)\PICC\Drivers\STRING.H            [14-Jul-11 10:13  CRC=23EDEC8F]
@@ -427,12 +427,12 @@ Project Files:
     C:\Program Files (x86)\PICC\Drivers\MATH.H              [28-Sep-12 11:35  CRC=546412C9]
     xuatbyte74595.c                                         [08-Nov-21 20:25  CRC=C3061C7F]
     C:\Program Files (x86)\PICC\Drivers\LCD.C               [19-Sep-13 15:38  CRC=D1A6378A]
-    khaibaobien.c                                           [13-Nov-21 01:31  CRC=0763DF5B]
+    khaibaobien.c                                           [21-Nov-21 00:47  CRC=C3A7980C]
     config_1.C                                              [11-Nov-21 15:09  CRC=5C51C6C9]
-    DIEU_KHIEN.C                                            [10-Nov-21 00:18  CRC=3089D4FA]
-    analog.C                                                [19-Nov-21 14:12  CRC=AF01A568]
+    DIEU_KHIEN.C                                            [20-Nov-21 23:22  CRC=B1C95331]
+    analog.C                                                [19-Nov-21 19:36  CRC=AF01A568]
 
-Source signature=C0ABE550
+Source signature=1E237E11
 
 Units:
     hellopic (main)

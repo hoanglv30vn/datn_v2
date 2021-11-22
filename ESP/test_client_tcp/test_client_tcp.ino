@@ -301,7 +301,7 @@ void loop()
       reset_esp = data_rset.indexOf("RST_ESP");
       if (reset_esp >= 0){
         client.connect(host, port);
-        client.write(data_send);        
+        client.write(HEADER_SEND);        
 //        ESP.reset();
       }
     }

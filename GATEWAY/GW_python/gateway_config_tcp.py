@@ -784,13 +784,13 @@ class udp (threading.Thread, Ui_MainWindow):
                         continue
 
                     # Get user by notified socket, so we will know who sent the message
-                    user = clients[notified_socket]
-                    # try:
-                    print(f'Received message from {user["data"].decode("utf-8")}: {message["data"].decode("utf-8")}')
-                    hello= message["data"].decode("utf-8") + '.'
-                    self.readData_TCP(hello)
-                    # except:
-                    #     print("lỗi tcp")
+                    try:
+                        user = clients[notified_socket]
+                        print(f'Received message from {user["data"].decode("utf-8")}: {message["data"].decode("utf-8")}')
+                        hello= message["data"].decode("utf-8") + '.'
+                        self.readData_TCP(hello)
+                    except:
+                        print("lỗi tcp")
                     #     pass
                     # khi nhan data from udp --> uart
                     # client_socket.send(b'oke')

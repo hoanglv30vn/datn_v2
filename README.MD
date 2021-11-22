@@ -42,3 +42,8 @@ https://github.com/hoanglv30vn/datn
 - [GW] hiện danh sách các thiết bị, trạng thái phòng active. đánh số thứ tự cho các thiết bị để điều khiển, và 1 số hàm chuyển đổi
 - [GW] nhận dữ liệu từ uart, gửi firebase.
 - ... kế thừa 1 số tính năng từ V1
+22/11: NẠP CODE LÊN PHẦN CỨNG
+- [PIC]: code chạy đúng với mô phỏng.(cấu hình, gửi analog (analog -nhiệt độ int), gửi lệnh điều khiển, nhận lệnh điều khiển)
+- [ESP - TCP client]: cấu hình wifi với wifi-manager. nhận địa chỉ ip của laptop qua uart. kết nối với laptop bằng TCP. nhận lệnh RST_ESP reset - xóa dữ liệu đã cấu hình/
+- [ESP - TCP client]: nhận uart gửi tcp và ngược lại.
+- [GATEWAY - Laptop]: chạy file python gateway-config-tcp.py -- tạm oke. phần TCP thỉnh thoảng bị mất kết nối chưa fix được.

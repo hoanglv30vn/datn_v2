@@ -13,6 +13,7 @@ Type=4
 1=hellopic.c
 [Opened Files]
 1=hellopic.c
+<<<<<<< HEAD
 2=..\..\..\..\STUDY\VXL\TTVXL\vxl\BAI_614_LCD_GIO_PHUT_GIAY_TIMER\BAI_615_LCD_GIO_PHUT_GIAY_TIMER.c
 3=thuvien.c
 4=C:\Program Files (x86)\PICC\Devices\16F887.H
@@ -25,6 +26,21 @@ Type=4
 11=C:\Program Files (x86)\PICC\Drivers\STDLIB.H
 12=C:\Program Files (x86)\PICC\Drivers\LCD.C
 13=
+=======
+2=thuvien.c
+3=C:\Program Files (x86)\PICC\Devices\16F887.H
+4=analog.C
+5=config_1.C
+6=..\..\..\..\DATN_DOC\ds18b20_lib\main.c
+7=..\..\..\..\DATN_DOC\ds18b20_lib\main.h
+8=analog_ds18b20.c
+9=ds18b20.h
+10=khaibaobien.c
+11=C:\Program Files (x86)\PICC\Drivers\STRING.H
+12=types.h
+13=C:\Program Files (x86)\PICC\Drivers\LCD.C
+14=
+>>>>>>> doanV2
 [Units]
 Count=1
 1=hellopic (main)

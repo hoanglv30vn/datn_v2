@@ -16,18 +16,13 @@ data='hi'
 serial_com = input("SELLECT COM: ")
 serial__=serial.Serial(serial_com, baudrate=9600 ,timeout=0.1)
 
-HEADER_LENGTH = 10
+HEADER_LENGTH = 40
 
-IP = "127.0.0.161"
-IP = socket.gethostbyname(socket.gethostname())
-PORT = 8888
+IP = "127.0.0.1"
+PORT = 1234
 # my_username = input("Username: ")
 my_username = input("tên node: ")
-username = my_username.encode('utf-8')
-username_header = f"{len(username):<{HEADER_LENGTH}}".encode('utf-8')
-print (username_header + username)
 
-# ABCD =input("jhihi")
 # Create a socket
 # socket.AF_INET - address family, IPv4, some otehr possible are AF_INET6, AF_BLUETOOTH, AF_UNIX
 # socket.SOCK_STREAM - TCP, conection-based, socket.SOCK_DGRAM - UDP, connectionless, datagrams, socket.SOCK_RAW - raw IP packets
@@ -37,13 +32,17 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect((IP, PORT))
 
 # Set connection to non-blocking state, so .recv() call won;t block, just return some exception we'll handle
-# client_socket.setblocking(False)
+client_socket.setblocking(False)
 
 # Prepare username and header and send them
 # We need to encode username to bytes, then count number of bytes and prepare header of fixed size, that we encode to bytes as well
+username = my_username.encode('utf-8')
+username_header = f"{len(username):<{HEADER_LENGTH}}".encode('utf-8')
+client_socket.send(username_header + username)
 
-client_socket.send(username_header + username)
-client_socket.send(username_header + username)
+
+
+
 class chaylen (threading.Thread):
     def __init__(self,  threadID, name ):
         threading.Thread.__init__(self)
@@ -87,7 +86,6 @@ class chaylen (threading.Thread):
                 print(data)    
                 message = data.encode('utf-8')
                 message_header = f"{len(data):<{HEADER_LENGTH}}".encode('utf-8')
-                print(message_header+message)
                 client_socket.send(message_header + message)                                        
 
 class udp (threading.Thread):
@@ -98,7 +96,6 @@ class udp (threading.Thread):
         # self.counter = counter
     def run(self):
         print ("Bat dau " + self.name)
-        # print("A")
         self.udp_truyen_nhan()
     def udp_truyen_nhan(self):
         while True:

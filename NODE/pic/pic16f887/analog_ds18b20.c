@@ -7,7 +7,7 @@
 float KET_QUA_ANALOG[]={0,0,0,0,0};
 
 
-//int16 temperature_raw; /*Du lieu nhiet do (resolution 1 / 256Â°C) */
+//int16 temperature_raw; /*Du lieu nhiet do (resolution 1 / 256°C) */
 float temperature_float; /* Gia tri nhiet do do duoc */
 //char temperature[8];  /* Mang luu gia tri nhiet do*/
 unsigned int8 sensor_count = 0;
@@ -31,16 +31,16 @@ float KET_QUA_ANALOG_TEMP=0;
          //temperature_raw = DS1820_GetTempRaw();
          //DS1820_GetTempString(temperature_raw, temperature);
          temperature_float = DS1820_GetTempFloat();
-         //fprintf(UART, "Sensor %d: %fÂ°C \n\r", sensor_count, temperature_float);    
-         
+         //fprintf(UART, "Sensor %d: %f°C \n\r", sensor_count, temperature_float);    
+
          KET_QUA_ANALOG[sensor_count] = temperature_float  ;
-         
+
          CHENH_LECH = ABS( KET_QUA_ANALOG[sensor_count] -KET_QUA_ANALOG_TEMP );                  
          IF (CHENH_LECH>0.2){
             TT_SEND_ANALOG = 1;
          }
          //KET_QUA_ANALOG_TEMP[sensor_count] = KET_QUA_ANALOG[sensor_count];         
-         
+
          sensor_count ++;
       }
       while ( DS1820_FindNextDevice() && SOLUONGCAMBIEN_CONFIG > sensor_count);
@@ -79,7 +79,7 @@ float KET_QUA_ANALOG_TEMP=0;
 
     PRINTF ("#");
     OUTPUT_TOGGLE (PIN_C4) ;
-    
+
  }
 
 

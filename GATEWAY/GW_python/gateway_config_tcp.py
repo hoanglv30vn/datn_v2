@@ -431,6 +431,7 @@ class Ui_MainWindow(object):
         curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = ? ", [name_nha] )
         if (len(curr.fetchall())>0): 
             curr.execute("DELETE FROM CONFIG_GW WHERE ATTRIBUTES = ?",[name_nha])  
+        conn.commit()
         conn.close()          
     def read_idGW_firebase(self):
         db = firebase.database().child("ADMIN")        

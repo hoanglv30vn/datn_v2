@@ -1,11 +1,6 @@
 
-<<<<<<< HEAD
-ROM used:   5446/8192 (66%)
-            5612/8192 (69%) including unused fragments
-=======
-ROM used:   7093/8192 (87%)
+ROM used:   7083/8192 (86%)
             7271/8192 (89%) including unused fragments
->>>>>>> doanV2
 
             1.0 Average locations per line
             5.2 Average locations per statement
@@ -18,13 +13,8 @@ Stack size: 8
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-<<<<<<< HEAD
-  224   123  10  hellopic.c
-   32     0   0  thuvien.c
-=======
-  238   129   9  hellopic.c
+  239   129   9  hellopic.c
    34     0   0  thuvien.c
->>>>>>> doanV2
   768     0   0  C:\Program Files (x86)\PICC\Devices\16F887.H
   423   125   9  C:\Program Files (x86)\PICC\Drivers\STRING.H
    32     0   0  C:\Program Files (x86)\PICC\Drivers\stddef.h
@@ -34,25 +24,15 @@ Lines Stmts  %   Files
    37     0   0  C:\Program Files (x86)\PICC\Drivers\STDIO.H
  2229   257  19  C:\Program Files (x86)\PICC\Drivers\MATH.H
    19     8   1  xuatbyte74595.c
-<<<<<<< HEAD
-  456   100   8  C:\Program Files (x86)\PICC\Drivers\LCD.C
-   29     0   0  khaibaobien.c
-  269   161  13  config_1.C
-   90    49   4  DIEU_KHIEN.C
-  128    38   3  analog.C
------ -----
- 6538  1220 Total
-=======
   456   100   7  C:\Program Files (x86)\PICC\Drivers\LCD.C
-   28     0   0  khaibaobien.c
+   32     0   0  khaibaobien.c
   269   161  12  config_1.C
-   91    50   4  DIEU_KHIEN.C
+   90    49   4  DIEU_KHIEN.C
    86    35   3  analog_ds18b20.c
    59     0   0  types.h
   677   137  10  ds18b20.h
 ----- -----
- 7248  1361 Total
->>>>>>> doanV2
+ 7252  1360 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
@@ -121,44 +101,7 @@ Page ROM  %  RAM   Vol Diff  Functions:
 1     34   0    6             @WRITEBITA
 1     25   0    5             @READBITA
  Inline         4   237  5.5  BIN_TO_DEC
-<<<<<<< HEAD
-1    380   7    2  1039  6.2  XUAT_DIEU_KHIEN
-0      7   0    0             @const1174
-0      7   0    0             @const1175
-0      7   0    0             @const1176
-0      3   0    0             @const1178
-1     82   2    4             @PSTRINGC7_9600_62_63
-0      3   0    0             @const1183
- Inline         2   251  4.2  DIEUKHIENTHIETBI
- Inline        13   475  6.3  ADC_READ
-2    580  11    4   321  5.1  READ_ANALOG
-1    245   4    3   876  5.3  SEND_ANALOG_UART
-0      3   0    0             @const1202
-0      6   0    0             @const1204
- Inline         1   450  6.1  QUET_PHIM
-0     70   1    0    12  0.8  NGAT_NGOAI
-0     29   1    2   163  3.9  NGAT
-2    576  11    5  1362  8.4  XU_LY_UART
-0      5   0    0             @const1212
-2     10   0    0             @goto12771
-2    350   6    1  1377  6.8  MAIN
-0      5   0    0             @const1220
-0      5   0    0             @const1222
- Inline         0             @cinit1
-
-Program metrics:
-    Functions               39
-    Statements              1220
-    Comments                1131
-    Volume (V)              37875
-    Difficulty (D)          207.9
-    Effort to implement (E) 7872691
-    Time to implement (T)   121 hours, 30 minutes
-    Est Delivered Bugs (B)  13
-    Cyclomatic Complexity   90
-    Maintainability (MI)    123
-=======
-1    386   5    2  1086  6.3  XUAT_DIEU_KHIEN
+1    380   5    2  1039  6.2  XUAT_DIEU_KHIEN
 0      7   0    0             @const1171
 0      7   0    0             @const1172
 0      7   0    0             @const1173
@@ -171,57 +114,49 @@ Program metrics:
 1     31   0    1   143  2.1  DS1820_WriteBit
  Inline         2   218  5.0  DS1820_ReadByte
 1     32   0    3   203  4.1  DS1820_WriteByte
-2     47   1    3   210  4.7  DS1820_AddrDevice
+1     35   0    3   210  4.7  DS1820_AddrDevice
 1    169   2    9  1864 11.7  DS1820_FindNextDevice
  Inline         0    61  1.7  DS1820_FindFirstDevice
  Inline        16  1193 10.2  DS1820_GetTempRaw
  Inline         4    48  2.1  DS1820_GetTempFloat
-2    752  11   10   361  5.4  READ_ANALOG
+2    760  11   10   361  5.4  READ_ANALOG
 3    250   4    6   904  6.1  SEND_ANALOG_UART
-1     17   0    1             @SPRINTF
+2     17   0    1             @SPRINTF
  Inline         5             @FTOSD
 2     83   1   13             @DIV3232
-3    483   7   13   904  6.1  @PRINTF_L32D_1242FPFPFR
-0      3   0    0   904  6.1  @const1253
+3    483   7   13             @PRINTF_L32D_1242FPFPFR
+0      3   0    0   450  6.1  @const1253
  Inline         1   450  6.1  QUET_PHIM
 0     80   1    0    12  0.8  NGAT_NGOAI
 0     29   0    2   163  3.9  NGAT
 2    664   9    5  1618  8.5  XU_LY_UART
-0      5   0    0    12  0.8  @const1263
-2      9   0    0   163  3.9  @goto13006
+0      5   0    0             @const1263
+2      9   0    0             @goto13006
 3    394   6    1  1377  6.8  MAIN
-0      5   0    0  1377  6.8  @const1272
-0      5   0    0  1377  6.8  @const1274
- Inline         0  1377  6.8  @cinit1
+0      5   0    0             @const1272
+0      5   0    0             @const1274
+ Inline         0             @cinit1
 
 Program metrics:
-    Functions               55
-    Statements              1361
+    Functions               49
+    Statements              1360
     Comments                1437
-    Volume (V)              58310
-    Difficulty (D)          289.6
-    Effort to implement (E) 16886601
-    Time to implement (T)   260 hours, 36 minutes
-    Est Delivered Bugs (B)  22
-    Cyclomatic Complexity   133
-    Maintainability (MI)    132
->>>>>>> doanV2
+    Volume (V)              47295
+    Difficulty (D)          256.3
+    Effort to implement (E) 12119845
+    Time to implement (T)   187 hours, 2 minutes
+    Est Delivered Bugs (B)  18
+    Cyclomatic Complexity   112
+    Maintainability (MI)    124
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00003     4  0  
 00004-00057    84  0  
-<<<<<<< HEAD
-00058-007FF  1952  8  
-00800-00FFF  1890  158  
-01000-017FF  1516  532  
-01800-01FFF     0  2048  
-=======
 00058-007FF  1960  0  
-00800-00FFF  2033  15  
-01000-017FF  1885  163  
+00800-00FFF  2045  3  
+01000-017FF  1863  185  
 01800-01FFF  1127  921  
->>>>>>> doanV2
 
 
 

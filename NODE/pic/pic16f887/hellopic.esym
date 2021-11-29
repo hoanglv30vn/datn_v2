@@ -1,8 +1,7 @@
-D G "LCD_LINE_LENGTH" 11 187 "20"
-D G "__PCM__" 12 1 ""5.015""
-D G "__DEVICE__" 12 1 "887"
-D G "__DATE__" 12 1 ""19-Nov-21""
-D G "__TIME__" 12 1 ""15:12:44"" "Standard Header file for the PIC16F887 device ////////////////"
+D G "__PCM__" 0 239 ""5.015""
+D G "__DEVICE__" 0 239 "887"
+D G "__DATE__" 0 239 ""29-Nov-21""
+D G "__TIME__" 0 239 ""21:03:25"" "Standard Header file for the PIC16F887 device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 v L "value" 2 39 "int8" `54 
 f B "set_tris_a" 2 39 "void(int8 value)" `53 
@@ -1481,105 +1480,371 @@ V L "on" 11 443 "int8" `1067
 F G "lcd_cursor_on" 11 444 "void(int8 on)" `1066 
 C L "lcd_cursor_on" 11 2 1 "FUNCTION"
 C L "lcd_cursor_on" 11 2 1 "FUNCTION"
-V G "KQADC" 12 1 "int16" `1069 
-V G "KET_QUA_ANALOG" 12 2 "int8[1]" `1070 
-V G "KET_QUA_ANALOG_TEMP" 12 3 "int8[1]" `1071 
-V G "CONFIG_FUN" 12 4 "int8" `1072 
-V G "VT" 12 5 "int8" `1073 
-V G "KYTU" 12 5 "int8" `1074 
-V G "LENH_DIEU_KHIEN" 12 6 "int8" `1075 
-V G "ID_GATEWAY" 12 7 "int8[6]" `1076 
-V G "ID_NODE" 12 8 "int8[4]" `1077 
-V G "LEN_PACKAGES" 12 9 "int8" `1078 
-V G "LENHDIEUKHIEN" 12 10 "int8" `1079 
-V G "DODAI_DATA_NHAN" 12 10 "int8" `1080 
-V G "SOLUONGTHIETBI_CONFIG" 12 11 "int8" `1081 
-V G "SOLUONGCAMBIEN_CONFIG" 12 11 "int8" `1082 
-V G "SOSANH_IDNODE" 12 12 "sint8" `1083 
-V G "SOSANH_IDGW" 12 12 "sint8" `1084 
-V G "TT_THIETBI_TEMP" 12 14 "int1[8]" `1085 
-V G "TTNHAN" 12 15 "int1" `1086 
-V G "TT_CONFIG" 12 15 "int1" `1087 
-V G "TT_CONTROL" 12 15 "int1" `1088 
-V G "TT_CONFIG_DONE" 12 15 "int1" `1089 
-V G "TT_FUN" 12 15 "int1" `1090 
-V G "TT_STT" 12 15 "int1" `1091 
-V G "TT_CONFIG_OKE_UART" 12 15 "int1" `1092 
-V G "TT_SW" 12 15 "int1" `1093 
-V G "TT_SEND_ANALOG" 12 15 "int1" `1094 
-V G "ID_NODE_CHAR" 12 17 "*int8[1]" `1095 
-V G "ID_GATEWAY_CHAR" 12 18 "*int8[1]" `1097 
-V G "ID_NODE_NHAN" 12 19 "*int8[1]" `1099 
-V G "ID_GW_NHAN" 12 20 "*int8[1]" `1101 
-V G "KYTUCHAR" 12 21 "int8[50]" `1103 
-V G "KYTUCHAR2" 12 22 "int8[25]" `1104 
-V G "TEMP_CHAR" 12 24 "*int8[1]" `1105 
-V G "TEMP_CHAR2" 12 25 "*int8[1]" `1107 
-C L "READ_EEPROMP_DATA_NODE" 12 5 1 "FUNCTION"
+V G "CONFIG_FUN" 12 4 "int8" `1069 
+V G "VT" 12 5 "int8" `1070 
+V G "KYTU" 12 5 "int8" `1071 
+V G "LENH_DIEU_KHIEN" 12 6 "int8" `1072 
+V G "ID_GATEWAY" 12 7 "int8[6]" `1073 
+V G "ID_NODE" 12 8 "int8[4]" `1074 
+V G "LEN_PACKAGES" 12 9 "int8" `1075 
+V G "LENHDIEUKHIEN" 12 10 "int8" `1076 
+V G "DODAI_DATA_NHAN" 12 10 "int8" `1077 
+V G "SOLUONGTHIETBI_CONFIG" 12 11 "int8" `1078 
+V G "SOLUONGCAMBIEN_CONFIG" 12 11 "int8" `1079 
+V G "SOSANH_IDNODE" 12 12 "sint8" `1080 
+V G "SOSANH_IDGW" 12 12 "sint8" `1081 
+V G "TT_THIETBI_TEMP" 12 14 "int1[8]" `1082 
+V G "TTNHAN" 12 15 "int1" `1083 
+V G "TT_CONFIG" 12 15 "int1" `1084 
+V G "TT_CONTROL" 12 15 "int1" `1085 
+V G "TT_CONFIG_DONE" 12 15 "int1" `1086 
+V G "TT_FUN" 12 15 "int1" `1087 
+V G "TT_STT" 12 15 "int1" `1088 
+V G "TT_CONFIG_OKE_UART" 12 15 "int1" `1089 
+V G "TT_SW" 12 15 "int1" `1090 
+V G "TT_SEND_ANALOG" 12 15 "int1" `1091 
+V G "ID_NODE_CHAR" 12 17 "*int8[1]" `1092 
+V G "ID_GATEWAY_CHAR" 12 18 "*int8[1]" `1094 
+V G "ID_NODE_NHAN" 12 19 "*int8[1]" `1096 
+V G "ID_GW_NHAN" 12 20 "*int8[1]" `1098 
+V G "KYTUCHAR" 12 21 "int8[50]" `1100 
+V G "KYTUCHAR2" 12 22 "int8[25]" `1101 
+V G "TEMP_CHAR" 12 24 "*int8[1]" `1102 
+V G "TEMP_CHAR2" 12 25 "*int8[1]" `1104 
+C L "READ_EEPROMP_DATA_NODE" 12 1 1 "FUNCTION"
 C L "READ_EEPROMP_DATA_NODE" 1 26 1 "FUNCTION"
-F G "READ_EEPROMP_DATA_NODE" 13 1 "void()" `1109 
-V L "j" 13 2 "int8" `1110 
+F G "READ_EEPROMP_DATA_NODE" 13 1 "void()" `1106 
+V L "j" 13 2 "int8" `1107 
 C L "CHON_ID" 13 12 1 "FUNCTION"
-F G "CHON_ID" 13 14 "void()" `1111  "TT_CONFIG_DONE;"
-V L "num" 13 18 "int8" `1112 
+F G "CHON_ID" 13 14 "void()" `1108  "TT_CONFIG_DONE;"
+V L "num" 13 18 "int8" `1109 
 C L "CHON_ID" 13 12 2 "FUNCTION"
 C L "CHON_ID" 13 12 1 "FUNCTION"
 C L "CHON_ID" 13 12 1 "FUNCTION"
-F G "NHAPID_GW" 13 55 "void()" `1123 
-V L "num" 13 56 "int8" `1124 
+F G "NHAPID_GW" 13 55 "void()" `1120 
+V L "num" 13 56 "int8" `1121 
 C L "NHAPID_GW" 13 12 2 "FUNCTION"
 C L "NHAPID_GW" 13 12 1 "FUNCTION"
 C L "NHAPID_GW" 13 12 1 "FUNCTION"
-F G "BUTT_OKE" 13 95 "void()" `1130 
+F G "BUTT_OKE" 13 95 "void()" `1127 
 C L "BUTT_OKE" 13 12 1 "FUNCTION"
 C L "BUTT_OKE" 13 12 1 "FUNCTION"
-F G "SELLECT_FUN" 13 102 "void()" `1131 
-F G "BUTT_FUN" 13 118 "void()" `1132 
+F G "SELLECT_FUN" 13 102 "void()" `1128 
+F G "BUTT_FUN" 13 118 "void()" `1129 
 C L "BUTT_FUN" 13 12 1 "FUNCTION"
 C L "BUTT_FUN" 13 12 1 "FUNCTION"
 C L "BUTT_FUN" 13 12 1 "FUNCTION"
-F G "XULY_IDNODE_NHAP" 13 161 "void()" `1137  "*TEMP_CHAR3 = "\0";"
-V L "j" 13 164 "int8" `1139 
+F G "XULY_IDNODE_NHAP" 13 161 "void()" `1134  "*TEMP_CHAR3 = "\0";"
+V L "j" 13 164 "int8" `1136 
 C L "XULY_IDNODE_NHAP" 13 12 3 "FUNCTION"
-F G "XULY_IDGW_NHAP" 13 175 "void()" `1140 
-V L "j" 13 178 "int8" `1142 
-F G "CONFIG_DONE" 13 189 "void()" `1143 
-V L "PACKAGE_CONFIG" 13 192 "*int8[1]" `1144 
+F G "XULY_IDGW_NHAP" 13 175 "void()" `1137 
+V L "j" 13 178 "int8" `1139 
+F G "CONFIG_DONE" 13 189 "void()" `1140 
+V L "PACKAGE_CONFIG" 13 192 "*int8[1]" `1141 
 C L "CONFIG_DONE" 13 12 4 "FUNCTION"
 C L "CONFIG_DONE" 13 12 1 "FUNCTION"
-V L "j" 13 213 "int8" `1146 
-F G "XACNHANCONFIG" 13 231 "void()" `1151 
-V L "TOKEN" 13 236 "*int8" `1153 
+V L "j" 13 213 "int8" `1143 
+F G "XACNHANCONFIG" 13 231 "void()" `1148 
+V L "TOKEN" 13 236 "*int8" `1150 
 C L "READ_BTN_STATE" 13 12 1 "FUNCTION"
-F G "READ_BTN_STATE" 14 2 "void()" `1157 
-V L "TB" 14 4 "int8" `1158 
-V L "ID_TB" 14 5 "int8" `1159 
+F G "READ_BTN_STATE" 14 2 "void()" `1154 
+V L "TB" 14 4 "int8" `1155 
+V L "ID_TB" 14 5 "int8" `1156 
 C L "READ_BTN_STATE" 14 14 4 "FUNCTION"
-F G "BIN_TO_DEC" 14 27 "int8()" `1167 
-V L "DEC_VL" 14 28 "int8" `1168 
-V L "base" 14 29 "int8" `1169 
-V L "i" 14 30 "int8" `1170 
-F G "XUAT_DIEU_KHIEN" 14 41 "void()" `1171 
-V L "ST" 14 44 "int8" `1172 
+F G "BIN_TO_DEC" 14 27 "int8()" `1164 
+V L "DEC_VL" 14 28 "int8" `1165 
+V L "base" 14 29 "int8" `1166 
+V L "i" 14 30 "int8" `1167 
+F G "XUAT_DIEU_KHIEN" 14 41 "void()" `1168 
+V L "ST" 14 44 "int8" `1169 
 C L "XUAT_DIEU_KHIEN" 14 14 1 "FUNCTION"
-F G "DIEUKHIENTHIETBI" 14 76 "void()" `1185 
-V L "MA_DEC" 14 77 "int8" `1186 
-V L "SB" 14 80 "int8" `1187 
-V L "KENH" 15 2 "int8" `1190 
-F G "ADC_READ" 15 3 "int8(int8 KENH)" `1189 
-V L "ANALOG_PORT" 15 4 "int8[1]" `1191 
-V L "i" 15 10 "int8" `1192 
-F G "READ_ANALOG" 15 22 "void()" `1193 
-V L "CHENH_LECH" 15 23 "sint8" `1194 
-V L "K" 15 24 "int8" `1195 
-C L "SEND_ANALOG_UART" 15 33 38 "FUNCTION"
-F G "SEND_ANALOG_UART" 15 97 "void()" `1196 
-C L "SEND_ANALOG_UART" 15 33 1 "FUNCTION"
-V L "PACKAGE_SS" 15 100 "*int8[1]" `1197 
-V L "DO_DAI" 15 103 "int8" `1199 
-V L "i" 15 105 "int8" `1200 
-F G "QUET_PHIM" 0 6 "void()" `1205 
-V L "BDT" 0 7 "int8" `1206 
+F G "DIEUKHIENTHIETBI" 14 76 "void()" `1182 
+V L "MA_DEC" 14 77 "int8" `1183 
+V L "SB" 14 80 "int8" `1184 
+C G "" 16 1 1 "*"
+C G "" 16 1 1 "*"
+C G "" 16 1 1 "*"
+C G "" 16 1 1 "*"
+C G "" 16 1 1 "*"
+C G "" 16 11 1 "*"
+C G "" 16 11 1 "*"
+C G "" 16 11 1 "*"
+C G "" 16 11 1 "*"
+C G "" 16 11 1 "*"
+D G "_TYPES_H" 16 24 ""
+T G "bool" 16 48 "int1" `1186 
+T G "sint8" 16 49 "sint8" `1187 
+T G "sint16" 16 50 "sint16" `1188 
+T G "sint32" 16 51 "sint32" `1189 
+T G "uint8" 16 52 "int8" `1190 
+T G "uint16" 16 53 "int16" `1191 
+T G "uint32" 16 54 "int32" `1192  "(defined(__PCB__) || defined(__PCH__) || defined(__PCM__)) *"
+D G "DS1820_DATAPIN" 15 2 "PIN_A0"
+C G "" 17 1 1 "*"
+C G "" 17 1 1 "*"
+C G "" 17 1 1 "*"
+C G "" 17 1 1 "*"
+C G "" 17 1 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+C G "" 17 11 1 "*"
+D G "_DS1820_H" 17 50 ""
+D G "TEMP_RES" 17 59 "0x100" "temperature resolution => 1/256°C = 0.0039°C"
+D G "DS1820_RST_PULSE" 17 66 "480" "master reset pulse time in [us]"
+D G "DS1820_MSTR_BITSTART" 17 67 "2" "delay time for bit start by master"
+D G "DS1820_PRESENCE_WAIT" 17 68 "40" "delay after master reset pulse in [us]"
+D G "DS1820_PRESENCE_FIN" 17 69 "480" "dealy after reading of presence pulse [us]"
+D G "DS1820_BITREAD_DLY" 17 70 "5" "bit read delay"
+D G "DS1820_BITWRITE_DLY" 17 71 "100" "bit write delay"
+D G "DS1820_REG_TEMPLSB" 17 78 "0"
+D G "DS1820_REG_TEMPMSB" 17 79 "1"
+D G "DS1820_REG_CNTREMAIN" 17 80 "6"
+D G "DS1820_REG_CNTPERSEC" 17 81 "7"
+D G "DS1820_SCRPADMEM_LEN" 17 82 "9" "length of scratchpad memory"
+D G "DS1820_ADDR_LEN" 17 84 "8"
+D G "DS1820_CMD_SEARCHROM" 17 91 "0xF0"
+D G "DS1820_CMD_READROM" 17 92 "0x33"
+D G "DS1820_CMD_MATCHROM" 17 93 "0x55"
+D G "DS1820_CMD_SKIPROM" 17 94 "0xCC"
+D G "DS1820_CMD_ALARMSEARCH" 17 95 "0xEC"
+D G "DS1820_CMD_CONVERTTEMP" 17 96 "0x44"
+D G "DS1820_CMD_WRITESCRPAD" 17 97 "0x4E"
+D G "DS1820_CMD_READSCRPAD" 17 98 "0xBE"
+D G "DS1820_CMD_COPYSCRPAD" 17 99 "0x48"
+D G "DS1820_CMD_RECALLEE" 17 100 "0xB8"
+D G "DS1820_FAMILY_CODE_DS18B20" 17 103 "0x28"
+D G "DS1820_FAMILY_CODE_DS18S20" 17 104 "0x10"
+V G "bDoneFlag" 17 111 "bool" `1193 
+V G "nLastDiscrepancy_u8" 17 112 "uint8" `1194 
+V G "nRomAddr_au8" 17 113 "uint8[8]" `1195  "-------------------------------------------------------------------------- *"
+C G "" 17 122 1 "*"
+C G "" 17 122 1 "*"
+C G "" 17 122 1 "*"
+C G "" 17 122 1 "*"
+D G "DS1820_DelayUs" 17 130 "(dly_us)       delay_us(dly_us)"
+C G "" 17 133 1 "*"
+C G "" 17 133 1 "*"
+C G "" 17 133 1 "*"
+C G "" 17 133 1 "*"
+D G "DS1820_DelayMs" 17 141 "(dly_ms)   delay_ms(dly_ms)"
+C G "" 17 144 1 "*"
+C G "" 17 144 1 "*"
+C G "" 17 144 1 "*"
+C G "" 17 144 1 "*"
+D G "DS1820_DisableInterrupts" 17 155 "()"
+C G "" 17 160 1 "*"
+C G "" 17 160 1 "*"
+C G "" 17 160 1 "*"
+C G "" 17 160 1 "*"
+D G "DS1820_EnableInterrupts" 17 171 "()"
+C L "DS1820_Reset" 17 175 1 "*"
+C L "DS1820_Reset" 17 175 1 "*"
+C L "DS1820_Reset" 17 175 1 "*"
+C L "DS1820_Reset" 17 175 1 "*"
+C L "DS1820_Reset" 17 175 1 "*"
+F G "DS1820_Reset" 17 184 "int8()" `1196 
+V L "bPresPulse" 17 185 "bool" `1197  "reset pulse *"
+C L "DS1820_Reset" 17 175 1 "FUNCTION"
+C L "DS1820_Reset" 17 175 1 "FUNCTION"
+C L "DS1820_ReadBit" 17 208 1 "*"
+C L "DS1820_ReadBit" 17 208 1 "*"
+C L "DS1820_ReadBit" 17 208 1 "*"
+C L "DS1820_ReadBit" 17 208 1 "*"
+C L "DS1820_ReadBit" 17 208 1 "*"
+F G "DS1820_ReadBit" 17 217 "int8()" `1198 
+V L "bBit" 17 218 "bool" `1199 
+C L "DS1820_WriteBit" 17 235 1 "*"
+C L "DS1820_WriteBit" 17 235 1 "*"
+C L "DS1820_WriteBit" 17 235 1 "*"
+C L "DS1820_WriteBit" 17 235 1 "*"
+C L "DS1820_WriteBit" 17 235 1 "*"
+V L "bBit" 17 243 "int8" `1201 
+F G "DS1820_WriteBit" 17 244 "void(int8 bBit)" `1200 
+C L "DS1820_ReadByte" 17 262 1 "*"
+C L "DS1820_ReadByte" 17 262 1 "*"
+C L "DS1820_ReadByte" 17 262 1 "*"
+C L "DS1820_ReadByte" 17 262 1 "*"
+C L "DS1820_ReadByte" 17 262 1 "*"
+F G "DS1820_ReadByte" 17 271 "uint8()" `1202 
+V L "i" 17 272 "uint8" `1203 
+V L "value" 17 273 "uint8" `1204 
+C L "DS1820_WriteByte" 17 287 1 "*"
+C L "DS1820_WriteByte" 17 287 1 "*"
+C L "DS1820_WriteByte" 17 287 1 "*"
+C L "DS1820_WriteByte" 17 287 1 "*"
+C L "DS1820_WriteByte" 17 287 1 "*"
+V L "val_u8" 17 295 "uint8" `1206 
+F G "DS1820_WriteByte" 17 296 "void(uint8 val_u8)" `1205 
+V L "i" 17 297 "uint8" `1207 
+V L "temp" 17 298 "uint8" `1208 
+C L "DS1820_WriteByte" 17 287 1 "FUNCTION"
+C L "DS1820_WriteByte" 17 287 1 "FUNCTION"
+C L "DS1820_WriteByte" 17 287 1 "FUNCTION"
+C L "DS1820_WriteByte" 17 287 1 "FUNCTION"
+C L "DS1820_AddrDevice" 17 287 3 "FUNCTION"
+C L "DS1820_AddrDevice" 17 317 1 "*"
+C L "DS1820_AddrDevice" 17 317 1 "*"
+C L "DS1820_AddrDevice" 17 317 1 "*"
+C L "DS1820_AddrDevice" 17 317 1 "*"
+C L "DS1820_AddrDevice" 17 317 1 "*"
+C L "DS1820_AddrDevice" 17 317 1 "*"
+V L "nAddrMethod" 17 326 "uint8" `1210 
+F G "DS1820_AddrDevice" 17 327 "void(uint8 nAddrMethod)" `1209 
+V L "i" 17 328 "uint8" `1211 
+C L "DS1820_AddrDevice" 17 317 1 "FUNCTION"
+C L "DS1820_AddrDevice" 17 317 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "*"
+C L "DS1820_FindNextDevice" 17 345 1 "*"
+C L "DS1820_FindNextDevice" 17 345 1 "*"
+C L "DS1820_FindNextDevice" 17 345 1 "*"
+C L "DS1820_FindNextDevice" 17 345 1 "*"
+C L "DS1820_FindNextDevice" 17 345 1 "*"
+F G "DS1820_FindNextDevice" 17 355 "int8()" `1212 
+V L "state_u8" 17 356 "uint8" `1213 
+V L "byteidx_u8" 17 357 "uint8" `1214 
+V L "mask_u8" 17 358 "uint8" `1215 
+V L "bitpos_u8" 17 359 "uint8" `1216 
+V L "nDiscrepancyMarker_u8" 17 360 "uint8" `1217 
+V L "bit_b" 17 361 "bool" `1218 
+V L "bStatus" 17 362 "bool" `1219 
+V L "next_b" 17 363 "bool" `1220 
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 7 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindNextDevice" 17 345 1 "FUNCTION"
+C L "DS1820_FindFirstDevice" 17 489 1 "*"
+C L "DS1820_FindFirstDevice" 17 489 1 "*"
+C L "DS1820_FindFirstDevice" 17 489 1 "*"
+C L "DS1820_FindFirstDevice" 17 489 1 "*"
+C L "DS1820_FindFirstDevice" 17 489 1 "*"
+C L "DS1820_FindFirstDevice" 17 489 1 "*"
+F G "DS1820_FindFirstDevice" 17 499 "int8()" `1221 
+C L "DS1820_GetTempRaw" 17 507 1 "*"
+C L "DS1820_GetTempRaw" 17 507 1 "*"
+C L "DS1820_GetTempRaw" 17 507 1 "*"
+C L "DS1820_GetTempRaw" 17 507 1 "*"
+C L "DS1820_GetTempRaw" 17 507 1 "*"
+C L "DS1820_GetTempRaw" 17 507 14 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+C L "DS1820_GetTempRaw" 17 536 1 "*"
+F G "DS1820_GetTempRaw" 17 579 "sint16()" `1222 
+V L "i" 17 580 "uint8" `1223 
+V L "temp_u16" 17 581 "uint16" `1224 
+V L "highres_u16" 17 582 "uint16" `1225 
+V L "scrpad" 17 583 "uint8[9]" `1226  "--- start temperature conversion -------------------------------------- *"
+C L "DS1820_GetTempRaw" 17 536 1 "FUNCTION"
+C L "DS1820_GetTempRaw" 17 536 2 "FUNCTION"
+C L "DS1820_GetTempRaw" 17 536 1 "FUNCTION"
+C L "DS1820_GetTempRaw" 17 536 1 "FUNCTION"
+C L "DS1820_GetTempRaw" 17 536 2 "FUNCTION"
+C L "DS1820_GetTempRaw" 17 536 4 "FUNCTION"
+C L "DS1820_GetTempRaw" 17 536 1 "FUNCTION"
+C L "DS1820_GetTempRaw" 17 536 2 "FUNCTION"
+C L "DS1820_GetTempRaw" 17 536 1 "FUNCTION"
+C L "DS1820_GetTempRaw" 17 536 1 "FUNCTION"
+C L "DS1820_GetTempRaw" 17 536 1 "FUNCTION"
+C L "DS1820_GetTempRaw" 17 536 2 "FUNCTION"
+C L "DS1820_GetTempFloat" 17 650 1 "*"
+C L "DS1820_GetTempFloat" 17 650 1 "*"
+C L "DS1820_GetTempFloat" 17 650 1 "*"
+C L "DS1820_GetTempFloat" 17 650 1 "*"
+C L "DS1820_GetTempFloat" 17 650 1 "*"
+F G "DS1820_GetTempFloat" 17 659 "float()" `1227 
+C G "" 17 664 1 "*"
+C G "" 17 664 1 "*"
+C G "" 17 664 1 "*"
+C G "" 17 664 1 "*"
+C G "" 17 664 1 "*"
+C G "" 17 664 2 "*"
+V G "KET_QUA_ANALOG" 15 7 "float[1]" `1228 
+V G "temperature_float" 15 11 "float" `1229  "Gia tri nhiet do do duoc *"
+V G "sensor_count" 15 13 "int8" `1230 
+V G "KET_QUA_ANALOG_TEMP" 15 14 "float" `1231 
+F G "READ_ANALOG" 15 20 "void()" `1232  "FOR (INT I =0; I<5; I++){"
+C L "READ_ANALOG" 15 10 1 "FUNCTION"
+V L "CHENH_LECH" 15 26 "float" `1233 
+C L "READ_ANALOG" 15 10 2 "FUNCTION"
+C L "READ_ANALOG" 15 10 1 "FUNCTION"
+C L "READ_ANALOG" 15 10 1 "FUNCTION"
+F G "SEND_ANALOG_UART" 15 53 "void()" `1234 
+C L "SEND_ANALOG_UART" 15 10 1 "FUNCTION"
+V L "PACKAGE_SS" 15 57 "*int8[1]" `1235 
+V L "DO_DAI" 15 60 "int8" `1237 
+V L "i" 15 61 "int8" `1238 
+V L "K" 15 62 "int8" `1239 
+C L "SEND_ANALOG_UART" 15 10 1 "FUNCTION"
+F G "QUET_PHIM" 0 6 "void()" `1256 
+V L "BDT" 0 7 "int8" `1257 
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
@@ -1587,25 +1852,30 @@ C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
 C L "QUET_PHIM" 0 8 1 "FUNCTION"
-F G "NGAT_NGOAI" 0 44 "void()" `1207 
-F G "NGAT" 0 50 "void()" `1208 
-F G "XU_LY_UART" 0 65 "void()" `1209  "ID_NODE_NHAN = KYTU[1] - 48;"
+F G "NGAT_NGOAI" 0 44 "void()" `1258 
+F G "NGAT" 0 50 "void()" `1259 
+F G "XU_LY_UART" 0 65 "void()" `1260  "ID_NODE_NHAN = KYTU[1] - 48;"
 C L "XU_LY_UART" 0 8 3 "FUNCTION"
-V L "CH" 0 74 "int8" `1210 
-V L "RET" 0 75 "*int8" `1211 
-V L "LEN_RET" 0 79 "int8" `1213 
+V L "CH" 0 71 "int8" `1261 
+V L "RET" 0 72 "*int8" `1262 
+V L "LEN_RET" 0 76 "int8" `1264 
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
-V L "TOKEN" 0 86 "*int8" `1215 
+V L "_CHAR_TACH_" 0 82 "*int8" `1265 
+C L "XU_LY_UART" 0 8 1 "FUNCTION"
+V L "TOKEN" 0 84 "*int8" `1267 
+C L "XU_LY_UART" 0 8 1 "FUNCTION"
+C L "XU_LY_UART" 0 8 2 "FUNCTION"
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
 C L "XU_LY_UART" 0 8 1 "FUNCTION"
-F G "MAIN" 0 153 "void()" `1217 
-C L "MAIN" 0 8 2 "FUNCTION"
+C L "XU_LY_UART" 0 8 1 "FUNCTION"
+F G "MAIN" 0 158 "void()" `1269 
+C L "MAIN" 0 8 3 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
 C L "MAIN" 0 8 1 "FUNCTION"
-V L "ABCD" 0 183 "int8" `1221 
+V L "ABCD" 0 192 "int8" `1273 
 C L "MAIN" 0 8 1 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0

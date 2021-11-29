@@ -17,9 +17,8 @@ serial_com = input("SELLECT COM: ")
 serial__=serial.Serial(serial_com, baudrate=9600 ,timeout=0.1)
 HEADER_LENGTH = 40
 
-# IP = "127.0.0.161"
-IP = socket.gethostbyname(socket.gethostname())
-PORT = 8888
+IP = "127.0.0.1"
+PORT = 1234
 
 # Create a socket
 # socket.AF_INET - address family, IPv4, some otehr possible are AF_INET6, AF_BLUETOOTH, AF_UNIX

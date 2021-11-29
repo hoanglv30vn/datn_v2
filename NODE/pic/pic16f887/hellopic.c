@@ -14,7 +14,7 @@ VOID QUET_PHIM()
       }
    }
 
-   IF (BDT > 10)
+   IF (BDT > 15)
    {
       //CONFIG NODE
       TT_CONFIG = ~TT_CONFIG; // VAO TRANG THAI CONFIG
@@ -24,7 +24,7 @@ VOID QUET_PHIM()
       TT_FUN = 0;
    }
 
-   ELSE IF (BDT > 1&&BDT < 10)
+   ELSE IF (BDT > 1&&BDT < 15)
    {
       BUTT_OKE (); //OKE
    }
@@ -68,9 +68,6 @@ VOID QUET_PHIM()
     //TT_DEVICE_NHAN = KYTU[3] - 48; // - 48 ASCII -- > S?. + 64 -- > PORT_D (D0 = 64)
     /* TINH DO DAI*/
     
-    LCD_GOTOXY (1, 2) ;
-    DELAY_MS (10);
-    PRINTF (LCD_PUTC,KYTUCHAR );    
     CHAR CH = '*';
     CHAR * RET;
     * ID_NODE_NHAN = '\0';
@@ -82,19 +79,20 @@ VOID QUET_PHIM()
 
     /* LAY TOKEN DAU TIEN */
     KYTU = 0;
-    TEMP_CHAR = "#";
-    CHAR * TOKEN;
-    TOKEN = STRTOK (KYTUCHAR, TEMP_CHAR);
+    CHAR *_CHAR_TACH_ = "#";
+    //CHAR * TOKEN = "123456";
+    CHAR *TOKEN = STRTOK (KYTUCHAR, _CHAR_TACH_);
 
     /* DUYET QUA CAC TOKEN CON LAI */
     WHILE (TOKEN != NULL)
     {
        SWITCH (KYTU)
        {
-          CASE 0:
-          BREAK;
+          //CASE 0:
+          //BREAK;
 
           CASE 1:
+          //strncpy (ID_GW_NHAN, TOKEN, 6);
           STRCAT (ID_GW_NHAN, TOKEN);
           BREAK;
 
@@ -114,16 +112,15 @@ VOID QUET_PHIM()
           STRCAT (KYTUCHAR2, TOKEN);
           BREAK;
        }
-
-       TOKEN = STRTOK (NULL, TEMP_CHAR);
+       TOKEN = STRTOK (NULL, _CHAR_TACH_);
        KYTU++;
     }
 
     /* SO SANH ID returns - 1 IF s1 < s2, 0 if s1 = s2, 1 if s1 > s2 */
     SOSANH_IDGW = STRCMP (ID_GW_NHAN, ID_GATEWAY_CHAR);
-    SOSANH_IDNODE = STRCMP (ID_NODE_NHAN, ID_NODE_CHAR);
-    
+    SOSANH_IDNODE = STRCMP (ID_NODE_NHAN, ID_NODE_CHAR);        
     IF (SOSANH_IDGW == 0&&SOSANH_IDNODE == 0&&LEN_RET == DODAI_DATA_NHAN)
+    //IF (LEN_RET == DODAI_DATA_NHAN)
     {
        SWITCH (LENHDIEUKHIEN)
        {
@@ -143,7 +140,15 @@ VOID QUET_PHIM()
     ELSE
     {
        DELAY_MS (10);
-
+       OUTPUT_TOGGLE (PIN_C4);
+       DELAY_MS (100);
+       OUTPUT_TOGGLE (PIN_C4);
+       DELAY_MS (200);
+       OUTPUT_TOGGLE (PIN_C4);
+       DELAY_MS (300);
+       OUTPUT_TOGGLE (PIN_C4);       
+       DELAY_MS (400);
+       OUTPUT_TOGGLE (PIN_C4);       
        /* DATA RCV SAI ID NODE, ID GW HOAC LA SAI DO DAI*/
     }
 
@@ -155,7 +160,11 @@ VOID QUET_PHIM()
     SET_TRIS_B (0XFF);
     SET_TRIS_E (0);
     SET_TRIS_C (0X80);
-    SETUP_ADC (ADC_CLOCK_DIV_8);
+    SET_TRIS_A (0XFF);
+    //SETUP_ADC (ADC_CLOCK_DIV_8);// use ds18b20 nên bo cai dong nay
+    
+    
+    
     //SETUP_TIMER_0(T0_INTERNAL | T0_DIV_1);
     //ENABLE_INTERRUPTS (INT_TIMER0);
     

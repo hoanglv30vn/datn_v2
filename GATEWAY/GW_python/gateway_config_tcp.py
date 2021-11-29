@@ -74,11 +74,13 @@ from socket import SHUT_RDWR
 import select
 
 ############################# DATABASE SQL #########################################
-conn = sqlite3.connect('data_config.db')   #kết nối tới database
-curr = conn.cursor()    #con trỏ
+conn_db = sqlite3.connect('data_config.db')   #kết nối tới database
+curr = conn_db.cursor()    #con trỏ
 curr.execute('''CREATE TABLE IF NOT EXISTS CONFIG_GW(ATTRIBUTES char[30], THONGTIN char[20])''') 
 curr.execute('''CREATE TABLE IF NOT EXISTS DATA_NODE(ID_NODE char[20], NAME_ID_NODE char[20],  ID_THIETBI CHAR[20], NAME_THIETBI CHAR[20], PHANLOAI CHAR[20], PHANLOAI_ID_THIETBI CHAR[10], TRANGTHAI_ACTIVE CHAR[20])''') 
-conn.commit()
+conn_db.commit()
+
+
 
 
 # cấu hình firebase 
@@ -123,7 +125,7 @@ clients = {}
 
 print(f'Listening for connections on {IP}:{PORT}...')
 
-
+conn_db.close()
 
 
 
@@ -259,14 +261,19 @@ class Ui_MainWindow(object):
         self.box_comport.clear()                
         self.box_comport.addItems(self.serial_ports())
 
-    def set_serial_change(self):            
+    def set_serial_change(self):       
+        conn = sqlite3.connect('data_config.db')   #kết nối tới database
+        curr = conn.cursor()    #con trỏ            
         serial_com = self.box_comport.currentText()    
         curr.execute("UPDATE CONFIG_GW SET THONGTIN = ? WHERE ATTRIBUTES = ?",[serial_com, "COM_PORT"])
         conn.commit() 
+        conn.close()
         self.set_serial()
 
     def set_serial(self):
         global serial__
+        conn = sqlite3.connect('data_config.db')   #kết nối tới database
+        curr = conn.cursor()    #con trỏ    
         # chọn cổng com, tốc độ baud                             
         serial_baud = int(self.box_baudrate.currentText())
         # Đọc từ SQL Để xem đã có cổng com chưa
@@ -288,6 +295,7 @@ class Ui_MainWindow(object):
             conn.commit()              
             serial__=serial.Serial(serial_com, baudrate=serial_baud ,timeout=0.1)
         print(serial__)
+        conn.close()  
 
     def read_interval(self):
         # thread
@@ -329,6 +337,9 @@ class Ui_MainWindow(object):
     def ALL_DATA(self,update_firebase): 
         # in tên + id nhà
         # result = conn.execute("SELECT * FROM CONFIG_GW")  
+        conn = sqlite3.connect('data_config.db')   #kết nối tới database
+        curr = conn.cursor()    #con trỏ    
+         
         db = firebase.database().child("ADMIN")          
         global id_gw    
         name_home = "     HOME:"
@@ -395,14 +406,16 @@ class Ui_MainWindow(object):
             if start_row != row_number:
                 # pass
                 self.apply_span_to_sales_table(start_row, self.table_danhsach.rowCount())        
-        # conn.close()   
+        conn.close()   
         print(id_gw)
         db = firebase.database().child("ADMIN")  
         db.child(id_gw).stream(self.stream_handler) 
+
         # db.child(id_gw).update(result)  
     def check_data_from_sql(self,id_nha,id_gw_from_line,name_nha):
         # check xem có data chưa, nếu có rồi thì xóa.
-
+        conn = sqlite3.connect('data_config.db')   #kết nối tới database
+        curr = conn.cursor()    #con trỏ     
         curr.execute("SELECT * FROM DATA_NODE")
         if (len(curr.fetchall())>0): 
             curr.execute("SELECT * FROM DATA_NODE")
@@ -418,6 +431,7 @@ class Ui_MainWindow(object):
         curr.execute("SELECT * FROM CONFIG_GW WHERE ATTRIBUTES = ? ", [name_nha] )
         if (len(curr.fetchall())>0): 
             curr.execute("DELETE FROM CONFIG_GW WHERE ATTRIBUTES = ?",[name_nha])  
+        conn.close()          
     def read_idGW_firebase(self):
         db = firebase.database().child("ADMIN")        
         id_gw_from_line = self.line_idgw.text()
@@ -437,6 +451,8 @@ class Ui_MainWindow(object):
         sothutu_thietbi = 0
         sothutu_cambien = 0
         phanloai_id_thietbi = "none"
+        conn = sqlite3.connect('data_config.db')   #kết nối tới database
+        curr = conn.cursor()    #con trỏ           
         for phong, nha in data_object.items():
             # print("phòng:" + str(phong))
             if isinstance(nha, dict):
@@ -471,7 +487,8 @@ class Ui_MainWindow(object):
                 tennhasql= self.decode_data(nha)
                 print("nhà" + tennhasql)    
                 curr.execute("INSERT INTO CONFIG_GW VALUES (?,?)",["name_nha",tennhasql])                            
-        conn.commit()        
+        conn.commit()  
+        conn.close()       
         self.ALL_DATA(0)
 
     # def pretty( self, data_object):
@@ -725,87 +742,90 @@ class udp (threading.Thread, Ui_MainWindow):
             
 
     def udp_truyen_nhan(self,receive_message):
-        while True:            
-            # Calls Unix select() system call or Windows select() WinSock call with three parameters:
-            #   - rlist - sockets to be monitored for incoming data
-            #   - wlist - sockets for data to be send to (checks if for example buffers are not full and socket is ready to send some data)
-            #   - xlist - sockets to be monitored for exceptions (we want to monitor all sockets for errors, so we can use rlist)
-            # Returns lists:
-            #   - reading - sockets we received some data on (that way we don't have to check sockets manually)
-            #   - writing - sockets ready for data to be send thru them
-            #   - errors  - sockets with some exceptions
-            # This is a blocking call, code execution will "wait" here and "get" notified in case any action should be taken
-            read_sockets, _, exception_sockets = select.select(sockets_list, [], sockets_list)
+        while True:       
+            try:     
+                # Calls Unix select() system call or Windows select() WinSock call with three parameters:
+                #   - rlist - sockets to be monitored for incoming data
+                #   - wlist - sockets for data to be send to (checks if for example buffers are not full and socket is ready to send some data)
+                #   - xlist - sockets to be monitored for exceptions (we want to monitor all sockets for errors, so we can use rlist)
+                # Returns lists:
+                #   - reading - sockets we received some data on (that way we don't have to check sockets manually)
+                #   - writing - sockets ready for data to be send thru them
+                #   - errors  - sockets with some exceptions
+                # This is a blocking call, code execution will "wait" here and "get" notified in case any action should be taken
+                read_sockets, _, exception_sockets = select.select(sockets_list, [], sockets_list)
 
 
-            # Iterate over notified sockets
-            for notified_socket in read_sockets:
+                # Iterate over notified sockets
+                for notified_socket in read_sockets:
 
-                # If notified socket is a server socket - new connection, accept it
-                if notified_socket == server_socket:
+                    # If notified socket is a server socket - new connection, accept it
+                    if notified_socket == server_socket:
 
-                    # Accept new connection
-                    # That gives us new socket - client socket, connected to this given client only, it's unique for that client
-                    # The other returned object is ip/port set
-                    client_socket, client_address = server_socket.accept()
+                        # Accept new connection
+                        # That gives us new socket - client socket, connected to this given client only, it's unique for that client
+                        # The other returned object is ip/port set
+                        client_socket, client_address = server_socket.accept()
 
-                    # Client should send his name right away, receive it
-                    user = receive_message(client_socket)
+                        # Client should send his name right away, receive it
+                        user = receive_message(client_socket)
 
-                    # If False - client disconnected before he sent his name
-                    if user is False:
-                        continue
+                        # If False - client disconnected before he sent his name
+                        if user is False:
+                            continue
 
-                    # Add accepted socket to select.select() list
-                    sockets_list.append(client_socket)
+                        # Add accepted socket to select.select() list
+                        sockets_list.append(client_socket)
 
-                    # Also save username and username header
-                    clients[client_socket] = user                          
-                    print('Accepted new connection from {}:{}, username: {}'.format(*client_address, user['data'].decode('utf-8')))
-                        
+                        # Also save username and username header
+                        clients[client_socket] = user                          
+                        print('Accepted new connection from {}:{}, username: {}'.format(*client_address, user['data'].decode('utf-8')))
+                            
 
-                # Else existing socket is sending a message
-                else:
-                    # Receive message
-                    message = receive_message(notified_socket)
-                    # If False, client disconnected, cleanup
-                    if message is False:
-                        # pass
-                        # continue
-                        print('Closed connection from: {}'.format(clients[notified_socket]['data'].decode('utf-8')))
+                    # Else existing socket is sending a message
+                    else:
+                        # Receive message
+                        message = receive_message(notified_socket)
+                        # If False, client disconnected, cleanup
+                        if message is False:
+                            # pass
+                            # continue
+                            print('Closed connection from: {}'.format(clients[notified_socket]['data'].decode('utf-8')))
 
-                        # Remove from list for socket.socket()
-                        sockets_list.remove(notified_socket)
+                            # Remove from list for socket.socket()
+                            sockets_list.remove(notified_socket)
 
-                        # Remove from our list of users
-                        del clients[notified_socket]
+                            # Remove from our list of users
+                            del clients[notified_socket]
 
-                        # server_socket.shutdown(SHUT_RDWR)  
-                        continue
+                            # server_socket.shutdown(SHUT_RDWR)  
+                            continue
 
-                    # Get user by notified socket, so we will know who sent the message
-                    try:
-                        user = clients[notified_socket]
-                        print(f'Received message from {user["data"].decode("utf-8")}: {message["data"].decode("utf-8")}')
-                        hello= message["data"].decode("utf-8") + '.'
-                        self.readData_TCP(hello)
-                    except:
-                        print("lỗi tcp")
-                    #     pass
-                    # khi nhan data from udp --> uart
-                    # client_socket.send(b'oke')
-                    # try:
-                    #     serial__.write(hello.encode())    
-                    # except:
-                    #     print("disconnect uart")
-            # It's not really necessary to have this, but will handle some socket exceptions just in case
-            for notified_socket in exception_sockets:
+                        # Get user by notified socket, so we will know who sent the message
+                        try:
+                            user = clients[notified_socket]
+                            print(f'Received message from {user["data"].decode("utf-8")}: {message["data"].decode("utf-8")}')
+                            hello= message["data"].decode("utf-8") + '.'
+                            self.readData_TCP(hello)
+                        except:
+                            print("lỗi tcp")
+                        #     pass
+                        # khi nhan data from udp --> uart
+                        # client_socket.send(b'oke')
+                        # try:
+                        #     serial__.write(hello.encode())    
+                        # except:
+                        #     print("disconnect uart")
+                # It's not really necessary to have this, but will handle some socket exceptions just in case
+                for notified_socket in exception_sockets:
 
-                # Remove from list for socket.socket()
-                sockets_list.remove(notified_socket)
+                    # Remove from list for socket.socket()
+                    sockets_list.remove(notified_socket)
 
-                # Remove from our list of users
-                del clients[notified_socket]     
+                    # Remove from our list of users
+                    del clients[notified_socket]   
+            except:
+                print("đ biết lỗi đâu")                  
     def readData_TCP(self,data_read_fr_tcp):
         # thread: lắng nghe uart
         global id_gw
@@ -864,7 +884,7 @@ class udp (threading.Thread, Ui_MainWindow):
             print("id node nhận đc:"+ id_node_nhan )
             cursor_.execute("UPDATE DATA_NODE SET TRANGTHAI_ACTIVE = 'active' WHERE ID_NODE = ? ", [id_node_nhan] ) 
             connect_sql.commit()
-            connect_sql.close()
+
             # gửi lại xác nhận cho node.
             hello=f'*#{id_gw}#{id_node_nhan}#1#{name_node_no_VN}'+'_'+str(soluongthietbi)+'_'+str(soluongcambien)
             len_data_send = len(hello) + 3
@@ -890,7 +910,7 @@ class udp (threading.Thread, Ui_MainWindow):
                 # client_socket.send( userheader + userdata + messheader + messdata)     
                 client_socket.send(data_send_tcp.encode())    
                 print(data) 
-
+        connect_sql.close()
         # self.ALL_DATA(1)          
         # DATA_NODE(ID_NODE char[20], NAME_ID_NODE char[20], PHANLOAI CHAR[20], ID_THIETBI CHAR[20], NAME_THIETBI CHAR[20]                  
 
